@@ -1,0 +1,30 @@
+"use client";
+
+import Image from "next/image";
+
+type PageHeroProps = {
+  onHowToPlay: () => void;
+  /** Hide the CTA while the tutorial is open so it doesn’t stack on the same flow. */
+  showHowToPlay?: boolean;
+};
+
+export function PageHero({ onHowToPlay, showHowToPlay = true }: PageHeroProps) {
+  return (
+    <>
+      <div className="table-title" aria-label="Coffee Rush title">
+        <Image src="/images/title.png" alt="Coffee Rush title" width={1024} height={340} priority />
+      </div>
+
+      {showHowToPlay ? (
+        <button
+          type="button"
+          className="how-to-play-button"
+          aria-label="How To Play?"
+          onClick={onHowToPlay}
+        >
+          How To Play?
+        </button>
+      ) : null}
+    </>
+  );
+}

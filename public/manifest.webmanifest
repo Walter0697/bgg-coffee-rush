@@ -1,0 +1,16 @@
+{
+  "name": "Coffee Rush",
+  "short_name": "CoffeeRush",
+  "description": "Coffee Rush board app",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8ecdb",
+  "theme_color": "#f2d9b6",
+  "icons": [
+    {
+      "src": "/images/rush.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
