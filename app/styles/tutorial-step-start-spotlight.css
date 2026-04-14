@@ -1,0 +1,44 @@
+/* Same “dim the table” language as objective-cups + start-meeples: opacity 0.08, not a dark scrim */
+.table-layout--center-spotlight .center-zone,
+.table-layout--center-spotlight .table-layout__supply,
+.table-layout--center-spotlight .table-layout__rush-stack,
+.table-layout--center-spotlight .table-layout__card-deck-stack,
+.table-layout--center-spotlight .table-layout__shared-area-hitbox,
+.table-layout--center-spotlight .player-board,
+.table-layout--center-spotlight .edge-glass-group img:not(.meeple-token) {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.table-layout--center-spotlight .skill-tiles-group,
+.table-layout--center-spotlight .skill-tiles-group img {
+  opacity: 0.08 !important;
+  filter: saturate(0.6) brightness(0.7);
+  pointer-events: none;
+}
+
+.table-layout--center-spotlight .meeple-token {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Above seat question cards (z-index 11) when both are shown — e.g. Prepare cups + token */
+.table-layout__center-spotlight-art {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 2vmin, 20px);
+  pointer-events: none;
+}
+
+.table-layout__center-spotlight-img {
+  max-width: min(82%, 440px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.32));
+}

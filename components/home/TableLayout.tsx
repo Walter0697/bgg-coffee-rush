@@ -59,6 +59,15 @@ export function TableLayout({
   const sharedAreaInteractive = tutorialActive && interaction?.mode === "shared-area-elements";
   const sharedAreaTutorial =
     sharedAreaInteractive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
+  const centerOverlaySrc =
+    tutorialActive && step?.centerOverlayImageSrc ? step.centerOverlayImageSrc : null;
+  const centerOverlayPlacement = step?.centerOverlayPlacement ?? "table-center";
+  const showTableCenterFirstPlayerOverlay =
+    Boolean(centerOverlaySrc && centerOverlayPlacement === "table-center");
+  const startFirstPlayerTokenUnderCardsSrc =
+    centerOverlaySrc && centerOverlayPlacement === "under-bottom-start-cards"
+      ? centerOverlaySrc
+      : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
   const isStartGameStepOne =
@@ -243,6 +252,10 @@ export function TableLayout({
             skillTilesTutorial={Boolean(skillTilesForThisSeat)}
             skillTilesFrozen={shouldFreezeSkillTiles}
             startQuestionCardsMode={seat.side === "bottom" ? startQuestionCardsMode : null}
+            startFirstPlayerTokenUnderCardsSrc={
+              seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
+            }
+            objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(objectiveCardVisible)}
           />
         );
       })}
@@ -250,6 +263,19 @@ export function TableLayout({
       {objectiveCardVisible ? (
         <div className="table-layout__objective-card" aria-hidden>
           <Image src="/images/card.png" alt="" width={240} height={320} unoptimized />
+        </div>
+      ) : null}
+
+      {showTableCenterFirstPlayerOverlay && centerOverlaySrc ? (
+        <div className="table-layout__center-spotlight-art">
+          <Image
+            className="table-layout__center-spotlight-img"
+            src={centerOverlaySrc}
+            alt=""
+            width={640}
+            height={640}
+            unoptimized
+          />
         </div>
       ) : null}
 

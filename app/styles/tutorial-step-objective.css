@@ -31,8 +31,151 @@
   z-index: 9;
 }
 
-.table-layout--objective-cups .seat--bottom .edge-glass-group img:not(.meeple-token) {
+.table-layout--objective-cups .seat--bottom .edge-glass-group > img:not(.meeple-token),
+.table-layout--objective-cups .seat--bottom .edge-glass-group .edge-glass-cup__glass {
   width: clamp(44px, 6.8vmin, 64px);
+  height: auto;
+}
+
+/* First cup: glass in back; coffee + milk painted on top in the bowl; steam above rim */
+.table-layout--objective-cups .seat--bottom .edge-glass-cup--objective {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0;
+}
+
+.table-layout--objective-cups .seat--bottom .edge-glass-cup__glass {
+  position: relative;
+  z-index: 0;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(20, 10, 2, 0.25));
+}
+
+.table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredients {
+  position: absolute;
+  left: 50%;
+  bottom: 22%;
+  transform: translateX(-50%);
+  width: 42%;
+  aspect-ratio: 1;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Start position Y: viewport-based so icons drop in from above the visible screen */
+.table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--coffee {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 82%;
+  height: auto;
+  z-index: 1;
+  filter: drop-shadow(0 1px 2px rgba(40, 22, 8, 0.35));
+  transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), calc(-120vh - 18vmin)) rotate(-26deg);
+  opacity: 0;
+  animation: objectiveIngredientFallCoffee 0.5s cubic-bezier(0.28, 0.65, 0.16, 1) 0s forwards;
+}
+
+.table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--milk {
+  position: absolute;
+  left: 50%;
+  bottom: 16%;
+  width: 66%;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 1px 2px rgba(40, 22, 8, 0.25));
+  transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), calc(-118vh - 14vmin)) rotate(22deg);
+  opacity: 0;
+  animation: objectiveIngredientFallMilk 0.72s cubic-bezier(0.24, 0.68, 0.18, 1) 0.12s forwards;
+}
+
+.table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--steam {
+  position: absolute;
+  left: 50%;
+  top: -2%;
+  width: 48%;
+  height: auto;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(90, 70, 50, 0.25));
+  transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), calc(-125vh - 22vmin)) rotate(-14deg);
+  opacity: 0;
+  animation: objectiveIngredientFallSteam 0.95s cubic-bezier(0.22, 0.78, 0.22, 1) 0.26s forwards;
+}
+
+@keyframes objectiveIngredientFallCoffee {
+  0% {
+    transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), calc(-120vh - 18vmin)) rotate(-26deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  78% {
+    transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), 6%) rotate(5deg);
+  }
+  100% {
+    transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes objectiveIngredientFallMilk {
+  0% {
+    transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), calc(-118vh - 14vmin)) rotate(22deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  72% {
+    transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), 8%) rotate(-7deg);
+  }
+  100% {
+    transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes objectiveIngredientFallSteam {
+  0% {
+    transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), calc(-125vh - 22vmin)) rotate(-14deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.95;
+  }
+  65% {
+    transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 12%) rotate(9deg);
+  }
+  100% {
+    transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 0) rotate(0deg);
+    opacity: 0.95;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--coffee,
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--milk,
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--steam {
+    animation: none;
+    opacity: 1;
+  }
+
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--coffee {
+    transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), 0) rotate(0deg);
+  }
+
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--milk {
+    transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), 0) rotate(0deg);
+  }
+
+  .table-layout--objective-cups .seat--bottom .edge-glass-cup__ingredient--steam {
+    transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 0) rotate(0deg);
+  }
 }
 
 .table-layout--objective-cups .seat--bottom .edge-glass-group .meeple-token {

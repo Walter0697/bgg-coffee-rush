@@ -63,6 +63,10 @@ function startGameMeeplesOverviewLayout(subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--start-meeples"];
 }
 
+function startGameCenterSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--center-spotlight"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -143,6 +147,17 @@ const OBJECTIVE_TUTORIAL_STEPS = [
 
 const START_OF_GAME_TUTORIAL_STEPS = [
   {
+    title: "First player",
+    description:
+      "Start of the game — pick a first player and give them the first player token. For example: who is the last one to drink coffee today?",
+    interaction: {
+      mode: "center-image-spotlight"
+    },
+    focusLabels: {},
+    layoutClasses: startGameCenterSpotlightLayout,
+    centerOverlayImageSrc: "/images/first.png"
+  },
+  {
     title: "Player board first",
     description:
       "Start of the game — begin from your player board. Check your board space before handling pieces.",
@@ -163,7 +178,9 @@ const START_OF_GAME_TUTORIAL_STEPS = [
       elements: ["board", "cups", "meeple"]
     },
     focusLabels: {},
-    layoutClasses: startGameStepOneLayout
+    layoutClasses: startGameStepOneLayout,
+    centerOverlayImageSrc: "/images/first.png",
+    centerOverlayPlacement: "under-bottom-start-cards"
   },
   {
     title: "Meeple ready",

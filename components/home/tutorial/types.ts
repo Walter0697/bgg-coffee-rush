@@ -37,11 +37,17 @@ export type TutorialSkillTilesInteraction = {
   seat: SeatSide;
 };
 
+/** Full-table overview dimmed via CSS; center art uses `centerOverlayImageSrc` on the step. */
+export type TutorialCenterImageSpotlightInteraction = {
+  mode: "center-image-spotlight";
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
   | TutorialSeatPartsInteraction
-  | TutorialSkillTilesInteraction;
+  | TutorialSkillTilesInteraction
+  | TutorialCenterImageSpotlightInteraction;
 
 export type TutorialStepConfig = {
   /** Shown on "Back to …" and similar; keep short. */
@@ -56,6 +62,10 @@ export type TutorialStepConfig = {
   focusLabels: Partial<Record<string, string>>;
   /** Extra root classes on `.table-layout` while this step is active (camera / overview). */
   layoutClasses: (subFocus: TutorialSubFocus) => string[];
+  /** Optional image centered on the table (e.g. first player token). */
+  centerOverlayImageSrc?: string;
+  /** Where to show `centerOverlayImageSrc` (default: full table center). */
+  centerOverlayPlacement?: "table-center" | "under-bottom-start-cards";
 };
 
 export type TutorialModuleConfig = {

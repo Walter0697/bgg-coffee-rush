@@ -1,11 +1,19 @@
-.seat-start-question-cards {
-  --start-question-card-size: clamp(14px, 2vmin, 20px);
-  --start-question-card-gap: clamp(3px, 0.6vmin, 7px);
+.seat-start-question-wrap {
   position: absolute;
   left: calc(var(--mini-short) + clamp(10px, 1.8vmin, 20px));
   top: clamp(10px, 1.5vmin, 16px);
   z-index: 11;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2px, 0.45vmin, 5px);
   pointer-events: none;
+}
+
+.seat-start-question-cards {
+  --start-question-card-size: clamp(14px, 2vmin, 20px);
+  --start-question-card-gap: clamp(3px, 0.6vmin, 7px);
+  position: static;
   width: var(--start-question-card-size);
   display: flex;
   flex-direction: column;
@@ -105,5 +113,33 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+/* First player token under the three start cards (Prepare cups) — flat, no depth shadow */
+.seat-start-first-token {
+  --first-token-dx: clamp(5px, 1vmin, 14px);
+  --first-token-dy: clamp(2px, 0.4vmin, 6px);
+  flex-shrink: 0;
+  margin-top: clamp(5px, 0.85vmin, 12px);
+}
+
+.seat-start-first-token__img {
+  display: block;
+  width: clamp(18px, 2.6vmin, 30px);
+  height: auto;
+  filter: none;
+  opacity: 0;
+  animation: seatStartFirstTokenFadeIn 520ms cubic-bezier(0.22, 0.8, 0.3, 1) 0.32s forwards;
+}
+
+@keyframes seatStartFirstTokenFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(var(--first-token-dx), calc(var(--first-token-dy) + 8px)) rotate(-11deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate(var(--first-token-dx), var(--first-token-dy)) rotate(-11deg);
   }
 }

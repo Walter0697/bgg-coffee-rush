@@ -16,6 +16,10 @@ type PlayerSeatProps = {
   skillTilesTutorial: boolean;
   skillTilesFrozen: boolean;
   startQuestionCardsMode: "step1" | "step2" | null;
+  /** Shown under the start question cards (Prepare cups), small + tilted */
+  startFirstPlayerTokenUnderCardsSrc: string | null;
+  /** Objective step: show coffee, milk & steam in the first (left) cup */
+  objectiveFirstCupIngredients?: boolean;
 };
 
 export function PlayerSeat({
@@ -28,7 +32,9 @@ export function PlayerSeat({
   onSeatPartSelect,
   skillTilesTutorial,
   skillTilesFrozen,
-  startQuestionCardsMode
+  startQuestionCardsMode,
+  startFirstPlayerTokenUnderCardsSrc,
+  objectiveFirstCupIngredients = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
   const cupsDimWhenMeepleFocused =
@@ -63,11 +69,25 @@ export function PlayerSeat({
         />
       </div>
       {startQuestionCardsMode ? (
-        <div className={`seat-start-question-cards seat-start-question-cards--${startQuestionCardsMode}`} aria-hidden>
-          <Image className="seat-start-question-cards__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
-          <Image className="seat-start-question-cards__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
-          {startQuestionCardsMode === "step2" ? (
-            <Image className="seat-start-question-cards__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+        <div className="seat-start-question-wrap">
+          <div className={`seat-start-question-cards seat-start-question-cards--${startQuestionCardsMode}`} aria-hidden>
+            <Image className="seat-start-question-cards__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            {startQuestionCardsMode === "step2" ? (
+              <Image className="seat-start-question-cards__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            ) : null}
+          </div>
+          {startFirstPlayerTokenUnderCardsSrc && startQuestionCardsMode === "step2" ? (
+            <div className="seat-start-first-token" aria-hidden>
+              <Image
+                className="seat-start-first-token__img"
+                src={startFirstPlayerTokenUnderCardsSrc}
+                alt=""
+                width={220}
+                height={220}
+                unoptimized
+              />
+            </div>
           ) : null}
         </div>
       ) : null}
@@ -91,13 +111,53 @@ export function PlayerSeat({
         aria-label={`${seat.label} cups`}
         onClick={seatPartsTutorial ? () => onSeatPartSelect("cups") : undefined}
       >
-        <Image
-          className={cupsDimWhenMeepleFocused}
-          src="/images/glass.png"
-          alt={`${seat.label} cup 1`}
-          width={220}
-          height={157}
-        />
+        {seat.side === "bottom" && objectiveFirstCupIngredients ? (
+          <div
+            className={`edge-glass-cup edge-glass-cup--objective ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
+          >
+            <Image
+              className="edge-glass-cup__glass"
+              src="/images/glass.png"
+              alt={`${seat.label} cup 1`}
+              width={220}
+              height={157}
+            />
+            <div className="edge-glass-cup__ingredients" aria-hidden>
+              <Image
+                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--coffee"
+                src="/images/ingredient/coffee.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+              <Image
+                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--milk"
+                src="/images/ingredient/milk.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            </div>
+            <Image
+              className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
+              src="/images/ingredient/steam.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+          </div>
+        ) : (
+          <Image
+            className={cupsDimWhenMeepleFocused}
+            src="/images/glass.png"
+            alt={`${seat.label} cup 1`}
+            width={220}
+            height={157}
+          />
+        )}
         <Image
           className={cupsDimWhenMeepleFocused}
           src="/images/glass.png"

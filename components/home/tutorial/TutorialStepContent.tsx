@@ -2,6 +2,7 @@
 
 import { TUTORIAL_STEPS } from "./tutorialConfig";
 import { TutorialObjectiveBody } from "./steps/TutorialObjectiveBody";
+import { TutorialStartGameStepIntroBody } from "./steps/TutorialStartGameStepIntroBody";
 import { TutorialStartGameStepOneBody } from "./steps/TutorialStartGameStepOneBody";
 import { TutorialStartGameStepThreeBody } from "./steps/TutorialStartGameStepThreeBody";
 import { TutorialStartGameStepTwoBody } from "./steps/TutorialStartGameStepTwoBody";
@@ -60,14 +61,18 @@ export function TutorialStepContent({
   }
 
   if (phaseTitle === "Start of the game" && phaseStepIndex === 0) {
-    return <TutorialStartGameStepOneBody />;
+    return <TutorialStartGameStepIntroBody />;
   }
 
   if (phaseTitle === "Start of the game" && phaseStepIndex === 1) {
-    return <TutorialStartGameStepTwoBody />;
+    return <TutorialStartGameStepOneBody />;
   }
 
   if (phaseTitle === "Start of the game" && phaseStepIndex === 2) {
+    return <TutorialStartGameStepTwoBody />;
+  }
+
+  if (phaseTitle === "Start of the game" && phaseStepIndex === 3) {
     return <TutorialStartGameStepThreeBody />;
   }
 
