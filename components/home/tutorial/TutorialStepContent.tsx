@@ -3,19 +3,21 @@
 import { TUTORIAL_STEPS } from "./tutorialConfig";
 import { TutorialStepOneBody } from "./steps/TutorialStepOneBody";
 import { TutorialStepTwoBody } from "./steps/TutorialStepTwoBody";
+import { TutorialStepThreeBody } from "./steps/TutorialStepThreeBody";
+
 type TutorialStepContentProps = {
   stepIndex: number;
   /** Current step title for zoom banner copy ("Back to …"). */
   stepTitle: string;
-  /** When set (step 1 layout zoom), card shows the zoom banner instead of tappable keywords. */
-  layoutZoomBannerLabel: string | null;
+  /** When set, card shows drill-in banner instead of tappable keywords (layout zoom or shared corner). */
+  drillInBannerLabel: string | null;
   onSetSubFocus: (key: string) => void;
 };
 
 export function TutorialStepContent({
   stepIndex,
   stepTitle,
-  layoutZoomBannerLabel,
+  drillInBannerLabel,
   onSetSubFocus
 }: TutorialStepContentProps) {
   const step = TUTORIAL_STEPS[stepIndex];
@@ -24,14 +26,24 @@ export function TutorialStepContent({
     return (
       <TutorialStepOneBody
         stepTitle={stepTitle}
-        layoutZoomBannerLabel={layoutZoomBannerLabel}
+        drillInBannerLabel={drillInBannerLabel}
         onSetSubFocus={onSetSubFocus}
       />
     );
   }
 
   if (stepIndex === 1) {
-    return <TutorialStepTwoBody onSetSubFocus={onSetSubFocus} />;
+    return (
+      <TutorialStepTwoBody
+        stepTitle={stepTitle}
+        drillInBannerLabel={drillInBannerLabel}
+        onSetSubFocus={onSetSubFocus}
+      />
+    );
+  }
+
+  if (stepIndex === 2) {
+    return <TutorialStepThreeBody onSetSubFocus={onSetSubFocus} />;
   }
 
   if (step) {

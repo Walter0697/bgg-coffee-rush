@@ -4,12 +4,54 @@ import { TUTORIAL_STEPS, getActiveTutorialModule } from "./tutorial/tutorialConf
 import { TutorialStepContent } from "./tutorial/TutorialStepContent";
 import type { TutorialSubFocus } from "./tutorial/types";
 
+function IconChevronLeft() {
+  return (
+    <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+      />
+    </svg>
+  );
+}
+
+function IconChevronRight() {
+  return (
+    <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+      />
+    </svg>
+  );
+}
+
+function IconCheck() {
+  return (
+    <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
+      <path fill="currentColor" d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+    </svg>
+  );
+}
+
+function IconClose() {
+  return (
+    <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+      />
+    </svg>
+  );
+}
+
 type TutorialCardProps = {
   stepIndex: number;
   subFocus: TutorialSubFocus;
   isFinalStep: boolean;
   onSetSubFocus: (value: TutorialSubFocus) => void;
   onClose: () => void;
+  onPrevious: () => void;
   onNext: () => void;
 };
 
@@ -19,22 +61,22 @@ export function TutorialCard({
   isFinalStep,
   onSetSubFocus,
   onClose,
+  onPrevious,
   onNext
 }: TutorialCardProps) {
   const module = getActiveTutorialModule();
   const step = TUTORIAL_STEPS[stepIndex];
-  const layoutZoomBannerLabel =
-    step?.interaction.mode === "layout-zoom" && subFocus
-      ? step.focusLabels[subFocus] ?? `${subFocus} player area`
+  const drillInBannerLabel =
+    subFocus && step
+      ? step.interaction.mode === "layout-zoom"
+        ? (step.focusLabels[subFocus] ?? `${subFocus} player area`)
+        : step.interaction.mode === "shared-area-elements"
+          ? (step.focusLabels[subFocus] ?? subFocus)
+          : null
       : null;
 
-  const showBackToLayoutStep =
-    step?.interaction.mode === "layout-zoom" && layoutZoomBannerLabel !== null;
-
-  const showBackToSeatPartsStep =
-    step?.interaction.mode === "seat-elements" && subFocus !== null;
-
   const totalSteps = module.steps.length;
+  const previousDisabled = stepIndex === 0 && subFocus === null;
   const progressPercent =
     totalSteps > 0 ? Math.round(((stepIndex + 1) / totalSteps) * 100) : 0;
 
@@ -48,35 +90,51 @@ export function TutorialCard({
           <TutorialStepContent
             stepIndex={stepIndex}
             stepTitle={step?.title ?? "this step"}
-            layoutZoomBannerLabel={layoutZoomBannerLabel}
+            drillInBannerLabel={drillInBannerLabel}
             onSetSubFocus={(key) => onSetSubFocus(key)}
           />
         </p>
         <div className="tutorial-actions">
-          {showBackToLayoutStep && step ? (
-            <button
-              type="button"
-              className="tutorial-button tutorial-button--ghost"
-              onClick={() => onSetSubFocus(null)}
-            >
-              Back to {step.title}
-            </button>
-          ) : null}
-          {showBackToSeatPartsStep && step ? (
-            <button
-              type="button"
-              className="tutorial-button tutorial-button--ghost"
-              onClick={() => onSetSubFocus(null)}
-            >
-              Back to {step.title}
-            </button>
-          ) : null}
-          <button type="button" className="tutorial-button tutorial-button--ghost" onClick={onClose}>
-            Exit
+          <button
+            type="button"
+            className="tutorial-button tutorial-button--ghost tutorial-button--icon"
+            onClick={onClose}
+            aria-label="Exit tutorial"
+          >
+            <IconClose />
           </button>
-          <button type="button" className="tutorial-button" onClick={onNext}>
-            {isFinalStep ? "Finish" : "Next"}
-          </button>
+          <div className="tutorial-actions__nav">
+            {subFocus !== null ? (
+              <button
+                type="button"
+                className="tutorial-button tutorial-button--icon"
+                onClick={() => onSetSubFocus(null)}
+                aria-label="Back to step overview"
+              >
+                <IconChevronLeft />
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className="tutorial-button tutorial-button--ghost tutorial-button--icon"
+                  onClick={onPrevious}
+                  disabled={previousDisabled}
+                  aria-label="Previous step"
+                >
+                  <IconChevronLeft />
+                </button>
+                <button
+                  type="button"
+                  className="tutorial-button tutorial-button--icon"
+                  onClick={onNext}
+                  aria-label={isFinalStep ? "Finish tutorial" : "Next step"}
+                >
+                  {isFinalStep ? <IconCheck /> : <IconChevronRight />}
+                </button>
+              </>
+            )}
+          </div>
         </div>
       </section>
 

@@ -6,15 +6,23 @@ function stepOneLayout(subFocus: TutorialSubFocus): string[] {
   return ["table-layout--focused", `table-layout--focus-${subFocus}`];
 }
 
-function stepTwoLayout(subFocus: TutorialSubFocus): string[] {
-  const base = ["table-layout--step-two", "table-layout--focused"];
+function stepSharedAreaLayout(subFocus: TutorialSubFocus): string[] {
+  const base = ["table-layout--face-up", "table-layout--step-shared-area", "table-layout--focused"];
+  if (!subFocus) {
+    return [...base, "table-layout--tutorial-overview", "table-layout--focus-shared-area"];
+  }
+  return [...base, `table-layout--focus-shared-${subFocus}`];
+}
+
+function stepThreeLayout(subFocus: TutorialSubFocus): string[] {
+  const base = ["table-layout--step-three", "table-layout--focused"];
   const tail =
     subFocus === "board"
       ? "table-layout--focus-bottom-board"
       : subFocus === "cups"
         ? "table-layout--focus-bottom-cups"
-        : subFocus === "mable"
-          ? "table-layout--focus-bottom-mable"
+        : subFocus === "meeple"
+          ? "table-layout--focus-bottom-meeple"
           : "table-layout--focus-bottom";
   return [...base, tail];
 }
@@ -23,13 +31,13 @@ const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
     description:
-      "Setup — place the main board in the center and the four player boards on the top, right, bottom, and left.",
+      "Setup — place the ingredient board in the center and the four player boards on the top, right, bottom, and left.",
     interaction: {
       mode: "layout-zoom",
       focusKeys: ["center", "top", "right", "bottom", "left"]
     },
     focusLabels: {
-      center: "main board",
+      center: "ingredient board",
       top: "top player area",
       right: "right player area",
       bottom: "bottom player area",
@@ -38,15 +46,30 @@ const SETUP_TUTORIAL_STEPS = [
     layoutClasses: stepOneLayout
   },
   {
+    title: "Common area",
+    description:
+      "Setup — put the ingredient tray, rush token, and cards in a common area that everyone can access.",
+    interaction: {
+      mode: "shared-area-elements",
+      elements: ["supply", "rush", "deck"]
+    },
+    focusLabels: {
+      supply: "ingredient tray",
+      rush: "rush token",
+      deck: "draw pile"
+    },
+    layoutClasses: stepSharedAreaLayout
+  },
+  {
     title: "Player pieces",
-    description: "Setup — for each seat: one player board, three cups, and one mable.",
+    description: "Setup — for each seat: one player board, three cups, and one meeple.",
     interaction: {
       mode: "seat-elements",
       seat: "bottom",
-      elements: ["board", "cups", "mable"]
+      elements: ["board", "cups", "meeple"]
     },
     focusLabels: {},
-    layoutClasses: stepTwoLayout
+    layoutClasses: stepThreeLayout
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

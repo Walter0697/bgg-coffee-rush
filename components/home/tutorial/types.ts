@@ -22,10 +22,19 @@ export type TutorialSeatPartsInteraction = {
   mode: "seat-elements";
   seat: SeatSide;
   /** Click targets under that seat; maps to sub-focus strings */
-  elements: readonly ("board" | "cups" | "mable")[];
+  elements: readonly ("board" | "cups" | "meeple")[];
 };
 
-export type TutorialInteractionConfig = TutorialLayoutZoomInteraction | TutorialSeatPartsInteraction;
+export type TutorialSharedAreaInteraction = {
+  mode: "shared-area-elements";
+  /** Corner supplies everyone shares; maps to sub-focus strings */
+  elements: readonly ("supply" | "rush" | "deck")[];
+};
+
+export type TutorialInteractionConfig =
+  | TutorialLayoutZoomInteraction
+  | TutorialSharedAreaInteraction
+  | TutorialSeatPartsInteraction;
 
 export type TutorialStepConfig = {
   /** Shown on "Back to …" and similar; keep short. */

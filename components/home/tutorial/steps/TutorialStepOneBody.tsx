@@ -5,26 +5,26 @@ import { TutorialActionKeyword } from "../TutorialActionKeyword";
 type TutorialStepOneBodyProps = {
   stepTitle: string;
   /** From config `focusLabels`; when set, show zoom banner instead of tappable keywords. */
-  layoutZoomBannerLabel: string | null;
+  drillInBannerLabel: string | null;
   onSetSubFocus: (key: string) => void;
 };
 
 export function TutorialStepOneBody({
   stepTitle,
-  layoutZoomBannerLabel,
+  drillInBannerLabel,
   onSetSubFocus
 }: TutorialStepOneBodyProps) {
-  if (layoutZoomBannerLabel) {
+  if (drillInBannerLabel) {
     return (
       <>
-        {`Zoomed into the ${layoutZoomBannerLabel}. Use “Back to ${stepTitle}” below to return to the full setup view.`}
+        {`Zoomed into the ${drillInBannerLabel}. Tap the back arrow below to return to the full setup view.`}
       </>
     );
   }
 
   return (
     <>
-      Place the <TutorialActionKeyword onClick={() => onSetSubFocus("center")}>main board</TutorialActionKeyword>
+      Place the <TutorialActionKeyword onClick={() => onSetSubFocus("center")}>ingredient board</TutorialActionKeyword>
       , player boards (
       <TutorialActionKeyword onClick={() => onSetSubFocus("right")}>blue</TutorialActionKeyword>,{" "}
       <TutorialActionKeyword onClick={() => onSetSubFocus("top")}>red</TutorialActionKeyword>,{" "}

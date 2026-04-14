@@ -12,7 +12,7 @@ type PlayerSeatProps = {
   onLayoutZoomSelect: (side: SeatSide) => void;
   seatPartsTutorial: boolean;
   seatPartsSubFocus: TutorialSubFocus;
-  onSeatPartSelect: (part: "board" | "cups" | "mable") => void;
+  onSeatPartSelect: (part: "board" | "cups" | "meeple") => void;
 };
 
 export function PlayerSeat({
@@ -25,8 +25,8 @@ export function PlayerSeat({
   onSeatPartSelect
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
-  const cupsDimWhenMableFocused =
-    seatPartsTutorial && seatPartsSubFocus === "mable"
+  const cupsDimWhenMeepleFocused =
+    seatPartsTutorial && seatPartsSubFocus === "meeple"
       ? "tutorial-target tutorial-target--dimmed"
       : undefined;
 
@@ -65,43 +65,43 @@ export function PlayerSeat({
         onClick={seatPartsTutorial ? () => onSeatPartSelect("cups") : undefined}
       >
         <Image
-          className={cupsDimWhenMableFocused}
+          className={cupsDimWhenMeepleFocused}
           src="/images/glass.png"
           alt={`${seat.label} cup 1`}
           width={220}
           height={157}
         />
         <Image
-          className={cupsDimWhenMableFocused}
+          className={cupsDimWhenMeepleFocused}
           src="/images/glass.png"
           alt={`${seat.label} cup 2`}
           width={220}
           height={157}
         />
         <Image
-          className={cupsDimWhenMableFocused}
+          className={cupsDimWhenMeepleFocused}
           src="/images/glass.png"
           alt={`${seat.label} cup 3`}
           width={220}
           height={157}
         />
         <Image
-          className={`mable-token ${seatPartsTutorial ? "tutorial-target" : ""} ${
-            seatPartsTutorial && seatPartsSubFocus === "mable" ? "tutorial-target--active" : ""
+          className={`meeple-token ${seatPartsTutorial ? "tutorial-target" : ""} ${
+            seatPartsTutorial && seatPartsSubFocus === "meeple" ? "tutorial-target--active" : ""
           } ${
-            seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "mable"
+            seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "meeple"
               ? "tutorial-target--dimmed"
               : ""
           }`}
-          src={`/images/mable_${seat.color}.png`}
-          alt={`${seat.label} mable`}
+          src={`/images/meeple_${seat.color}.png`}
+          alt={`${seat.label} meeple`}
           width={98}
           height={144}
           onClick={
             seatPartsTutorial
               ? (event) => {
                   event.stopPropagation();
-                  onSeatPartSelect("mable");
+                  onSeatPartSelect("meeple");
                 }
               : undefined
           }

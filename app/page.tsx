@@ -32,6 +32,17 @@ export default function HomePage() {
     setTutorialSubFocus(null);
   };
 
+  const previousStep = () => {
+    if (tutorialSubFocus) {
+      setTutorialSubFocus(null);
+      return;
+    }
+    if (currentStep > 0) {
+      setCurrentStep((step) => step - 1);
+      setTutorialSubFocus(null);
+    }
+  };
+
   const closeTutorial = () => {
     setTutorialStarted(false);
     setCurrentStep(0);
@@ -49,6 +60,7 @@ export default function HomePage() {
           isFinalStep={isFinalStep}
           onSetSubFocus={setTutorialSubFocus}
           onClose={closeTutorial}
+          onPrevious={previousStep}
           onNext={nextStep}
         />
       ) : null}
