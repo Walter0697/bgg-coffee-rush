@@ -20,6 +20,8 @@ type PlayerSeatProps = {
   startFirstPlayerTokenUnderCardsSrc: string | null;
   /** Objective step: show coffee, milk & steam in the first (left) cup */
   objectiveFirstCupIngredients?: boolean;
+  /** Start step 5: animate steam from meeple toward first cup */
+  startSteamFlyFromMeeple?: boolean;
 };
 
 export function PlayerSeat({
@@ -34,7 +36,8 @@ export function PlayerSeat({
   skillTilesFrozen,
   startQuestionCardsMode,
   startFirstPlayerTokenUnderCardsSrc,
-  objectiveFirstCupIngredients = false
+  objectiveFirstCupIngredients = false,
+  startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
   const cupsDimWhenMeepleFocused =
@@ -172,28 +175,67 @@ export function PlayerSeat({
           width={220}
           height={157}
         />
-        <Image
-          className={`meeple-token ${seatPartsTutorial ? "tutorial-target" : ""} ${
-            seatPartsTutorial && seatPartsSubFocus === "meeple" ? "tutorial-target--active" : ""
-          } ${
-            seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "meeple"
-              ? "tutorial-target--dimmed"
-              : ""
-          }`}
-          src={`/images/meeple_${seat.color}.png`}
-          alt={`${seat.label} meeple`}
-          width={98}
-          height={144}
-          onClick={
-            seatPartsTutorial
-              ? (event) => {
-                  event.stopPropagation();
-                  onSeatPartSelect("meeple");
-                }
-              : undefined
-          }
-          unoptimized
-        />
+        {seat.side === "bottom" && startSteamFlyFromMeeple ? (
+          <div
+            className={`seat-start-five-meeple-anchor ${seatPartsTutorial ? "tutorial-target" : ""} ${
+              seatPartsTutorial && seatPartsSubFocus === "meeple" ? "tutorial-target--active" : ""
+            } ${
+              seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "meeple"
+                ? "tutorial-target--dimmed"
+                : ""
+            }`}
+            onClick={
+              seatPartsTutorial
+                ? (event) => {
+                    event.stopPropagation();
+                    onSeatPartSelect("meeple");
+                  }
+                : undefined
+            }
+          >
+            <Image
+              className="meeple-token"
+              src={`/images/meeple_${seat.color}.png`}
+              alt={`${seat.label} meeple`}
+              width={98}
+              height={144}
+              unoptimized
+            />
+            <div className="seat-start-five-steam-fly" aria-hidden>
+              <Image
+                className="seat-start-five-steam-fly__img"
+                src="/images/ingredient/steam.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            </div>
+          </div>
+        ) : (
+          <Image
+            className={`meeple-token ${seatPartsTutorial ? "tutorial-target" : ""} ${
+              seatPartsTutorial && seatPartsSubFocus === "meeple" ? "tutorial-target--active" : ""
+            } ${
+              seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "meeple"
+                ? "tutorial-target--dimmed"
+                : ""
+            }`}
+            src={`/images/meeple_${seat.color}.png`}
+            alt={`${seat.label} meeple`}
+            width={98}
+            height={144}
+            onClick={
+              seatPartsTutorial
+                ? (event) => {
+                    event.stopPropagation();
+                    onSeatPartSelect("meeple");
+                  }
+                : undefined
+            }
+            unoptimized
+          />
+        )}
       </div>
     </section>
   );

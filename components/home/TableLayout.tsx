@@ -78,13 +78,17 @@ export function TableLayout({
     tutorialActive &&
     step?.phaseTitle === "Start of the game" &&
     step?.title === "Prepare cups";
+  const isStartGameStepFive =
+    tutorialActive &&
+    step?.phaseTitle === "Start of the game" &&
+    step?.title === "Ready to brew";
+  const startGameTablePassive =
+    tutorialActive && step?.phaseTitle === "Start of the game";
   const startQuestionCardsMode: "step1" | "step2" | null = isStartGameStepOne
     ? "step1"
     : isStartGameStepTwo
       ? "step2"
       : null;
-  const disableSeatPartClicksForStartStepOne = isStartGameStepOne;
-
   function onCommonAreaKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (!commonAreaInteractive) return;
     if (event.key === "Enter" || event.key === " ") {
@@ -103,7 +107,9 @@ export function TableLayout({
 
   return (
     <section
-      className={`table-layout ${tutorialClassNames}`.trim()}
+      className={`table-layout ${tutorialClassNames}${
+        startGameTablePassive ? " table-layout--start-game-passive" : ""
+      }`.trim()}
       aria-label="Coffee Rush table layout"
     >
       <div
@@ -233,8 +239,7 @@ export function TableLayout({
       </div>
 
       {seats.map((seat) => {
-        const partsForThisSeat =
-          !disableSeatPartClicksForStartStepOne && seatPartsConfig && seat.side === seatPartsConfig.seat;
+        const partsForThisSeat = seatPartsConfig && seat.side === seatPartsConfig.seat;
         const skillTilesForThisSeat =
           (skillTilesConfig && seat.side === skillTilesConfig.seat) ||
           (shouldKeepSkillTilesVisible && seat.side === "bottom");
@@ -256,6 +261,7 @@ export function TableLayout({
               seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
             }
             objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(objectiveCardVisible)}
+            startSteamFlyFromMeeple={seat.side === "bottom" && Boolean(isStartGameStepFive)}
           />
         );
       })}

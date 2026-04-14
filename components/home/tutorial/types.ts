@@ -42,12 +42,18 @@ export type TutorialCenterImageSpotlightInteraction = {
   mode: "center-image-spotlight";
 };
 
+/** Table is display-only: no board / cups / meeple drill-in clicks or sub-focus. */
+export type TutorialPassiveInteraction = {
+  mode: "passive";
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
   | TutorialSeatPartsInteraction
   | TutorialSkillTilesInteraction
-  | TutorialCenterImageSpotlightInteraction;
+  | TutorialCenterImageSpotlightInteraction
+  | TutorialPassiveInteraction;
 
 export type TutorialStepConfig = {
   /** Shown on "Back to …" and similar; keep short. */

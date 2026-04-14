@@ -1,0 +1,118 @@
+/* Start of game step 5: ingredient board + bottom cups + meeples all visible (no start-meeples fade). */
+
+/* Nudge cups + meeple stack slightly toward the bottom edge of the seat */
+.table-layout--start-step-five .seat--bottom .edge-glass-group.edge-glass-group--bottom {
+  /* Match globals: .edge-glass-group gap + img width + .meeple-token width (steam travel is derived in layout px, then /0.8 for anchor scale). */
+  --start5-gap: clamp(3px, 0.7vmin, 7px);
+  --start5-cup-h: calc(clamp(24px, 3.9vmin, 34px) * 157 / 220);
+  --start5-meeple-mt: clamp(2px, 0.5vmin, 6px);
+  /* Half anchor stack height (meeple margin-top + image), matches .edge-glass-group .meeple-token */
+  --start5-meeple-half: calc((var(--start5-meeple-mt) + clamp(20px, 3.2vmin, 28px) * 144 / 98) / 2);
+  /* Anchor center → top of anchor + 3× flex gap + 2 full cups + half of cup1 (order: cup1, cup2, cup3, anchor). */
+  --start5-steam-travel: calc(
+    var(--start5-meeple-half) + 3 * var(--start5-gap) + 2.5 * var(--start5-cup-h)
+  );
+  transform: translateY(calc(-50% + clamp(8px, 1.4vmin, 14px))) translateZ(26px);
+}
+
+.table-layout--start-step-five .table-layout__supply,
+.table-layout--start-step-five .table-layout__rush-stack,
+.table-layout--start-step-five .table-layout__card-deck-stack,
+.table-layout--start-step-five .seat--top,
+.table-layout--start-step-five .seat--right,
+.table-layout--start-step-five .seat--left {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.table-layout--start-step-five .center-zone,
+.table-layout--start-step-five .seat--bottom .player-board,
+.table-layout--start-step-five .seat--bottom .edge-glass-group img {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Same “on the board” pose as step 4 `meepleToBoard*` hold frame (28%–86% / 48%–86% / …). */
+.table-layout--start-step-five .meeple-token {
+  animation: none !important;
+  will-change: auto;
+  opacity: 1;
+  filter: drop-shadow(0 0 0.2rem rgba(255, 220, 150, 0.95))
+    drop-shadow(0 0 0.7rem rgba(255, 182, 85, 0.9));
+}
+
+/* Board pose on wrapper so steam can start at the meeple’s painted center (50% / 50% of this box). */
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-15px, -125px) scale(0.8);
+  pointer-events: auto;
+}
+
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
+  transform: none;
+}
+
+.table-layout--start-step-five .seat--right .meeple-token {
+  transform: translate(-10px, -125px) scale(0.8);
+}
+
+.table-layout--start-step-five .seat--top .meeple-token {
+  transform: translate(-18px, -125px) scale(0.8);
+}
+
+.table-layout--start-step-five .seat--left .meeple-token {
+  transform: translate(-10px, -125px) scale(0.8);
+}
+
+.table-layout--start-step-five .seat--bottom .skill-tiles-group,
+.table-layout--start-step-five .seat--bottom .skill-tiles-group img {
+  opacity: 1 !important;
+  filter: none;
+  pointer-events: none;
+}
+
+/* Steam starts at meeple center (anchor box) and moves up toward the first cup (sibling above in column). */
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly__img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(16px, 2.6vmin, 26px) !important;
+  height: auto !important;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 5px rgba(80, 60, 45, 0.45));
+  animation: startStepFiveSteamToFirstCup 2.85s cubic-bezier(0.42, 0.01, 0.18, 1) infinite;
+}
+
+@keyframes startStepFiveSteamToFirstCup {
+  0% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.72);
+  }
+  14% {
+    opacity: 0.98;
+  }
+  100% {
+    opacity: 1;
+    /* Parent anchor uses scale(0.8); pre-scale travel must be larger by 1/0.8 so the puff lands on cup 1. */
+    transform: translate(70%, 300%) scale(0.72);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly__img {
+    animation: none;
+    opacity: 0.55;
+    transform: translate(-50%, calc(-50% - (var(--start5-steam-travel) / 0.8))) scale(0.4);
+  }
+}

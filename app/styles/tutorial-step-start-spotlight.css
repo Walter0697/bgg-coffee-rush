@@ -42,3 +42,22 @@
   opacity: 1;
   filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.32));
 }
+
+/* Start of the game (steps 1–5): table is read-only — no image / zone takes pointer focus or drill-in */
+.table-layout--start-game-passive .center-zone,
+.table-layout--start-game-passive .center-zone__board,
+.table-layout--start-game-passive .player-board,
+.table-layout--start-game-passive .edge-glass-group,
+.table-layout--start-game-passive .table-layout__supply,
+.table-layout--start-game-passive .table-layout__rush-stack,
+.table-layout--start-game-passive .table-layout__card-deck-stack,
+.table-layout--start-game-passive .table-layout__shared-area-hitbox,
+.table-layout--start-game-passive .skill-tiles-group,
+.table-layout--start-game-passive .seat-start-question-wrap {
+  pointer-events: none;
+}
+
+.table-layout--start-game-passive .table-layout__center-spotlight-art,
+.table-layout--start-game-passive .table-layout__objective-card {
+  pointer-events: none;
+}

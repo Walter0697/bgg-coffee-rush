@@ -63,6 +63,16 @@ function startGameMeeplesOverviewLayout(subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--start-meeples"];
 }
 
+/** Ingredient board + bottom cups + meeples all undimmed; other seats / corners faded. */
+function startGameStepFiveLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--start-step-five",
+    "table-layout--focused",
+    "table-layout--focus-bottom"
+  ];
+}
+
 function startGameCenterSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--center-spotlight"];
 }
@@ -162,9 +172,7 @@ const START_OF_GAME_TUTORIAL_STEPS = [
     description:
       "Start of the game — begin from your player board. Check your board space before handling pieces.",
     interaction: {
-      mode: "seat-elements",
-      seat: "bottom",
-      elements: ["board", "cups", "meeple"]
+      mode: "passive"
     },
     focusLabels: {},
     layoutClasses: startGameStepOneLayout
@@ -173,9 +181,7 @@ const START_OF_GAME_TUTORIAL_STEPS = [
     title: "Prepare cups",
     description: "Start of the game — place your three cups in your play area and keep them visible.",
     interaction: {
-      mode: "seat-elements",
-      seat: "bottom",
-      elements: ["board", "cups", "meeple"]
+      mode: "passive"
     },
     focusLabels: {},
     layoutClasses: startGameStepOneLayout,
@@ -186,12 +192,20 @@ const START_OF_GAME_TUTORIAL_STEPS = [
     title: "Meeple ready",
     description: "Start of the game — place your meeple in your player area and get ready to begin.",
     interaction: {
-      mode: "seat-elements",
-      seat: "bottom",
-      elements: ["board", "cups", "meeple"]
+      mode: "passive"
     },
     focusLabels: {},
     layoutClasses: startGameMeeplesOverviewLayout
+  },
+  {
+    title: "Ready to brew",
+    description:
+      "Start of the game — for each player, pick up the ingredient where the meeple is standing at.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: startGameStepFiveLayout
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
