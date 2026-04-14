@@ -14,6 +14,7 @@ type PlayerSeatProps = {
   seatPartsSubFocus: TutorialSubFocus;
   onSeatPartSelect: (part: "board" | "cups" | "meeple") => void;
   skillTilesTutorial: boolean;
+  skillTilesFrozen: boolean;
 };
 
 export function PlayerSeat({
@@ -24,7 +25,8 @@ export function PlayerSeat({
   seatPartsTutorial,
   seatPartsSubFocus,
   onSeatPartSelect,
-  skillTilesTutorial
+  skillTilesTutorial,
+  skillTilesFrozen
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
   const cupsDimWhenMeepleFocused =
@@ -59,7 +61,10 @@ export function PlayerSeat({
         />
       </div>
       {skillTilesTutorial ? (
-        <div className="skill-tiles-group skill-tiles-group--left" aria-label={`${seat.label} skill tiles`}>
+        <div
+          className={`skill-tiles-group skill-tiles-group--left ${skillTilesFrozen ? "skill-tiles-group--frozen" : ""}`}
+          aria-label={`${seat.label} skill tiles`}
+        >
           <Image src="/images/e1.png" alt="Skill tile e1" width={72} height={72} unoptimized />
           <Image src="/images/e2.png" alt="Skill tile e2" width={72} height={72} unoptimized />
           <Image src="/images/e3.png" alt="Skill tile e3" width={72} height={72} unoptimized />

@@ -46,6 +46,10 @@ export type TutorialInteractionConfig =
 export type TutorialStepConfig = {
   /** Shown on "Back to …" and similar; keep short. */
   title: string;
+  /** Optional phase label for this step (e.g. "Objective of the game"). */
+  phaseTitle?: string;
+  /** Hide "Step x of y" when this phase should read like a section header. */
+  hideStepCounter?: boolean;
   description: string;
   interaction: TutorialInteractionConfig;
   /** Labels for zoom / drill-in banner copy (`focusLabels[subFocus]`) */

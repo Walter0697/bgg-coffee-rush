@@ -38,6 +38,16 @@ function stepFourLayout(): string[] {
   return ["table-layout--face-up", "table-layout--step-four", "table-layout--focused", "table-layout--focus-bottom-board"];
 }
 
+function objectiveIntroLayout(subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--objective-cups",
+    "table-layout--focused",
+    "table-layout--focus-bottom"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -99,12 +109,30 @@ const SETUP_TUTORIAL_STEPS = [
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
+const OBJECTIVE_TUTORIAL_STEPS = [
+  {
+    title: "Objective of the game",
+    phaseTitle: "Objective of the game",
+    hideStepCounter: true,
+    description:
+      "the goal of the game is to fulfill as much orders as possible until the end of the game. Whoever did more orders, win!",
+    interaction: {
+      mode: "seat-elements",
+      seat: "bottom",
+      elements: ["board", "cups", "meeple"]
+    },
+    focusLabels: {},
+    layoutClasses: objectiveIntroLayout
+  }
+] as const satisfies readonly TutorialStepConfig[];
+
 /**
  * Ordered tutorial modules. More kinds (objective, scoring, …) will get their own entries later.
  * `DEFAULT_TUTORIAL_MODULE_INDEX` picks which one "How to play" runs today.
  */
 export const TUTORIAL_MODULES: readonly TutorialModuleConfig[] = [
-  { kind: "setup", title: "Setup", steps: SETUP_TUTORIAL_STEPS }
+  { kind: "setup", title: "Setup", steps: SETUP_TUTORIAL_STEPS },
+  { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS }
 ] as const;
 
 export const DEFAULT_TUTORIAL_MODULE_INDEX = 0;
@@ -114,7 +142,17 @@ export function getActiveTutorialModule(): TutorialModuleConfig {
 }
 
 /** Steps for the currently active tutorial module (today: setup only). */
-export const TUTORIAL_STEPS: readonly TutorialStepConfig[] = getActiveTutorialModule().steps;
+export const TUTORIAL_STEPS: readonly TutorialStepConfig[] = TUTORIAL_MODULES.flatMap((module) =>
+  module.steps.map((step) => ({
+    ...step,
+    phaseTitle: step.phaseTitle ?? module.title
+  }))
+);
+
+export const SETUP_STEP_COUNT = SETUP_TUTORIAL_STEPS.length;
+export const SKILL_TILES_STEP_INDEX = TUTORIAL_STEPS.findIndex(
+  (step) => step.interaction.mode === "skill-tiles"
+);
 
 export function getTutorialStep(stepIndex: number): TutorialStepConfig | undefined {
   return TUTORIAL_STEPS[stepIndex];

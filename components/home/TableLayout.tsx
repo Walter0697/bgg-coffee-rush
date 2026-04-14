@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { PlayerSeat } from "./PlayerSeat";
 import { seats } from "./seats";
-import { getTutorialStep } from "./tutorial/tutorialConfig";
+import { SKILL_TILES_STEP_INDEX, getTutorialStep } from "./tutorial/tutorialConfig";
 import type { TutorialSubFocus } from "./tutorial/types";
 
 /** Fixed offsets so the stack looks casually piled (stable across SSR/hydration). */
@@ -51,11 +51,16 @@ export function TableLayout({
     tutorialActive && step?.interaction?.mode === "seat-elements" ? step.interaction : null;
   const skillTilesConfig =
     tutorialActive && step?.interaction?.mode === "skill-tiles" ? step.interaction : null;
+  const shouldKeepSkillTilesVisible =
+    tutorialActive && SKILL_TILES_STEP_INDEX >= 0 && tutorialStepIndex >= SKILL_TILES_STEP_INDEX;
+  const shouldFreezeSkillTiles =
+    tutorialActive && SKILL_TILES_STEP_INDEX >= 0 && tutorialStepIndex > SKILL_TILES_STEP_INDEX;
 
   const sharedAreaInteractive = tutorialActive && interaction?.mode === "shared-area-elements";
   const sharedAreaTutorial =
     sharedAreaInteractive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
   const commonAreaInteractive = layoutZoomTutorial;
+  const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
 
   function onCommonAreaKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (!commonAreaInteractive) return;
@@ -206,7 +211,9 @@ export function TableLayout({
 
       {seats.map((seat) => {
         const partsForThisSeat = seatPartsConfig && seat.side === seatPartsConfig.seat;
-        const skillTilesForThisSeat = skillTilesConfig && seat.side === skillTilesConfig.seat;
+        const skillTilesForThisSeat =
+          (skillTilesConfig && seat.side === skillTilesConfig.seat) ||
+          (shouldKeepSkillTilesVisible && seat.side === "bottom");
 
         return (
           <PlayerSeat
@@ -219,9 +226,16 @@ export function TableLayout({
             seatPartsSubFocus={partsForThisSeat ? tutorialSubFocus : null}
             onSeatPartSelect={(part) => onTutorialSubFocus(part)}
             skillTilesTutorial={Boolean(skillTilesForThisSeat)}
+            skillTilesFrozen={shouldFreezeSkillTiles}
           />
         );
       })}
+
+      {objectiveCardVisible ? (
+        <div className="table-layout__objective-card" aria-hidden>
+          <Image src="/images/card.png" alt="" width={240} height={320} unoptimized />
+        </div>
+      ) : null}
     </section>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { TUTORIAL_STEPS, getActiveTutorialModule } from "./tutorial/tutorialConfig";
+import { SETUP_STEP_COUNT, TUTORIAL_STEPS } from "./tutorial/tutorialConfig";
 import { TutorialStepContent } from "./tutorial/TutorialStepContent";
 import type { TutorialSubFocus } from "./tutorial/types";
 
@@ -64,8 +64,9 @@ export function TutorialCard({
   onPrevious,
   onNext
 }: TutorialCardProps) {
-  const module = getActiveTutorialModule();
   const step = TUTORIAL_STEPS[stepIndex];
+  const phaseTitle = step?.phaseTitle ?? "Setup";
+  const hideStepCounter = Boolean(step?.hideStepCounter);
   const drillInBannerLabel =
     subFocus && step
       ? step.interaction.mode === "layout-zoom"
@@ -75,16 +76,19 @@ export function TutorialCard({
           : null
       : null;
 
-  const totalSteps = module.steps.length;
+  const setupStepNumber = Math.min(stepIndex + 1, SETUP_STEP_COUNT);
+  const totalSteps = SETUP_STEP_COUNT;
+  const totalTutorialSteps = TUTORIAL_STEPS.length;
+  const currentTutorialStep = stepIndex + 1;
   const previousDisabled = stepIndex === 0 && subFocus === null;
   const progressPercent =
-    totalSteps > 0 ? Math.round(((stepIndex + 1) / totalSteps) * 100) : 0;
+    totalTutorialSteps > 0 ? Math.round((currentTutorialStep / totalTutorialSteps) * 100) : 0;
 
   return (
     <>
       <div className="tutorial-card-shell">
         <p className="tutorial-step-label">
-          {module.title} · Step {stepIndex + 1} of {totalSteps}
+          {hideStepCounter ? phaseTitle : `${phaseTitle} · Step ${setupStepNumber} of ${totalSteps}`}
         </p>
         <section className="tutorial-card" aria-label="Tutorial steps">
           <p className="tutorial-step-text">
@@ -144,9 +148,9 @@ export function TutorialCard({
         className="tutorial-step-progress"
         role="progressbar"
         aria-valuemin={1}
-        aria-valuemax={totalSteps}
-        aria-valuenow={stepIndex + 1}
-        aria-label={`${module.title}: step ${stepIndex + 1} of ${totalSteps}`}
+        aria-valuemax={totalTutorialSteps}
+        aria-valuenow={currentTutorialStep}
+        aria-label={`Tutorial progress: step ${currentTutorialStep} of ${totalTutorialSteps}`}
       >
         <div className="tutorial-step-progress__track">
           <div
