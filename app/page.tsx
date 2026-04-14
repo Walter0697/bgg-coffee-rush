@@ -44,7 +44,9 @@ export default function HomePage() {
       setTutorialSubFocus(null);
       return;
     }
-    setCurrentStep((step) => step + 1);
+
+    const nextStepIndex = currentStep + 1;
+    setCurrentStep(nextStepIndex);
     setTutorialSubFocus(null);
   };
 
@@ -75,7 +77,6 @@ export default function HomePage() {
         <TutorialCard
           stepIndex={currentStep}
           subFocus={tutorialSubFocus}
-          isFinalStep={isFinalStep}
           onSetSubFocus={setTutorialSubFocus}
           onClose={closeTutorial}
           onPrevious={previousStep}

@@ -61,6 +61,20 @@ export function TableLayout({
     sharedAreaInteractive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
+  const isStartGameStepOne =
+    tutorialActive &&
+    step?.phaseTitle === "Start of the game" &&
+    step?.title === "Player board first";
+  const isStartGameStepTwo =
+    tutorialActive &&
+    step?.phaseTitle === "Start of the game" &&
+    step?.title === "Prepare cups";
+  const startQuestionCardsMode: "step1" | "step2" | null = isStartGameStepOne
+    ? "step1"
+    : isStartGameStepTwo
+      ? "step2"
+      : null;
+  const disableSeatPartClicksForStartStepOne = isStartGameStepOne;
 
   function onCommonAreaKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (!commonAreaInteractive) return;
@@ -210,7 +224,8 @@ export function TableLayout({
       </div>
 
       {seats.map((seat) => {
-        const partsForThisSeat = seatPartsConfig && seat.side === seatPartsConfig.seat;
+        const partsForThisSeat =
+          !disableSeatPartClicksForStartStepOne && seatPartsConfig && seat.side === seatPartsConfig.seat;
         const skillTilesForThisSeat =
           (skillTilesConfig && seat.side === skillTilesConfig.seat) ||
           (shouldKeepSkillTilesVisible && seat.side === "bottom");
@@ -227,6 +242,7 @@ export function TableLayout({
             onSeatPartSelect={(part) => onTutorialSubFocus(part)}
             skillTilesTutorial={Boolean(skillTilesForThisSeat)}
             skillTilesFrozen={shouldFreezeSkillTiles}
+            startQuestionCardsMode={seat.side === "bottom" ? startQuestionCardsMode : null}
           />
         );
       })}
@@ -236,6 +252,7 @@ export function TableLayout({
           <Image src="/images/card.png" alt="" width={240} height={320} unoptimized />
         </div>
       ) : null}
+
     </section>
   );
 }

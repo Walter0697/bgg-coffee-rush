@@ -1,0 +1,33 @@
+.table-layout--step-three .meeple-token.tutorial-target--active {
+  filter: drop-shadow(0 0 0.2rem rgba(255, 220, 150, 0.95))
+    drop-shadow(0 0 0.7rem rgba(255, 182, 85, 0.9));
+}
+
+.table-layout--step-shared-area .center-zone,
+.table-layout--step-shared-area .seat {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.table-layout--step-three .center-zone,
+.table-layout--step-three .table-layout__supply,
+.table-layout--step-three .table-layout__rush-stack,
+.table-layout--step-three .table-layout__card-deck-stack,
+.table-layout--step-three .seat--top,
+.table-layout--step-three .seat--right,
+.table-layout--step-three .seat--left {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.table-layout--step-four .center-zone,
+.table-layout--step-four .table-layout__supply,
+.table-layout--step-four .table-layout__rush-stack,
+.table-layout--step-four .table-layout__card-deck-stack,
+.table-layout--step-four .seat--top,
+.table-layout--step-four .seat--right,
+.table-layout--step-four .seat--left,
+.table-layout--step-four .seat--bottom .edge-glass-group {
+  opacity: 0.14;
+  pointer-events: none;
+}

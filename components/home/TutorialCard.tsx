@@ -1,6 +1,6 @@
 "use client";
 
-import { SETUP_STEP_COUNT, TUTORIAL_STEPS } from "./tutorial/tutorialConfig";
+import { TUTORIAL_STEPS } from "./tutorial/tutorialConfig";
 import { TutorialStepContent } from "./tutorial/TutorialStepContent";
 import type { TutorialSubFocus } from "./tutorial/types";
 
@@ -48,7 +48,6 @@ function IconClose() {
 type TutorialCardProps = {
   stepIndex: number;
   subFocus: TutorialSubFocus;
-  isFinalStep: boolean;
   onSetSubFocus: (value: TutorialSubFocus) => void;
   onClose: () => void;
   onPrevious: () => void;
@@ -58,7 +57,6 @@ type TutorialCardProps = {
 export function TutorialCard({
   stepIndex,
   subFocus,
-  isFinalStep,
   onSetSubFocus,
   onClose,
   onPrevious,
@@ -76,10 +74,15 @@ export function TutorialCard({
           : null
       : null;
 
-  const setupStepNumber = Math.min(stepIndex + 1, SETUP_STEP_COUNT);
-  const totalSteps = SETUP_STEP_COUNT;
+  const phaseStepIndexes = TUTORIAL_STEPS.map((item, index) =>
+    item.phaseTitle === phaseTitle ? index : -1
+  ).filter((index) => index >= 0);
+  const totalSteps = phaseStepIndexes.length;
+  const stepPosition = phaseStepIndexes.indexOf(stepIndex);
+  const setupStepNumber = stepPosition >= 0 ? stepPosition + 1 : 1;
   const totalTutorialSteps = TUTORIAL_STEPS.length;
   const currentTutorialStep = stepIndex + 1;
+  const hasNextStep = stepIndex < totalTutorialSteps - 1;
   const previousDisabled = stepIndex === 0 && subFocus === null;
   const progressPercent =
     totalTutorialSteps > 0 ? Math.round((currentTutorialStep / totalTutorialSteps) * 100) : 0;
@@ -133,9 +136,9 @@ export function TutorialCard({
                     type="button"
                     className="tutorial-button tutorial-button--icon"
                     onClick={onNext}
-                    aria-label={isFinalStep ? "Finish tutorial" : "Next step"}
+                    aria-label={hasNextStep ? "Next step" : "Finish tutorial"}
                   >
-                    {isFinalStep ? <IconCheck /> : <IconChevronRight />}
+                    {hasNextStep ? <IconChevronRight /> : <IconCheck />}
                   </button>
                 </>
               )}

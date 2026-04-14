@@ -1,0 +1,109 @@
+.seat-start-question-cards {
+  --start-question-card-size: clamp(14px, 2vmin, 20px);
+  --start-question-card-gap: clamp(3px, 0.6vmin, 7px);
+  position: absolute;
+  left: calc(var(--mini-short) + clamp(10px, 1.8vmin, 20px));
+  top: clamp(10px, 1.5vmin, 16px);
+  z-index: 11;
+  pointer-events: none;
+  width: var(--start-question-card-size);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--start-question-card-gap);
+  perspective: none;
+  transform-style: flat;
+  transform: none;
+}
+
+.seat-start-question-cards img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  filter: drop-shadow(0 8px 14px rgba(20, 10, 2, 0.28));
+  perspective: none;
+  transform-style: flat;
+  backface-visibility: hidden;
+}
+
+.seat-start-question-cards--step1 {
+  display: grid;
+  width: var(--start-question-card-size);
+  grid-template-columns: var(--start-question-card-size);
+  grid-template-areas:
+    "card1"
+    "card2";
+  gap: var(--start-question-card-gap);
+  align-items: start;
+}
+
+.seat-start-question-cards--step1 .seat-start-question-cards__card-1 {
+  grid-area: card1;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  animation: startQuestionCardEaseIn 420ms cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+}
+
+.seat-start-question-cards--step1 .seat-start-question-cards__card-2 {
+  grid-area: card2;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  animation: startQuestionCardEaseIn 460ms cubic-bezier(0.22, 0.8, 0.3, 1) 70ms forwards;
+}
+
+.seat-start-question-cards--step2 {
+  display: grid;
+  width: calc((var(--start-question-card-size) * 2) + var(--start-question-card-gap));
+  grid-template-columns: var(--start-question-card-size) var(--start-question-card-size);
+  grid-template-areas:
+    "card1 card2"
+    "card3 .";
+  align-items: start;
+  gap: var(--start-question-card-gap);
+}
+
+.seat-start-question-cards--step2 .seat-start-question-cards__card-1 {
+  grid-area: card1;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step2 .seat-start-question-cards__card-2 {
+  grid-area: card2;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+  animation: startQuestionCardEaseInTop 460ms cubic-bezier(0.22, 0.8, 0.3, 1) 70ms forwards;
+}
+
+.seat-start-question-cards--step2 .seat-start-question-cards__card-3 {
+  grid-area: card3;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+@keyframes startQuestionCardEaseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes startQuestionCardEaseInTop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

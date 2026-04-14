@@ -48,6 +48,21 @@ function objectiveIntroLayout(subFocus: TutorialSubFocus): string[] {
   ];
 }
 
+function startGameStepOneLayout(subFocus: TutorialSubFocus): string[] {
+  const base = ["table-layout--face-up", "table-layout--step-three", "table-layout--focused"];
+  const tail =
+    subFocus === "cups"
+      ? "table-layout--focus-bottom-cups"
+      : subFocus === "meeple"
+        ? "table-layout--focus-bottom-meeple"
+        : "table-layout--focus-bottom-board";
+  return [...base, tail];
+}
+
+function startGameMeeplesOverviewLayout(subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--start-meeples"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -126,13 +141,51 @@ const OBJECTIVE_TUTORIAL_STEPS = [
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
+const START_OF_GAME_TUTORIAL_STEPS = [
+  {
+    title: "Player board first",
+    description:
+      "Start of the game — begin from your player board. Check your board space before handling pieces.",
+    interaction: {
+      mode: "seat-elements",
+      seat: "bottom",
+      elements: ["board", "cups", "meeple"]
+    },
+    focusLabels: {},
+    layoutClasses: startGameStepOneLayout
+  },
+  {
+    title: "Prepare cups",
+    description: "Start of the game — place your three cups in your play area and keep them visible.",
+    interaction: {
+      mode: "seat-elements",
+      seat: "bottom",
+      elements: ["board", "cups", "meeple"]
+    },
+    focusLabels: {},
+    layoutClasses: startGameStepOneLayout
+  },
+  {
+    title: "Meeple ready",
+    description: "Start of the game — place your meeple in your player area and get ready to begin.",
+    interaction: {
+      mode: "seat-elements",
+      seat: "bottom",
+      elements: ["board", "cups", "meeple"]
+    },
+    focusLabels: {},
+    layoutClasses: startGameMeeplesOverviewLayout
+  }
+] as const satisfies readonly TutorialStepConfig[];
+
 /**
  * Ordered tutorial modules. More kinds (objective, scoring, …) will get their own entries later.
  * `DEFAULT_TUTORIAL_MODULE_INDEX` picks which one "How to play" runs today.
  */
 export const TUTORIAL_MODULES: readonly TutorialModuleConfig[] = [
   { kind: "setup", title: "Setup", steps: SETUP_TUTORIAL_STEPS },
-  { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS }
+  { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS },
+  { kind: "how-to-play", title: "Start of the game", steps: START_OF_GAME_TUTORIAL_STEPS }
 ] as const;
 
 export const DEFAULT_TUTORIAL_MODULE_INDEX = 0;

@@ -15,6 +15,7 @@ type PlayerSeatProps = {
   onSeatPartSelect: (part: "board" | "cups" | "meeple") => void;
   skillTilesTutorial: boolean;
   skillTilesFrozen: boolean;
+  startQuestionCardsMode: "step1" | "step2" | null;
 };
 
 export function PlayerSeat({
@@ -26,7 +27,8 @@ export function PlayerSeat({
   seatPartsSubFocus,
   onSeatPartSelect,
   skillTilesTutorial,
-  skillTilesFrozen
+  skillTilesFrozen,
+  startQuestionCardsMode
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
   const cupsDimWhenMeepleFocused =
@@ -60,6 +62,15 @@ export function PlayerSeat({
           unoptimized
         />
       </div>
+      {startQuestionCardsMode ? (
+        <div className={`seat-start-question-cards seat-start-question-cards--${startQuestionCardsMode}`} aria-hidden>
+          <Image className="seat-start-question-cards__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          <Image className="seat-start-question-cards__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          {startQuestionCardsMode === "step2" ? (
+            <Image className="seat-start-question-cards__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          ) : null}
+        </div>
+      ) : null}
       {skillTilesTutorial ? (
         <div
           className={`skill-tiles-group skill-tiles-group--left ${skillTilesFrozen ? "skill-tiles-group--frozen" : ""}`}

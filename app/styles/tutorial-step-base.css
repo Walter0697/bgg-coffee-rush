@@ -1,0 +1,48 @@
+.tutorial-target {
+  cursor: pointer;
+  /* Only opacity/transform — avoid animating filter here; filter dimming makes PNGs look soft */
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+/* Step 2 corner props default to pointer-events:none (decorative / non-blocking). Re-enable hits when they're tutorial targets — same idea as the step 1 board. */
+.table-layout__supply.tutorial-target,
+.table-layout__rush-stack.tutorial-target,
+.table-layout__card-deck-stack.tutorial-target,
+.table-layout__shared-area-hitbox.tutorial-target {
+  pointer-events: auto;
+}
+
+.table-layout--tutorial-overview .tutorial-target::after {
+  content: "";
+  position: absolute;
+  inset: clamp(6px, 1.2vmin, 12px);
+  border-radius: 14px;
+  background: rgba(255, 223, 158, 0.16);
+  box-shadow: 0 0 20px rgba(255, 199, 110, 0.35);
+  animation: tutorialPulse 1.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.table-layout--focused .tutorial-target--dimmed {
+  /* Opacity-only dimming: grayscale/saturate filters re-rasterize the layer and read blurry next to zoom/scale */
+  opacity: 0.3;
+}
+
+.table-layout--focused .tutorial-target--active {
+  z-index: 8;
+}
+
+@keyframes tutorialPulse {
+  0% {
+    opacity: 0.68;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.018);
+  }
+  100% {
+    opacity: 0.68;
+    transform: scale(1);
+  }
+}

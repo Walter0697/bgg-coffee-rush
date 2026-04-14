@@ -1,6 +1,10 @@
 "use client";
 
 import { TUTORIAL_STEPS } from "./tutorialConfig";
+import { TutorialObjectiveBody } from "./steps/TutorialObjectiveBody";
+import { TutorialStartGameStepOneBody } from "./steps/TutorialStartGameStepOneBody";
+import { TutorialStartGameStepThreeBody } from "./steps/TutorialStartGameStepThreeBody";
+import { TutorialStartGameStepTwoBody } from "./steps/TutorialStartGameStepTwoBody";
 import { TutorialStepOneBody } from "./steps/TutorialStepOneBody";
 import { TutorialStepTwoBody } from "./steps/TutorialStepTwoBody";
 import { TutorialStepThreeBody } from "./steps/TutorialStepThreeBody";
@@ -21,8 +25,13 @@ export function TutorialStepContent({
   onSetSubFocus
 }: TutorialStepContentProps) {
   const step = TUTORIAL_STEPS[stepIndex];
+  const phaseTitle = step?.phaseTitle ?? "";
+  const phaseStepIndexes = TUTORIAL_STEPS.map((item, index) =>
+    item.phaseTitle === phaseTitle ? index : -1
+  ).filter((index) => index >= 0);
+  const phaseStepIndex = phaseStepIndexes.indexOf(stepIndex);
 
-  if (stepIndex === 0) {
+  if (phaseTitle === "Setup" && phaseStepIndex === 0) {
     return (
       <TutorialStepOneBody
         stepTitle={stepTitle}
@@ -32,7 +41,7 @@ export function TutorialStepContent({
     );
   }
 
-  if (stepIndex === 1) {
+  if (phaseTitle === "Setup" && phaseStepIndex === 1) {
     return (
       <TutorialStepTwoBody
         stepTitle={stepTitle}
@@ -42,8 +51,24 @@ export function TutorialStepContent({
     );
   }
 
-  if (stepIndex === 2) {
+  if (phaseTitle === "Setup" && phaseStepIndex === 2) {
     return <TutorialStepThreeBody onSetSubFocus={onSetSubFocus} />;
+  }
+
+  if (phaseTitle === "Objective of the game") {
+    return <TutorialObjectiveBody />;
+  }
+
+  if (phaseTitle === "Start of the game" && phaseStepIndex === 0) {
+    return <TutorialStartGameStepOneBody />;
+  }
+
+  if (phaseTitle === "Start of the game" && phaseStepIndex === 1) {
+    return <TutorialStartGameStepTwoBody />;
+  }
+
+  if (phaseTitle === "Start of the game" && phaseStepIndex === 2) {
+    return <TutorialStartGameStepThreeBody />;
   }
 
   if (step) {
