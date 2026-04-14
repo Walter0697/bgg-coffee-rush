@@ -15,7 +15,8 @@ function stepSharedAreaLayout(subFocus: TutorialSubFocus): string[] {
 }
 
 function stepThreeLayout(subFocus: TutorialSubFocus): string[] {
-  const base = ["table-layout--step-three", "table-layout--focused"];
+  /* face-up matches steps 1–2: top-down table, no idle board tilt */
+  const base = ["table-layout--face-up", "table-layout--step-three", "table-layout--focused"];
   const tail =
     subFocus === "board"
       ? "table-layout--focus-bottom-board"

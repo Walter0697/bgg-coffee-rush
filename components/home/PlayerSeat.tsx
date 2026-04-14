@@ -53,6 +53,7 @@ export function PlayerSeat({
           width={288}
           height={626}
           priority={seat.side === "bottom"}
+          unoptimized
         />
       </div>
       <div
@@ -105,6 +106,7 @@ export function PlayerSeat({
                 }
               : undefined
           }
+          unoptimized
         />
       </div>
     </section>

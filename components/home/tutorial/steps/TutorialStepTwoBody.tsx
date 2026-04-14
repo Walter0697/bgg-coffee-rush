@@ -22,7 +22,7 @@ export function TutorialStepTwoBody({ stepTitle, drillInBannerLabel, onSetSubFoc
       Put the <TutorialActionKeyword onClick={() => onSetSubFocus("supply")}>ingredient tray</TutorialActionKeyword>,{" "}
       <TutorialActionKeyword onClick={() => onSetSubFocus("rush")}>rush token</TutorialActionKeyword>, and{" "}
       <TutorialActionKeyword onClick={() => onSetSubFocus("deck")}>draw pile</TutorialActionKeyword> in a common area
-      that everyone can access. You can tap the words or the table.
+      that everyone can access.
     </>
   );
 }

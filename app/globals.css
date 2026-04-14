@@ -35,6 +35,45 @@ body {
   perspective-origin: 18% 88%;
 }
 
+/* Tutorial: drop page perspective and Z-lifts so everything reads flat (face-up table already kills board tilt). */
+.mahjong-shell--tutorial {
+  perspective: none;
+}
+
+.mahjong-shell--tutorial .table-layout {
+  transform-style: flat;
+}
+
+.mahjong-shell--tutorial .center-zone {
+  transform: none;
+}
+
+.mahjong-shell--tutorial .seat {
+  transform-style: flat;
+}
+
+.mahjong-shell--tutorial .player-board,
+.mahjong-shell--tutorial .seat--right .player-board,
+.mahjong-shell--tutorial .seat--left .player-board {
+  transform: none;
+}
+
+.mahjong-shell--tutorial .edge-glass-group--bottom {
+  transform: translateY(-50%);
+}
+
+.mahjong-shell--tutorial .edge-glass-group--top {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.mahjong-shell--tutorial .edge-glass-group--right {
+  transform: translateX(-50%) rotate(-90deg);
+}
+
+.mahjong-shell--tutorial .edge-glass-group--left {
+  transform: translateX(-50%) rotate(90deg);
+}
+
 .table-layout {
   --table: min(94vmin, 760px);
   --side: calc(var(--table) * 0.27);
@@ -446,7 +485,15 @@ body {
 
 .tutorial-target {
   cursor: pointer;
-  transition: opacity 320ms ease, transform 320ms ease, filter 320ms ease;
+  /* Only opacity/transform — avoid animating filter here; filter dimming makes PNGs look soft */
+  transition: opacity 320ms ease, transform 320ms ease;
+}
+
+/* Step 2 corner props default to pointer-events:none (decorative / non-blocking). Re-enable hits when they're tutorial targets — same idea as the step 1 board. */
+.table-layout__supply.tutorial-target,
+.table-layout__rush-stack.tutorial-target,
+.table-layout__card-deck-stack.tutorial-target {
+  pointer-events: auto;
 }
 
 .table-layout--tutorial-overview .tutorial-target::after {
@@ -461,8 +508,8 @@ body {
 }
 
 .table-layout--focused .tutorial-target--dimmed {
-  opacity: 0.26;
-  filter: saturate(0.52) brightness(0.88);
+  /* Opacity-only dimming: grayscale/saturate filters re-rasterize the layer and read blurry next to zoom/scale */
+  opacity: 0.3;
 }
 
 .table-layout--focused .tutorial-target--active {
@@ -476,8 +523,7 @@ body {
 
 .table-layout--step-shared-area .center-zone,
 .table-layout--step-shared-area .seat {
-  opacity: 0.16;
-  filter: saturate(0.4) brightness(0.86);
+  opacity: 0.14;
   pointer-events: none;
 }
 
@@ -488,8 +534,7 @@ body {
 .table-layout--step-three .seat--top,
 .table-layout--step-three .seat--right,
 .table-layout--step-three .seat--left {
-  opacity: 0.16;
-  filter: saturate(0.4) brightness(0.86);
+  opacity: 0.14;
   pointer-events: none;
 }
 
