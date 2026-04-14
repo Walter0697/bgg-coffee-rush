@@ -26,11 +26,13 @@ export function TutorialStepOneBody({
     <>
       Place the <TutorialActionKeyword onClick={() => onSetSubFocus("center")}>ingredient board</TutorialActionKeyword>
       , player boards (
-      <TutorialActionKeyword onClick={() => onSetSubFocus("right")}>blue</TutorialActionKeyword>,{" "}
+      <TutorialActionKeyword onClick={() => onSetSubFocus("right")}>green</TutorialActionKeyword>,{" "}
       <TutorialActionKeyword onClick={() => onSetSubFocus("top")}>red</TutorialActionKeyword>,{" "}
-      <TutorialActionKeyword onClick={() => onSetSubFocus("bottom")}>green</TutorialActionKeyword>,{" "}
+      <TutorialActionKeyword onClick={() => onSetSubFocus("bottom")}>blue</TutorialActionKeyword>,{" "}
       <TutorialActionKeyword onClick={() => onSetSubFocus("left")}>yellow</TutorialActionKeyword>) like how we show it
-      here. 
+      here. Put other resources in a{" "}
+      <TutorialActionKeyword onClick={() => onSetSubFocus("shared-area")}>common area</TutorialActionKeyword>{" "}
+      where everyone can reach.
     </>
   );
 }

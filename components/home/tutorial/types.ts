@@ -31,10 +31,17 @@ export type TutorialSharedAreaInteraction = {
   elements: readonly ("supply" | "rush" | "deck")[];
 };
 
+export type TutorialSkillTilesInteraction = {
+  mode: "skill-tiles";
+  /** Seat to showcase (today: bottom player board). */
+  seat: SeatSide;
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
-  | TutorialSeatPartsInteraction;
+  | TutorialSeatPartsInteraction
+  | TutorialSkillTilesInteraction;
 
 export type TutorialStepConfig = {
   /** Shown on "Back to …" and similar; keep short. */

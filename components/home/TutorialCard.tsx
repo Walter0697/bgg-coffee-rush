@@ -82,61 +82,63 @@ export function TutorialCard({
 
   return (
     <>
-      <section className="tutorial-card" aria-label="Tutorial steps">
+      <div className="tutorial-card-shell">
         <p className="tutorial-step-label">
           {module.title} · Step {stepIndex + 1} of {totalSteps}
         </p>
-        <p className="tutorial-step-text">
-          <TutorialStepContent
-            stepIndex={stepIndex}
-            stepTitle={step?.title ?? "this step"}
-            drillInBannerLabel={drillInBannerLabel}
-            onSetSubFocus={(key) => onSetSubFocus(key)}
-          />
-        </p>
-        <div className="tutorial-actions">
-          <button
-            type="button"
-            className="tutorial-button tutorial-button--ghost tutorial-button--icon"
-            onClick={onClose}
-            aria-label="Exit tutorial"
-          >
-            <IconClose />
-          </button>
-          <div className="tutorial-actions__nav">
-            {subFocus !== null ? (
-              <button
-                type="button"
-                className="tutorial-button tutorial-button--icon"
-                onClick={() => onSetSubFocus(null)}
-                aria-label="Back to step overview"
-              >
-                <IconChevronLeft />
-              </button>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  className="tutorial-button tutorial-button--ghost tutorial-button--icon"
-                  onClick={onPrevious}
-                  disabled={previousDisabled}
-                  aria-label="Previous step"
-                >
-                  <IconChevronLeft />
-                </button>
+        <section className="tutorial-card" aria-label="Tutorial steps">
+          <p className="tutorial-step-text">
+            <TutorialStepContent
+              stepIndex={stepIndex}
+              stepTitle={step?.title ?? "this step"}
+              drillInBannerLabel={drillInBannerLabel}
+              onSetSubFocus={(key) => onSetSubFocus(key)}
+            />
+          </p>
+          <div className="tutorial-actions">
+            <button
+              type="button"
+              className="tutorial-button tutorial-button--ghost tutorial-button--icon"
+              onClick={onClose}
+              aria-label="Exit tutorial"
+            >
+              <IconClose />
+            </button>
+            <div className="tutorial-actions__nav">
+              {subFocus !== null ? (
                 <button
                   type="button"
                   className="tutorial-button tutorial-button--icon"
-                  onClick={onNext}
-                  aria-label={isFinalStep ? "Finish tutorial" : "Next step"}
+                  onClick={() => onSetSubFocus(null)}
+                  aria-label="Back to step overview"
                 >
-                  {isFinalStep ? <IconCheck /> : <IconChevronRight />}
+                  <IconChevronLeft />
                 </button>
-              </>
-            )}
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    className="tutorial-button tutorial-button--ghost tutorial-button--icon"
+                    onClick={onPrevious}
+                    disabled={previousDisabled}
+                    aria-label="Previous step"
+                  >
+                    <IconChevronLeft />
+                  </button>
+                  <button
+                    type="button"
+                    className="tutorial-button tutorial-button--icon"
+                    onClick={onNext}
+                    aria-label={isFinalStep ? "Finish tutorial" : "Next step"}
+                  >
+                    {isFinalStep ? <IconCheck /> : <IconChevronRight />}
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <div
         className="tutorial-step-progress"

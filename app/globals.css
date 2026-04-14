@@ -194,7 +194,7 @@ body {
   transform: translateY(1px);
 }
 
-.tutorial-card {
+.tutorial-card-shell {
   position: fixed;
   left: 50%;
   /* Sit lower while tutorial is open (How To Play hidden); stay above the progress bar. */
@@ -202,11 +202,14 @@ body {
   transform: translateX(-50%);
   z-index: 26;
   width: min(92vw, 520px);
+}
+
+.tutorial-card {
   border: 2px solid #5e3d22;
   border-radius: 16px;
   background: linear-gradient(180deg, #fff8ee 0%, #efd8b5 100%);
   box-shadow: 0 14px 24px rgba(20, 8, 2, 0.3);
-  padding: 14px 16px;
+  padding: 10px 14px;
 }
 
 .tutorial-step-progress {
@@ -237,14 +240,21 @@ body {
 }
 
 .tutorial-step-label {
-  margin: 0;
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: #6a4227;
+  margin-left: 10px;
+  margin-bottom: -3px;
+  font-size: clamp(1rem, 2.1vw, 1.18rem);
+  font-weight: 800;
+  color: #745500;
+  font-size: 1.2rem;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.98),
+    0 0 10px rgba(255, 255, 255, 0.92),
+    0 0 22px rgba(255, 227, 176, 0.9),
+    0 0 36px rgba(255, 162, 66, 0.8);
 }
 
 .tutorial-step-text {
-  margin: 8px 0 0;
+  margin: 4px 0 0;
   font-size: clamp(0.92rem, 1.9vw, 1.06rem);
   line-height: 1.35;
   color: #2d1a0f;
@@ -274,7 +284,7 @@ body {
 }
 
 .tutorial-actions {
-  margin-top: 14px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -442,6 +452,17 @@ body {
   z-index: 4;
 }
 
+.table-layout__shared-area-hitbox {
+  position: absolute;
+  top: clamp(4px, 1vmin, 14px);
+  right: clamp(0px, 0.8vmin, 10px);
+  width: clamp(60px, 14.5vmin, 106px);
+  height: clamp(96px, 22vmin, 154px);
+  border-radius: 16px;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .table-layout__rush-tile {
   position: absolute;
   right: 0;
@@ -492,7 +513,8 @@ body {
 /* Step 2 corner props default to pointer-events:none (decorative / non-blocking). Re-enable hits when they're tutorial targets — same idea as the step 1 board. */
 .table-layout__supply.tutorial-target,
 .table-layout__rush-stack.tutorial-target,
-.table-layout__card-deck-stack.tutorial-target {
+.table-layout__card-deck-stack.tutorial-target,
+.table-layout__shared-area-hitbox.tutorial-target {
   pointer-events: auto;
 }
 
@@ -534,6 +556,18 @@ body {
 .table-layout--step-three .seat--top,
 .table-layout--step-three .seat--right,
 .table-layout--step-three .seat--left {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.table-layout--step-four .center-zone,
+.table-layout--step-four .table-layout__supply,
+.table-layout--step-four .table-layout__rush-stack,
+.table-layout--step-four .table-layout__card-deck-stack,
+.table-layout--step-four .seat--top,
+.table-layout--step-four .seat--right,
+.table-layout--step-four .seat--left,
+.table-layout--step-four .seat--bottom .edge-glass-group {
   opacity: 0.14;
   pointer-events: none;
 }
@@ -661,6 +695,30 @@ body {
   margin-top: clamp(2px, 0.5vmin, 6px);
 }
 
+.skill-tiles-group {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2px, 0.5vmin, 6px);
+  z-index: 5;
+  transform-style: flat;
+  animation: skillTilesFadeIn 680ms ease-in-out both;
+}
+
+.skill-tiles-group--left {
+  left: clamp(-40px, -2vmin, -18px);
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+.skill-tiles-group img {
+  width: clamp(18px, 3vmin, 26px);
+  height: auto;
+  display: block;
+  transform: none;
+  filter: drop-shadow(0 3px 6px rgba(18, 8, 2, 0.28));
+}
+
 @keyframes tutorialPulse {
   0% {
     opacity: 0.68;
@@ -673,5 +731,14 @@ body {
   100% {
     opacity: 0.68;
     transform: scale(1);
+  }
+}
+
+@keyframes skillTilesFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

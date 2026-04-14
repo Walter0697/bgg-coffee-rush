@@ -3,6 +3,12 @@ import type { TutorialModuleConfig, TutorialStepConfig, TutorialSubFocus } from 
 function stepOneLayout(subFocus: TutorialSubFocus): string[] {
   const base = ["table-layout--face-up", "table-layout--tutorial-overview"];
   if (!subFocus) return base;
+  if (subFocus === "shared-area") {
+    return ["table-layout--focused", "table-layout--focus-shared-area"];
+  }
+  if (subFocus === "supply" || subFocus === "rush" || subFocus === "deck") {
+    return ["table-layout--focused", `table-layout--focus-shared-${subFocus}`];
+  }
   return ["table-layout--focused", `table-layout--focus-${subFocus}`];
 }
 
@@ -28,21 +34,29 @@ function stepThreeLayout(subFocus: TutorialSubFocus): string[] {
   return [...base, tail];
 }
 
+function stepFourLayout(): string[] {
+  return ["table-layout--face-up", "table-layout--step-four", "table-layout--focused", "table-layout--focus-bottom-board"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
     description:
-      "Setup — place the ingredient board in the center and the four player boards on the top, right, bottom, and left.",
+      "Setup — place the ingredient board in the center and the four player boards on the top, right, bottom, and left. Put other resources on the side where everyone can reach.",
     interaction: {
       mode: "layout-zoom",
-      focusKeys: ["center", "top", "right", "bottom", "left"]
+      focusKeys: ["center", "top", "right", "bottom", "left", "shared-area"]
     },
     focusLabels: {
       center: "ingredient board",
       top: "top player area",
       right: "right player area",
       bottom: "bottom player area",
-      left: "left player area"
+      left: "left player area",
+      "shared-area": "common area",
+      supply: "ingredient tray",
+      rush: "rush token",
+      deck: "draw pile"
     },
     layoutClasses: stepOneLayout
   },
@@ -71,6 +85,17 @@ const SETUP_TUTORIAL_STEPS = [
     },
     focusLabels: {},
     layoutClasses: stepThreeLayout
+  },
+  {
+    title: "Skill tiles",
+    description:
+      "Place all 4 skills tile backward (the side without +2) on top, into the correct place of the player board.",
+    interaction: {
+      mode: "skill-tiles",
+      seat: "bottom"
+    },
+    focusLabels: {},
+    layoutClasses: stepFourLayout
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

@@ -1,6 +1,6 @@
 "use client";
 
-import type { CSSProperties } from "react";
+import type { CSSProperties, KeyboardEvent } from "react";
 import Image from "next/image";
 
 import { PlayerSeat } from "./PlayerSeat";
@@ -49,9 +49,29 @@ export function TableLayout({
 
   const seatPartsConfig =
     tutorialActive && step?.interaction?.mode === "seat-elements" ? step.interaction : null;
+  const skillTilesConfig =
+    tutorialActive && step?.interaction?.mode === "skill-tiles" ? step.interaction : null;
 
+  const sharedAreaInteractive = tutorialActive && interaction?.mode === "shared-area-elements";
   const sharedAreaTutorial =
-    tutorialActive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
+    sharedAreaInteractive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
+  const commonAreaInteractive = layoutZoomTutorial;
+
+  function onCommonAreaKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    if (!commonAreaInteractive) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onTutorialSubFocus("shared-area");
+    }
+  }
+
+  function onSharedAreaKeyDown(event: KeyboardEvent<HTMLDivElement>, subFocus: "supply" | "rush" | "deck") {
+    if (!sharedAreaInteractive) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onTutorialSubFocus(subFocus);
+    }
+  }
 
   return (
     <section
@@ -75,16 +95,39 @@ export function TableLayout({
       </div>
 
       <div
-        className={`table-layout__supply ${sharedAreaTutorial ? "tutorial-target" : ""} ${
-          sharedAreaTutorial && tutorialSubFocus === "supply" ? "tutorial-target--active" : ""
+        className={`table-layout__shared-area-hitbox ${commonAreaInteractive ? "tutorial-target" : ""} ${
+          layoutZoomSubFocus === "shared-area" ? "tutorial-target--active" : ""
+        } ${
+          commonAreaInteractive && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "shared-area"
+            ? "tutorial-target--dimmed"
+            : ""
+        }`}
+        aria-hidden={!commonAreaInteractive}
+        aria-label={commonAreaInteractive ? "Common area" : undefined}
+        role={commonAreaInteractive ? "button" : undefined}
+        tabIndex={commonAreaInteractive ? 0 : -1}
+        onClick={commonAreaInteractive ? () => onTutorialSubFocus("shared-area") : undefined}
+        onKeyDown={onCommonAreaKeyDown}
+      />
+
+      <div
+        className={`table-layout__supply ${sharedAreaInteractive ? "tutorial-target" : ""} ${
+          sharedAreaInteractive && tutorialSubFocus === "supply" ? "tutorial-target--active" : ""
         } ${
           sharedAreaTutorial && tutorialSubFocus !== null && tutorialSubFocus !== "supply"
             ? "tutorial-target--dimmed"
             : ""
+        } ${
+          layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "shared-area"
+            ? "tutorial-target--dimmed"
+            : ""
         }`}
-        aria-hidden={!sharedAreaTutorial}
-        aria-label={sharedAreaTutorial ? "Ingredient tray" : undefined}
-        onClick={sharedAreaTutorial ? () => onTutorialSubFocus("supply") : undefined}
+        aria-hidden={!sharedAreaInteractive}
+        aria-label={sharedAreaInteractive ? "Ingredient tray" : undefined}
+        role={sharedAreaInteractive ? "button" : undefined}
+        tabIndex={sharedAreaInteractive ? 0 : -1}
+        onClick={sharedAreaInteractive ? () => onTutorialSubFocus("supply") : undefined}
+        onKeyDown={(event) => onSharedAreaKeyDown(event, "supply")}
       >
         <div className="table-layout__supply-3d">
           <Image
@@ -98,16 +141,23 @@ export function TableLayout({
       </div>
 
       <div
-        className={`table-layout__rush-stack ${sharedAreaTutorial ? "tutorial-target" : ""} ${
-          sharedAreaTutorial && tutorialSubFocus === "rush" ? "tutorial-target--active" : ""
+        className={`table-layout__rush-stack ${sharedAreaInteractive ? "tutorial-target" : ""} ${
+          sharedAreaInteractive && tutorialSubFocus === "rush" ? "tutorial-target--active" : ""
         } ${
           sharedAreaTutorial && tutorialSubFocus !== null && tutorialSubFocus !== "rush"
             ? "tutorial-target--dimmed"
             : ""
+        } ${
+          layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "shared-area"
+            ? "tutorial-target--dimmed"
+            : ""
         }`}
-        aria-hidden={!sharedAreaTutorial}
-        aria-label={sharedAreaTutorial ? "Rush token" : undefined}
-        onClick={sharedAreaTutorial ? () => onTutorialSubFocus("rush") : undefined}
+        aria-hidden={!sharedAreaInteractive}
+        aria-label={sharedAreaInteractive ? "Rush token" : undefined}
+        role={sharedAreaInteractive ? "button" : undefined}
+        tabIndex={sharedAreaInteractive ? 0 : -1}
+        onClick={sharedAreaInteractive ? () => onTutorialSubFocus("rush") : undefined}
+        onKeyDown={(event) => onSharedAreaKeyDown(event, "rush")}
       >
         {RUSH_STACK_STYLE.map((style, index) => (
           <Image
@@ -123,16 +173,23 @@ export function TableLayout({
       </div>
 
       <div
-        className={`table-layout__card-deck-stack ${sharedAreaTutorial ? "tutorial-target" : ""} ${
-          sharedAreaTutorial && tutorialSubFocus === "deck" ? "tutorial-target--active" : ""
+        className={`table-layout__card-deck-stack ${sharedAreaInteractive ? "tutorial-target" : ""} ${
+          sharedAreaInteractive && tutorialSubFocus === "deck" ? "tutorial-target--active" : ""
         } ${
           sharedAreaTutorial && tutorialSubFocus !== null && tutorialSubFocus !== "deck"
             ? "tutorial-target--dimmed"
             : ""
+        } ${
+          layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "shared-area"
+            ? "tutorial-target--dimmed"
+            : ""
         }`}
-        aria-hidden={!sharedAreaTutorial}
-        aria-label={sharedAreaTutorial ? "Draw pile" : undefined}
-        onClick={sharedAreaTutorial ? () => onTutorialSubFocus("deck") : undefined}
+        aria-hidden={!sharedAreaInteractive}
+        aria-label={sharedAreaInteractive ? "Draw pile" : undefined}
+        role={sharedAreaInteractive ? "button" : undefined}
+        tabIndex={sharedAreaInteractive ? 0 : -1}
+        onClick={sharedAreaInteractive ? () => onTutorialSubFocus("deck") : undefined}
+        onKeyDown={(event) => onSharedAreaKeyDown(event, "deck")}
       >
         {CARD_BACK_STACK_STYLE.map((style, index) => (
           <Image
@@ -149,6 +206,7 @@ export function TableLayout({
 
       {seats.map((seat) => {
         const partsForThisSeat = seatPartsConfig && seat.side === seatPartsConfig.seat;
+        const skillTilesForThisSeat = skillTilesConfig && seat.side === skillTilesConfig.seat;
 
         return (
           <PlayerSeat
@@ -160,6 +218,7 @@ export function TableLayout({
             seatPartsTutorial={Boolean(partsForThisSeat)}
             seatPartsSubFocus={partsForThisSeat ? tutorialSubFocus : null}
             onSeatPartSelect={(part) => onTutorialSubFocus(part)}
+            skillTilesTutorial={Boolean(skillTilesForThisSeat)}
           />
         );
       })}

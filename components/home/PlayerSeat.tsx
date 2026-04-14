@@ -13,6 +13,7 @@ type PlayerSeatProps = {
   seatPartsTutorial: boolean;
   seatPartsSubFocus: TutorialSubFocus;
   onSeatPartSelect: (part: "board" | "cups" | "meeple") => void;
+  skillTilesTutorial: boolean;
 };
 
 export function PlayerSeat({
@@ -22,7 +23,8 @@ export function PlayerSeat({
   onLayoutZoomSelect,
   seatPartsTutorial,
   seatPartsSubFocus,
-  onSeatPartSelect
+  onSeatPartSelect,
+  skillTilesTutorial
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
   const cupsDimWhenMeepleFocused =
@@ -56,6 +58,14 @@ export function PlayerSeat({
           unoptimized
         />
       </div>
+      {skillTilesTutorial ? (
+        <div className="skill-tiles-group skill-tiles-group--left" aria-label={`${seat.label} skill tiles`}>
+          <Image src="/images/e1.png" alt="Skill tile e1" width={72} height={72} unoptimized />
+          <Image src="/images/e2.png" alt="Skill tile e2" width={72} height={72} unoptimized />
+          <Image src="/images/e3.png" alt="Skill tile e3" width={72} height={72} unoptimized />
+          <Image src="/images/e4.png" alt="Skill tile e4" width={72} height={72} unoptimized />
+        </div>
+      ) : null}
       <div
         className={`edge-glass-group edge-glass-group--${seat.side} ${seatPartsTutorial ? "tutorial-target" : ""} ${
           seatPartsTutorial && seatPartsSubFocus === "cups" ? "tutorial-target--active" : ""
