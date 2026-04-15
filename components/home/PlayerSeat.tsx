@@ -226,6 +226,38 @@ export function PlayerSeat({
               height={64}
               unoptimized
             />
+            <Image
+              className="edge-glass-group__ingredient-in-cup edge-glass-group__ingredient-in-cup--coffee"
+              src="/images/ingredient/coffee.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+            <Image
+              className="edge-glass-group__ingredient-in-cup edge-glass-group__ingredient-in-cup--milk"
+              src="/images/ingredient/milk.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+            <Image
+              className="edge-glass-group__ingredient-in-cup edge-glass-group__ingredient-in-cup--steam-cup-one"
+              src="/images/ingredient/steam.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+            <Image
+              className="edge-glass-group__ingredient-in-cup edge-glass-group__ingredient-in-cup--ice"
+              src="/images/ingredient/ice.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
           </>
         ) : null}
         {seat.side === "bottom" && startSteamFlyFromMeeple ? (

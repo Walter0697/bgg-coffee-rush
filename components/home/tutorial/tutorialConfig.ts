@@ -127,6 +127,19 @@ function howToPlayInvalidCupsLayout(_subFocus: TutorialSubFocus): string[] {
   ];
 }
 
+/** How to play — keep cups centered like step 6 but freeze any cup rotation/motion. */
+function howToPlayCupsNoRotateLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--objective-cups",
+    "table-layout--focused",
+    "table-layout--focus-bottom",
+    "table-layout--how-to-play-cups",
+    "table-layout--how-to-play-cups-no-rotate"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -335,6 +348,17 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     focusLabels: {},
     layoutClasses: howToPlayInvalidCupsLayout,
     showCupStackCross: true
+  },
+  {
+    title: "Wrong cup setup (preview)",
+    description:
+      "you cannot leave any ingredients on the table but not inside the cup. if it doesn’t fit your needs, you just have to throw it away (put it back into supply bin)",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayCupsNoRotateLayout,
+    showCupIngredients: true
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
