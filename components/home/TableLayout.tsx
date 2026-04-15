@@ -79,8 +79,14 @@ export function TableLayout({
       ? step.howToPlayIngredientBoardMarkers
       : null;
   const commonAreaInteractive = layoutZoomTutorial;
-  const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
-  const cupIngredientsVisible = tutorialActive && objectiveCardVisible;
+  const objectivePhaseActive = tutorialActive && step?.phaseTitle === "Objective of the game";
+  const tableOverlayCardSrc =
+    tutorialActive
+      ? step?.tableOverlayCardSrc ?? (objectivePhaseActive ? "/images/card.png" : null)
+      : null;
+  const cupIngredientsVisible =
+    tutorialActive && (objectivePhaseActive || Boolean(step?.showCupIngredientsInCup));
+  const cupSteamInCup = tutorialActive && Boolean(step?.showCupSteamInCup);
   const cupIngredientsRow = tutorialActive && Boolean(step?.showCupIngredients);
   const cupStackCrossVisible = tutorialActive && Boolean(step?.showCupStackCross);
   const isStartGameStepOne =
@@ -293,6 +299,7 @@ export function TableLayout({
               seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
             }
             objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(cupIngredientsVisible)}
+            objectiveCupSteamInCup={seat.side === "bottom" && cupSteamInCup}
             cupIngredientsRow={seat.side === "bottom" && Boolean(cupIngredientsRow)}
             startSteamFlyFromMeeple={
               seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)
@@ -301,9 +308,9 @@ export function TableLayout({
         );
       })}
 
-      {objectiveCardVisible ? (
+      {tableOverlayCardSrc ? (
         <div className="table-layout__objective-card" aria-hidden>
-          <Image src="/images/card.png" alt="" width={240} height={320} unoptimized />
+          <Image src={tableOverlayCardSrc} alt="" width={240} height={320} unoptimized />
         </div>
       ) : null}
 

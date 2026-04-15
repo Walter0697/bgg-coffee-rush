@@ -87,6 +87,8 @@ export type TutorialStepConfig = {
   layoutClasses: (subFocus: TutorialSubFocus) => string[];
   /** Optional image centered on the table (e.g. first player token). */
   centerOverlayImageSrc?: string;
+  /** Optional card image shown in the objective-card slot near cups. */
+  tableOverlayCardSrc?: string;
   /** Where to show `centerOverlayImageSrc` (default: full table center). */
   centerOverlayPlacement?: "table-center" | "under-bottom-start-cards";
   /** Full dim + move yes/no overlay (How to play). */
@@ -94,6 +96,9 @@ export type TutorialStepConfig = {
   /** Coffee / milk / steam on the ingredient board (How to play — ingredient board focus). */
   howToPlayIngredientBoardMarkers?: readonly HowToPlayIngredientBoardMarkerItem[];
   /** Show coffee + milk + steam ingredients in the first bottom cup. */
+  showCupIngredientsInCup?: boolean;
+  /** When the first cup is rendered, keep the steam inside the cup instead of floating above it. */
+  showCupSteamInCup?: boolean;
   showCupIngredients?: boolean;
   /** Show upside-down cup stack with a cross marker (How to play — invalid cup setup). */
   showCupStackCross?: boolean;

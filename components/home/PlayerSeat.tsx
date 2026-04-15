@@ -20,6 +20,8 @@ type PlayerSeatProps = {
   startFirstPlayerTokenUnderCardsSrc: string | null;
   /** Objective step: show coffee, milk & steam in the first (left) cup */
   objectiveFirstCupIngredients?: boolean;
+  /** Keep the objective steam inside the first cup instead of floating above it. */
+  objectiveCupSteamInCup?: boolean;
   /** When true, render cup ingredients (coffee/milk/steam) in a horizontal row above the cup. */
   cupIngredientsRow?: boolean;
   /** Start step 5: animate steam from meeple toward first cup */
@@ -39,6 +41,7 @@ export function PlayerSeat({
   startQuestionCardsMode,
   startFirstPlayerTokenUnderCardsSrc,
   objectiveFirstCupIngredients = false,
+  objectiveCupSteamInCup = false,
   cupIngredientsRow = false,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
@@ -156,9 +159,19 @@ export function PlayerSeat({
                 />
               ) : null}
             </div>
-            {!cupIngredientsRow ? (
+            {!cupIngredientsRow && !objectiveCupSteamInCup ? (
               <Image
                 className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
+                src="/images/ingredient/steam.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            ) : null}
+            {!cupIngredientsRow && objectiveCupSteamInCup ? (
+              <Image
+                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam edge-glass-cup__ingredient--steam-in-cup"
                 src="/images/ingredient/steam.png"
                 alt=""
                 width={64}

@@ -140,6 +140,18 @@ function howToPlayCupsNoRotateLayout(_subFocus: TutorialSubFocus): string[] {
   ];
 }
 
+/** How to play — objective-like layout with one centered cup and a question card. */
+function howToPlaySingleCupQuestionLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--objective-cups",
+    "table-layout--focused",
+    "table-layout--focus-bottom",
+    "table-layout--how-to-play-single-cup-question"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -359,6 +371,19 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     focusLabels: {},
     layoutClasses: howToPlayCupsNoRotateLayout,
     showCupIngredients: true
+  },
+  {
+    title: "New order card",
+    description:
+      "you finished the order if your cup contains the exact same ingredients that show in one of your card! you can finish up to 3 orders each round since you have 3 cups",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlaySingleCupQuestionLayout,
+    tableOverlayCardSrc: "/images/question.png",
+    showCupIngredientsInCup: true,
+    showCupSteamInCup: true
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

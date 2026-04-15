@@ -1042,9 +1042,9 @@
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--steam-cup-one,
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--steam,
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--ice {
-  width: clamp(16px, 2.6vmin, 26px);
-  min-width: clamp(16px, 2.6vmin, 26px);
-  max-width: clamp(16px, 2.6vmin, 26px);
+  width: clamp(18px, 3vmin, 30px);
+  min-width: clamp(18px, 3vmin, 30px);
+  max-width: clamp(18px, 3vmin, 30px);
   height: auto;
   opacity: 1 !important;
   z-index: 13;
@@ -1053,32 +1053,71 @@
 /* Cup 1: coffee + steam + milk. */
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--coffee {
   left: calc(50% - clamp(58px, 10.4vmin, 80px));
-  bottom: clamp(22px, 4.2vmin, 34px);
+  bottom: clamp(20px, 3.9vmin, 32px);
   transform: translateX(-50%);
 }
 
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--steam-cup-one {
   left: calc(50% - clamp(58px, 10.4vmin, 80px));
-  bottom: clamp(36px, 6.1vmin, 48px);
+  bottom: clamp(34px, 5.8vmin, 46px);
   transform: translateX(-50%);
 }
 
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--milk {
   left: calc(50% - clamp(58px, 10.4vmin, 80px));
-  bottom: clamp(8px, 1.8vmin, 16px);
+  bottom: clamp(7px, 1.6vmin, 15px);
   transform: translateX(-50%);
 }
 
 /* Cup 2: one extra steam. */
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--steam {
   left: 50%;
-  bottom: clamp(18px, 3.2vmin, 30px);
+  bottom: clamp(16px, 2.9vmin, 28px);
   transform: translateX(-50%);
 }
 
 /* Cup 3: one ice ingredient. */
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient-in-cup--ice {
   left: calc(50% + clamp(58px, 10.4vmin, 80px));
-  bottom: clamp(18px, 3.2vmin, 30px);
+  bottom: clamp(16px, 2.9vmin, 28px);
   transform: translateX(-50%);
+}
+
+/* How to play step 8: objective-like framing but keep only one cup centered. */
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group__cup--2,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group__cup--3,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group__ingredient-in-cup,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group__ingredients-row {
+  display: none !important;
+}
+
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group.edge-glass-group--bottom {
+  left: calc(50% - clamp(52px, 8.5vmin, 76px)) !important;
+  z-index: 12;
+}
+
+.table-layout--how-to-play-single-cup-question .table-layout__objective-card {
+  z-index: 9;
+}
+
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--coffee,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--milk,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--steam,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--steam-in-cup {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--coffee {
+  transform: translate(calc(-50% - clamp(3px, 0.9vmin, 8px)), 0) rotate(0deg) !important;
+}
+
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--milk {
+  transform: translate(calc(-50% + clamp(4px, 1vmin, 9px)), 0) rotate(0deg) !important;
+}
+
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--steam,
+.table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--steam-in-cup {
+  opacity: 0.18 !important;
+  transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 0) rotate(0deg) !important;
 }
