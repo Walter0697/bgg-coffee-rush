@@ -58,6 +58,12 @@ export type HowToPlayMoveLegendConfig = {
   crossSrc?: string;
 };
 
+/** Ingredient icons overlaid on the ingredient board (positions via CSS modifiers). */
+export type HowToPlayIngredientBoardMarkerItem = {
+  slot: "coffee" | "milk" | "steam";
+  src: string;
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
@@ -85,6 +91,8 @@ export type TutorialStepConfig = {
   centerOverlayPlacement?: "table-center" | "under-bottom-start-cards";
   /** Full dim + move yes/no overlay (How to play). */
   howToPlayMoveLegend?: HowToPlayMoveLegendConfig;
+  /** Coffee / milk / steam on the ingredient board (How to play — ingredient board focus). */
+  howToPlayIngredientBoardMarkers?: readonly HowToPlayIngredientBoardMarkerItem[];
 };
 
 export type TutorialModuleConfig = {

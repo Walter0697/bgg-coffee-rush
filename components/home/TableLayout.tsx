@@ -74,6 +74,10 @@ export function TableLayout({
       : null;
   const howToPlayMoveLegend =
     tutorialActive && step?.howToPlayMoveLegend ? step.howToPlayMoveLegend : null;
+  const howToPlayIngredientBoardMarkers =
+    tutorialActive && step?.howToPlayIngredientBoardMarkers?.length
+      ? step.howToPlayIngredientBoardMarkers
+      : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
   const isStartGameStepOne =
@@ -123,9 +127,9 @@ export function TableLayout({
       aria-label="Coffee Rush table layout"
     >
       <div
-        className={`center-zone ${layoutZoomTutorial ? "tutorial-target" : ""} ${
-          layoutZoomSubFocus === "center" ? "tutorial-target--active" : ""
-        } ${
+        className={`center-zone${howToPlayIngredientBoardMarkers ? " center-zone--with-ingredient-markers" : ""} ${
+          layoutZoomTutorial ? "tutorial-target" : ""
+        } ${layoutZoomSubFocus === "center" ? "tutorial-target--active" : ""} ${
           layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "center"
             ? "tutorial-target--dimmed"
             : ""
@@ -135,6 +139,21 @@ export function TableLayout({
       >
         <div className="center-zone__board">
           <Image src="/images/board.png" alt="Ingredient board" width={711} height={711} priority />
+          {howToPlayIngredientBoardMarkers ? (
+            <div className="center-zone__ingredient-markers" aria-hidden>
+              {howToPlayIngredientBoardMarkers.map((marker) => (
+                <Image
+                  key={marker.slot}
+                  className={`center-zone__ingredient-marker center-zone__ingredient-marker--${marker.slot}`}
+                  src={marker.src}
+                  alt=""
+                  width={96}
+                  height={96}
+                  unoptimized
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
 

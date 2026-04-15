@@ -279,3 +279,295 @@
     transform: none;
   }
 }
+
+/* How to play — ingredient board focus: spotlight board + meeple; optional ingredient markers on board. */
+.table-layout--how-to-play-ingredient-board .table-layout__supply,
+.table-layout--how-to-play-ingredient-board .table-layout__rush-stack,
+.table-layout--how-to-play-ingredient-board .table-layout__card-deck-stack,
+.table-layout--how-to-play-ingredient-board .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-ingredient-board .seat:not(.seat--bottom) .player-board,
+.table-layout--how-to-play-ingredient-board .seat:not(.seat--bottom) .edge-glass-group img,
+.table-layout--how-to-play-ingredient-board .seat--bottom .player-board,
+.table-layout--how-to-play-ingredient-board .seat--bottom .seat-start-question-wrap,
+.table-layout--how-to-play-ingredient-board .seat--bottom .edge-glass-group img:not(.meeple-token),
+.table-layout--how-to-play-ingredient-board .table-layout__objective-card,
+.table-layout--how-to-play-ingredient-board .seat-start-five-steam-fly__img {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-ingredient-board .skill-tiles-group,
+.table-layout--how-to-play-ingredient-board .skill-tiles-group img {
+  opacity: 0.12 !important;
+  filter: saturate(0.45) brightness(0.72) !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone,
+.table-layout--how-to-play-ingredient-board .seat--bottom .meeple-token {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Keep spotlight step static (no movement loop). */
+.table-layout--how-to-play-ingredient-board .seat--bottom .meeple-token {
+  --htp-meeple-step-x: 50px;
+  --htp-meeple-step-y: 50px;
+  animation: none !important;
+  will-change: auto;
+}
+
+/* Override inherited start-step-five hold reset (`transform: none`) with matching specificity. */
+.table-layout--how-to-play-ingredient-board .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
+  transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-2 * var(--htp-meeple-step-y))) !important;
+}
+
+/* Ingredient board focus — start on board at your spots, then move to a vertical column just past the board edge */
+.table-layout--how-to-play-ingredient-board .center-zone.center-zone--with-ingredient-markers {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-markers {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker {
+  position: absolute;
+  display: block;
+  width: clamp(22px, 5.5vmin, 38px);
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  /* Same rhythm as skill tiles: skillTileSlideLoop uses 3200ms infinite */
+  animation-duration: 3200ms;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.3, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  will-change: left, top, transform, opacity;
+  /* Strong white read — stacked halos + crisp ring (drop-shadow stacks on PNG alpha). */
+  filter:
+    drop-shadow(0 0 1px rgb(255, 255, 255))
+    drop-shadow(0 0 2px rgb(255, 255, 255))
+    drop-shadow(0 0 6px rgba(255, 255, 255, 1))
+    drop-shadow(0 0 14px rgba(255, 255, 255, 0.92))
+    drop-shadow(0 0 26px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 40px rgba(255, 255, 255, 0.45))
+    drop-shadow(0 3px 8px rgba(20, 10, 2, 0.4));
+}
+
+/* Original on-board spots (also pre-animation / delay hold) → animate to shared column */
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--steam {
+  width: clamp(19px, 4.8vmin, 32px);
+  left: 80%;
+  top: 80%;
+  transform: rotate(-5deg);
+  animation-name: howToPlayMarkerSteamToColumn;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--coffee {
+  left: 80%;
+  top: 65%;
+  transform: rotate(-9deg);
+  animation-name: howToPlayMarkerCoffeeToColumn;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--milk {
+  width: clamp(17px, 4.2vmin, 30px);
+  left: 64%;
+  top: 65%;
+  transform: rotate(11deg);
+  animation-name: howToPlayMarkerMilkToColumn;
+}
+
+/* Loop: board → column (stagger) → hold → fade out at column → invisible jump home → fade in (matches skillTileSlideLoop 67/71/75/96%) */
+@keyframes howToPlayMarkerSteamToColumn {
+  0% {
+    opacity: 1;
+    left: 80%;
+    top: 80%;
+    transform: rotate(-5deg);
+  }
+  14% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 28%;
+    transform: rotate(0deg);
+  }
+  67% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 28%;
+    transform: rotate(0deg);
+  }
+  71% {
+    opacity: 0;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 28%;
+    transform: rotate(0deg);
+  }
+  75% {
+    opacity: 0;
+    left: 80%;
+    top: 80%;
+    transform: rotate(-5deg);
+  }
+  96% {
+    opacity: 1;
+    left: 80%;
+    top: 80%;
+    transform: rotate(-5deg);
+  }
+  100% {
+    opacity: 1;
+    left: 80%;
+    top: 80%;
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes howToPlayMarkerCoffeeToColumn {
+  0%,
+  5% {
+    opacity: 1;
+    left: 80%;
+    top: 65%;
+    transform: rotate(-9deg);
+  }
+  20% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 50%;
+    transform: rotate(0deg);
+  }
+  67% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 50%;
+    transform: rotate(0deg);
+  }
+  71% {
+    opacity: 0;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 50%;
+    transform: rotate(0deg);
+  }
+  75% {
+    opacity: 0;
+    left: 80%;
+    top: 65%;
+    transform: rotate(-9deg);
+  }
+  96% {
+    opacity: 1;
+    left: 80%;
+    top: 65%;
+    transform: rotate(-9deg);
+  }
+  100% {
+    opacity: 1;
+    left: 80%;
+    top: 65%;
+    transform: rotate(-9deg);
+  }
+}
+
+@keyframes howToPlayMarkerMilkToColumn {
+  0%,
+  10% {
+    opacity: 1;
+    left: 64%;
+    top: 65%;
+    transform: rotate(11deg);
+  }
+  24% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 70%;
+    transform: rotate(0deg);
+  }
+  67% {
+    opacity: 1;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 70%;
+    transform: rotate(0deg);
+  }
+  71% {
+    opacity: 0;
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 70%;
+    transform: rotate(0deg);
+  }
+  75% {
+    opacity: 0;
+    left: 64%;
+    top: 65%;
+    transform: rotate(11deg);
+  }
+  96% {
+    opacity: 1;
+    left: 64%;
+    top: 65%;
+    transform: rotate(11deg);
+  }
+  100% {
+    opacity: 1;
+    left: 64%;
+    top: 65%;
+    transform: rotate(11deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker {
+    animation: none !important;
+    will-change: auto;
+  }
+  .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--steam {
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 28%;
+    transform: rotate(0deg);
+  }
+  .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--coffee {
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 50%;
+    transform: rotate(0deg);
+  }
+  .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--milk {
+    left: calc(100% + clamp(8px, 2vmin, 18px));
+    top: 70%;
+    transform: rotate(0deg);
+  }
+}
+
+/* How to play — Rush token: dim cup + flying steam (overrides start-step-five-hold); fade in center rush art. */
+.table-layout--how-to-play-rush-token .seat-start-five-steam-fly__img,
+.table-layout--how-to-play-rush-token .edge-glass-cup__ingredient--steam {
+  opacity: 0.08 !important;
+  pointer-events: none !important;
+}
+
+@keyframes howToPlayRushTokenCenterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.table-layout--how-to-play-rush-token .table-layout__center-spotlight-img {
+  animation: howToPlayRushTokenCenterFadeIn 0.72s cubic-bezier(0.22, 0.82, 0.28, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-rush-token .table-layout__center-spotlight-img {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}

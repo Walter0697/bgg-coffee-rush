@@ -77,6 +77,16 @@ function startGameCenterSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--center-spotlight"];
 }
 
+/** How to play — rush token center spotlight + steam dim + rush art fade-in (see tutorial-step-how-to-play.css). */
+function howToPlayRushTokenSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--tutorial-overview",
+    "table-layout--center-spotlight",
+    "table-layout--how-to-play-rush-token"
+  ];
+}
+
 /** How to play — turn flow: blue meeple demos grid moves on the ingredient board (CSS animation). */
 function howToPlayTurnFlowLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-turn-flow"];
@@ -85,6 +95,11 @@ function howToPlayTurnFlowLayout(_subFocus: TutorialSubFocus): string[] {
 /** How to play — valid vs invalid moves: table fully dimmed; tick/move_yes and cross/move_no in the center. */
 function howToPlayMoveLegendLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-move-legend"];
+}
+
+/** How to play — spotlight ingredient board + meeple only. */
+function howToPlayIngredientBoardSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
 const SETUP_TUTORIAL_STEPS = [
@@ -233,6 +248,17 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     layoutClasses: howToPlayTurnFlowLayout
   },
   {
+    title: "Rush token",
+    description:
+      "you can use the rush token to walk one more time; you can use it as much as you want. I will let you know how to get rush tokens in a later step.",
+    interaction: {
+      mode: "center-image-spotlight"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayRushTokenSpotlightLayout,
+    centerOverlayImageSrc: "/images/rush.png"
+  },
+  {
     title: "Valid moves",
     description:
       "✅ You can walk into other meeple, you can also walk to the previous tile.\n❌ But the final stop cannot have other meeple.",
@@ -247,6 +273,21 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
       tickSrc: "/images/tick.png",
       crossSrc: "/images/cross.png"
     }
+  },
+  {
+    title: "Ingredient board focus",
+    description:
+      "For every tile that your meeple stepped on, you get the ingredient on that tile!",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayIngredientBoardSpotlightLayout,
+    howToPlayIngredientBoardMarkers: [
+      { slot: "steam", src: "/images/ingredient/steam.png" },
+      { slot: "coffee", src: "/images/ingredient/coffee.png" },
+      { slot: "milk", src: "/images/ingredient/milk.png" }
+    ]
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
