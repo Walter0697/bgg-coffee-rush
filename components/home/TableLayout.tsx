@@ -5,7 +5,11 @@ import Image from "next/image";
 
 import { PlayerSeat } from "./PlayerSeat";
 import { seats } from "./seats";
-import { SKILL_TILES_STEP_INDEX, getTutorialStep } from "./tutorial/tutorialConfig";
+import {
+  READY_TO_BREW_TUTORIAL_STEP_INDEX,
+  SKILL_TILES_STEP_INDEX,
+  getTutorialStep
+} from "./tutorial/tutorialConfig";
 import type { TutorialSubFocus } from "./tutorial/types";
 
 /** Fixed offsets so the stack looks casually piled (stable across SSR/hydration). */
@@ -68,6 +72,8 @@ export function TableLayout({
     centerOverlaySrc && centerOverlayPlacement === "under-bottom-start-cards"
       ? centerOverlaySrc
       : null;
+  const howToPlayMoveLegend =
+    tutorialActive && step?.howToPlayMoveLegend ? step.howToPlayMoveLegend : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
   const isStartGameStepOne =
@@ -82,6 +88,10 @@ export function TableLayout({
     tutorialActive &&
     step?.phaseTitle === "Start of the game" &&
     step?.title === "Ready to brew";
+  const holdStartGameStepFiveVisual =
+    tutorialActive &&
+    READY_TO_BREW_TUTORIAL_STEP_INDEX >= 0 &&
+    tutorialStepIndex > READY_TO_BREW_TUTORIAL_STEP_INDEX;
   const startGameTablePassive =
     tutorialActive && step?.phaseTitle === "Start of the game";
   const startQuestionCardsMode: "step1" | "step2" | null = isStartGameStepOne
@@ -109,7 +119,7 @@ export function TableLayout({
     <section
       className={`table-layout ${tutorialClassNames}${
         startGameTablePassive ? " table-layout--start-game-passive" : ""
-      }`.trim()}
+      }${holdStartGameStepFiveVisual ? " table-layout--start-step-five-hold" : ""}`.trim()}
       aria-label="Coffee Rush table layout"
     >
       <div
@@ -261,7 +271,9 @@ export function TableLayout({
               seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
             }
             objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(objectiveCardVisible)}
-            startSteamFlyFromMeeple={seat.side === "bottom" && Boolean(isStartGameStepFive)}
+            startSteamFlyFromMeeple={
+              seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)
+            }
           />
         );
       })}
@@ -282,6 +294,66 @@ export function TableLayout({
             height={640}
             unoptimized
           />
+        </div>
+      ) : null}
+
+      {howToPlayMoveLegend ? (
+        <div className="table-layout__how-to-play-move-legend">
+          {howToPlayMoveLegend?.centerImageSrcs && howToPlayMoveLegend.centerImageSrcs.length > 0 ? (
+            <div className="table-layout__how-to-play-move-legend-prelude">
+              {howToPlayMoveLegend.centerImageSrcs.map((src) => (
+                <Image
+                  key={src}
+                  className="table-layout__how-to-play-move-legend-prelude-img"
+                  src={src}
+                  alt=""
+                  width={72}
+                  height={72}
+                  unoptimized
+                />
+              ))}
+            </div>
+          ) : null}
+          {howToPlayMoveLegend ? (
+            <div className="table-layout__how-to-play-move-legend-pair">
+              <div className="table-layout__how-to-play-move-legend-item table-layout__how-to-play-move-legend-item--yes">
+                <Image
+                  className="table-layout__how-to-play-move-legend-icon"
+                  src={howToPlayMoveLegend.tickSrc ?? "/images/tick.png"}
+                  alt=""
+                  width={120}
+                  height={120}
+                  unoptimized
+                />
+                <Image
+                  className="table-layout__how-to-play-move-legend-move"
+                  src={howToPlayMoveLegend.moveYesSrc ?? "/images/move_yes.png"}
+                  alt=""
+                  width={400}
+                  height={280}
+                  unoptimized
+                />
+              </div>
+              <div className="table-layout__how-to-play-move-legend-item table-layout__how-to-play-move-legend-item--no">
+                <Image
+                  className="table-layout__how-to-play-move-legend-icon"
+                  src={howToPlayMoveLegend.crossSrc ?? "/images/cross.png"}
+                  alt=""
+                  width={120}
+                  height={120}
+                  unoptimized
+                />
+                <Image
+                  className="table-layout__how-to-play-move-legend-move"
+                  src={howToPlayMoveLegend.moveNoSrc ?? "/images/move_no.png"}
+                  alt=""
+                  width={400}
+                  height={280}
+                  unoptimized
+                />
+              </div>
+            </div>
+          ) : null}
         </div>
       ) : null}
 

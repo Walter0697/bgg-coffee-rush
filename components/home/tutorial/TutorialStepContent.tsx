@@ -77,7 +77,19 @@ export function TutorialStepContent({
   }
 
   if (step) {
-    return <>{step.description}</>;
+    const descriptionRows = step.description.split("\n");
+    if (descriptionRows.length === 1) return <>{step.description}</>;
+
+    return (
+      <>
+        {descriptionRows.map((row, index) => (
+          <span key={`${step.title}-${index}`}>
+            {row}
+            {index < descriptionRows.length - 1 ? <br /> : null}
+          </span>
+        ))}
+      </>
+    );
   }
 
   return null;

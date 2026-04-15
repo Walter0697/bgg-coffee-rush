@@ -4,6 +4,7 @@ import type { SeatSide } from "../seats";
 export type TutorialKind =
   | "setup"
   | "objective"
+  | "start-of-game"
   | "how-to-play"
   | "end-game"
   | "powerup"
@@ -47,6 +48,16 @@ export type TutorialPassiveInteraction = {
   mode: "passive";
 };
 
+/** How to play — move yes/no legend: full-table dim + centered art (optional) and tick/cross above move images. */
+export type HowToPlayMoveLegendConfig = {
+  /** Extra images above the yes/no row (e.g. ingredients). */
+  centerImageSrcs?: readonly string[];
+  moveYesSrc?: string;
+  moveNoSrc?: string;
+  tickSrc?: string;
+  crossSrc?: string;
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
@@ -72,6 +83,8 @@ export type TutorialStepConfig = {
   centerOverlayImageSrc?: string;
   /** Where to show `centerOverlayImageSrc` (default: full table center). */
   centerOverlayPlacement?: "table-center" | "under-bottom-start-cards";
+  /** Full dim + move yes/no overlay (How to play). */
+  howToPlayMoveLegend?: HowToPlayMoveLegendConfig;
 };
 
 export type TutorialModuleConfig = {

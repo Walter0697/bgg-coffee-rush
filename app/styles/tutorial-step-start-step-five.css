@@ -1,7 +1,8 @@
 /* Start of game step 5: ingredient board + bottom cups + meeples all visible (no start-meeples fade). */
 
 /* Nudge cups + meeple stack slightly toward the bottom edge of the seat */
-.table-layout--start-step-five .seat--bottom .edge-glass-group.edge-glass-group--bottom {
+.table-layout--start-step-five .seat--bottom .edge-glass-group.edge-glass-group--bottom,
+.table-layout--start-step-five-hold .seat--bottom .edge-glass-group.edge-glass-group--bottom {
   /* Match globals: .edge-glass-group gap + img width + .meeple-token width (steam travel is derived in layout px, then /0.8 for anchor scale). */
   --start5-gap: clamp(3px, 0.7vmin, 7px);
   --start5-cup-h: calc(clamp(24px, 3.9vmin, 34px) * 157 / 220);
@@ -33,7 +34,8 @@
 }
 
 /* Same “on the board” pose as step 4 `meepleToBoard*` hold frame (28%–86% / 48%–86% / …). */
-.table-layout--start-step-five .meeple-token {
+.table-layout--start-step-five .meeple-token,
+.table-layout--start-step-five-hold .meeple-token {
   animation: none !important;
   will-change: auto;
   opacity: 1;
@@ -42,7 +44,8 @@
 }
 
 /* Board pose on wrapper so steam can start at the meeple’s painted center (50% / 50% of this box). */
-.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor {
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor,
+.table-layout--start-step-five-hold .seat--bottom .seat-start-five-meeple-anchor {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -51,19 +54,23 @@
   pointer-events: auto;
 }
 
-.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .meeple-token,
+.table-layout--start-step-five-hold .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
   transform: none;
 }
 
-.table-layout--start-step-five .seat--right .meeple-token {
+.table-layout--start-step-five .seat--right .meeple-token,
+.table-layout--start-step-five-hold .seat--right .meeple-token {
   transform: translate(-10px, -125px) scale(0.8);
 }
 
-.table-layout--start-step-five .seat--top .meeple-token {
+.table-layout--start-step-five .seat--top .meeple-token,
+.table-layout--start-step-five-hold .seat--top .meeple-token {
   transform: translate(-18px, -125px) scale(0.8);
 }
 
-.table-layout--start-step-five .seat--left .meeple-token {
+.table-layout--start-step-five .seat--left .meeple-token,
+.table-layout--start-step-five-hold .seat--left .meeple-token {
   transform: translate(-10px, -125px) scale(0.8);
 }
 
@@ -75,7 +82,8 @@
 }
 
 /* Steam starts at meeple center (anchor box) and moves up toward the first cup (sibling above in column). */
-.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly {
+.table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly,
+.table-layout--start-step-five-hold .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -92,6 +100,13 @@
   transform: translate(-50%, -50%);
   filter: drop-shadow(0 2px 5px rgba(80, 60, 45, 0.45));
   animation: startStepFiveSteamToFirstCup 2.85s cubic-bezier(0.42, 0.01, 0.18, 1) infinite;
+}
+
+/* Later tutorial steps: freeze steam at end of flight (matches keyframes 100%). */
+.table-layout--start-step-five-hold .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly__img {
+  animation: none;
+  opacity: 1;
+  transform: translate(65%, 230%) scale(0.72);
 }
 
 @keyframes startStepFiveSteamToFirstCup {
@@ -111,6 +126,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .table-layout--start-step-five .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly__img {
+    animation: none;
+    opacity: 0.55;
+    transform: translate(-50%, calc(-50% - (var(--start5-steam-travel) / 0.8))) scale(0.4);
+  }
+
+  .table-layout--start-step-five-hold .seat--bottom .seat-start-five-meeple-anchor .seat-start-five-steam-fly__img {
     animation: none;
     opacity: 0.55;
     transform: translate(-50%, calc(-50% - (var(--start5-steam-travel) / 0.8))) scale(0.4);

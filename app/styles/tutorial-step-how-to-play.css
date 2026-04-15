@@ -1,0 +1,281 @@
+/* How to play — “Turn flow”: blue (bottom) meeple steps on the ingredient grid (up, pause, left, pause, up). */
+.table-layout--how-to-play-turn-flow {
+  --htp-meeple-step-x: 50px;
+  --htp-meeple-step-y: 50px;
+}
+
+/* Spotlight only ingredient board + bottom meeple; fade the rest (same opacity rhythm as start-step-five). */
+.table-layout--how-to-play-turn-flow .table-layout__supply,
+.table-layout--how-to-play-turn-flow .table-layout__rush-stack,
+.table-layout--how-to-play-turn-flow .table-layout__card-deck-stack,
+.table-layout--how-to-play-turn-flow .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-turn-flow .seat:not(.seat--bottom) .player-board,
+.table-layout--how-to-play-turn-flow .seat:not(.seat--bottom) .edge-glass-group img:not(.meeple-token),
+.table-layout--how-to-play-turn-flow .seat--bottom .player-board,
+.table-layout--how-to-play-turn-flow .seat--bottom .seat-start-question-wrap,
+.table-layout--how-to-play-turn-flow .seat--bottom .edge-glass-group img:not(.meeple-token),
+.table-layout--how-to-play-turn-flow .table-layout__objective-card {
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+/* Frozen skill tiles use `opacity: 1` in globals — must win over that (see objective-cups / center-spotlight). */
+.table-layout--how-to-play-turn-flow .skill-tiles-group,
+.table-layout--how-to-play-turn-flow .skill-tiles-group img {
+  opacity: 0.14 !important;
+  filter: saturate(0.45) brightness(0.72) !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-turn-flow .center-zone,
+.table-layout--how-to-play-turn-flow .meeple-token {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Beats `.table-layout--start-step-five-hold .meeple-token { animation: none !important }` once past “Ready to brew”. */
+.table-layout--how-to-play-turn-flow .seat--bottom .meeple-token {
+  animation: howToPlayBlueMeepleGrid 5.4s ease-in-out infinite !important;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-turn-flow .seat--bottom .meeple-token {
+    animation: none !important;
+    will-change: auto;
+  }
+}
+
+@keyframes howToPlayBlueMeepleGrid {
+  /* origin — same rhythm as skill tiles: fade out at end pose, jump home invisibly, fade in */
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  /* one step up */
+  7% {
+    opacity: 1;
+    transform: translate(0, calc(-1 * var(--htp-meeple-step-y)));
+  }
+  22% {
+    opacity: 1;
+    transform: translate(0, calc(-1 * var(--htp-meeple-step-y)));
+  }
+  /* one step left */
+  29% {
+    opacity: 1;
+    transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-1 * var(--htp-meeple-step-y)));
+  }
+  44% {
+    opacity: 1;
+    transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-1 * var(--htp-meeple-step-y)));
+  }
+  /* one step up again */
+  51% {
+    opacity: 1;
+    transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-2 * var(--htp-meeple-step-y)));
+  }
+  68% {
+    opacity: 1;
+    transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-2 * var(--htp-meeple-step-y)));
+  }
+  72% {
+    opacity: 0;
+    transform: translate(calc(-1 * var(--htp-meeple-step-x)), calc(-2 * var(--htp-meeple-step-y)));
+  }
+  76% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  92% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* How to play step 2 — full table dim (same language as center-spotlight); legend sits in a high z-index layer. */
+.table-layout--how-to-play-move-legend .center-zone,
+.table-layout--how-to-play-move-legend .table-layout__supply,
+.table-layout--how-to-play-move-legend .table-layout__rush-stack,
+.table-layout--how-to-play-move-legend .table-layout__card-deck-stack,
+.table-layout--how-to-play-move-legend .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-move-legend .player-board,
+.table-layout--how-to-play-move-legend .edge-glass-group img:not(.meeple-token) {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-move-legend .skill-tiles-group,
+.table-layout--how-to-play-move-legend .skill-tiles-group img {
+  opacity: 0.08 !important;
+  filter: saturate(0.6) brightness(0.7);
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-move-legend .meeple-token {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Step 2 can inherit `start-step-five-hold` where steam puff is forced visible; re-dim it here. */
+.table-layout--how-to-play-move-legend .seat-start-five-steam-fly__img {
+  opacity: 0.08 !important;
+  pointer-events: none !important;
+}
+
+.table-layout__how-to-play-move-legend {
+  position: absolute;
+  inset: 0;
+  z-index: 14;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2.2vmin, 22px);
+  padding: clamp(8px, 1.5vmin, 16px);
+  pointer-events: none;
+}
+
+.table-layout__how-to-play-move-legend-captions {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vmin, 14px);
+  max-width: min(94%, 38rem);
+}
+
+.table-layout__how-to-play-move-legend-caption {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.4em;
+  margin: 0;
+  font-size: clamp(0.78rem, 2.05vmin, 1.02rem);
+  line-height: 1.38;
+  font-weight: 600;
+  color: #3a2612;
+  text-shadow: 0 1px 0 rgba(255, 248, 235, 0.72);
+}
+
+.table-layout__how-to-play-move-legend-caption-emoji {
+  flex-shrink: 0;
+  line-height: 1.38;
+  font-size: 1.05em;
+}
+
+.table-layout__how-to-play-move-legend-caption--directions .table-layout__how-to-play-move-legend-caption-emoji {
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.table-layout__how-to-play-move-legend-prelude {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vmin, 18px);
+}
+
+.table-layout__how-to-play-move-legend-prelude-img {
+  width: clamp(44px, 9vmin, 72px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(20, 10, 2, 0.35));
+}
+
+.table-layout__how-to-play-move-legend-pair {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(14px, 3.5vmin, 36px);
+}
+
+.table-layout__how-to-play-move-legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 1vmin, 10px);
+}
+
+.table-layout__how-to-play-move-legend-icon {
+  width: clamp(40px, 10vmin, 100px);
+  height: auto;
+  max-height: min(18vmin, 120px);
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(20, 10, 2, 0.4));
+}
+
+.table-layout__how-to-play-move-legend-move {
+  width: min(42vw, 220px);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(20, 10, 2, 0.38));
+}
+
+/* Step 2 (Valid moves): fade in each legend image with a light stagger. */
+@keyframes howToPlayMoveLegendImageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img,
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-icon,
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-move {
+  animation: howToPlayMoveLegendImageFadeIn 0.55s cubic-bezier(0.22, 0.8, 0.28, 1) both;
+}
+
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img:nth-child(1) {
+  animation-delay: 0ms;
+}
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img:nth-child(2) {
+  animation-delay: 70ms;
+}
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img:nth-child(3) {
+  animation-delay: 140ms;
+}
+.table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img:nth-child(n + 4) {
+  animation-delay: 210ms;
+}
+
+.table-layout--how-to-play-move-legend
+  .table-layout__how-to-play-move-legend-item--yes
+  .table-layout__how-to-play-move-legend-icon {
+  animation-delay: 0ms;
+}
+.table-layout--how-to-play-move-legend
+  .table-layout__how-to-play-move-legend-item--yes
+  .table-layout__how-to-play-move-legend-move {
+  animation-delay: 95ms;
+}
+.table-layout--how-to-play-move-legend
+  .table-layout__how-to-play-move-legend-item--no
+  .table-layout__how-to-play-move-legend-icon {
+  animation-delay: 190ms;
+}
+.table-layout--how-to-play-move-legend
+  .table-layout__how-to-play-move-legend-item--no
+  .table-layout__how-to-play-move-legend-move {
+  animation-delay: 285ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-prelude-img,
+  .table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-icon,
+  .table-layout--how-to-play-move-legend .table-layout__how-to-play-move-legend-move {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+}

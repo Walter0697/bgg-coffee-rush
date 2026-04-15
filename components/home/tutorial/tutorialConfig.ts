@@ -77,6 +77,16 @@ function startGameCenterSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--center-spotlight"];
 }
 
+/** How to play — turn flow: blue meeple demos grid moves on the ingredient board (CSS animation). */
+function howToPlayTurnFlowLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-turn-flow"];
+}
+
+/** How to play — valid vs invalid moves: table fully dimmed; tick/move_yes and cross/move_no in the center. */
+function howToPlayMoveLegendLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-move-legend"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -209,14 +219,45 @@ const START_OF_GAME_TUTORIAL_STEPS = [
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
+/** First step of the main rules walkthrough (after setup + start-of-game). */
+const HOW_TO_PLAY_TUTORIAL_STEPS = [
+  {
+    title: "Turn flow",
+    description:
+      "In your turn, your meeple can move 3 steps on the ingredient board.\n⬆️ ⬇️ ⬅️ ➡️ Up down left right only.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    /** Full table top-down + blue meeple path demo. */
+    layoutClasses: howToPlayTurnFlowLayout
+  },
+  {
+    title: "Valid moves",
+    description:
+      "✅ You can walk into other meeple, you can also walk to the previous tile.\n❌ But the final stop cannot have other meeple.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayMoveLegendLayout,
+    howToPlayMoveLegend: {
+      moveYesSrc: "/images/move_yes.png",
+      moveNoSrc: "/images/move_no.png",
+      tickSrc: "/images/tick.png",
+      crossSrc: "/images/cross.png"
+    }
+  }
+] as const satisfies readonly TutorialStepConfig[];
+
 /**
- * Ordered tutorial modules. More kinds (objective, scoring, …) will get their own entries later.
- * `DEFAULT_TUTORIAL_MODULE_INDEX` picks which one "How to play" runs today.
+ * Ordered tutorial modules. `DEFAULT_TUTORIAL_MODULE_INDEX` can limit which slice runs in dev.
  */
 export const TUTORIAL_MODULES: readonly TutorialModuleConfig[] = [
   { kind: "setup", title: "Setup", steps: SETUP_TUTORIAL_STEPS },
   { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS },
-  { kind: "how-to-play", title: "Start of the game", steps: START_OF_GAME_TUTORIAL_STEPS }
+  { kind: "start-of-game", title: "Start of the game", steps: START_OF_GAME_TUTORIAL_STEPS },
+  { kind: "how-to-play", title: "How to play", steps: HOW_TO_PLAY_TUTORIAL_STEPS }
 ] as const;
 
 export const DEFAULT_TUTORIAL_MODULE_INDEX = 0;
@@ -231,6 +272,11 @@ export const TUTORIAL_STEPS: readonly TutorialStepConfig[] = TUTORIAL_MODULES.fl
     ...step,
     phaseTitle: step.phaseTitle ?? module.title
   }))
+);
+
+/** Index of "Ready to brew" in the flattened tutorial; steps after this keep its meeple/steam end pose. */
+export const READY_TO_BREW_TUTORIAL_STEP_INDEX = TUTORIAL_STEPS.findIndex(
+  (step) => step.phaseTitle === "Start of the game" && step.title === "Ready to brew"
 );
 
 export const SETUP_STEP_COUNT = SETUP_TUTORIAL_STEPS.length;
