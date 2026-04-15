@@ -87,6 +87,8 @@ export type TutorialStepConfig = {
   layoutClasses: (subFocus: TutorialSubFocus) => string[];
   /** Optional image centered on the table (e.g. first player token). */
   centerOverlayImageSrc?: string;
+  /** Optional badge overlaid on the center image (e.g. rush token). */
+  centerOverlayBadgeImageSrc?: string;
   /** Optional card image shown in the objective-card slot near cups. */
   tableOverlayCardSrc?: string;
   /** Where to show `centerOverlayImageSrc` (default: full table center). */

@@ -65,6 +65,8 @@ export function TableLayout({
     sharedAreaInteractive && step?.interaction?.mode === "shared-area-elements" ? step.interaction : null;
   const centerOverlaySrc =
     tutorialActive && step?.centerOverlayImageSrc ? step.centerOverlayImageSrc : null;
+  const centerOverlayBadgeSrc =
+    tutorialActive && step?.centerOverlayBadgeImageSrc ? step.centerOverlayBadgeImageSrc : null;
   const centerOverlayPlacement = step?.centerOverlayPlacement ?? "table-center";
   const showTableCenterFirstPlayerOverlay =
     Boolean(centerOverlaySrc && centerOverlayPlacement === "table-center");
@@ -329,14 +331,26 @@ export function TableLayout({
 
       {showTableCenterFirstPlayerOverlay && centerOverlaySrc ? (
         <div className="table-layout__center-spotlight-art">
-          <Image
-            className="table-layout__center-spotlight-img"
-            src={centerOverlaySrc}
-            alt=""
-            width={640}
-            height={640}
-            unoptimized
-          />
+          <div className="table-layout__center-spotlight-frame">
+            <Image
+              className="table-layout__center-spotlight-img"
+              src={centerOverlaySrc}
+              alt=""
+              width={640}
+              height={640}
+              unoptimized
+            />
+            {centerOverlayBadgeSrc ? (
+              <Image
+                className="table-layout__center-spotlight-badge"
+                src={centerOverlayBadgeSrc}
+                alt=""
+                width={160}
+                height={160}
+                unoptimized
+              />
+            ) : null}
+          </div>
         </div>
       ) : null}
 

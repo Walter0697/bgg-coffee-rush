@@ -34,6 +34,12 @@
   pointer-events: none;
 }
 
+.table-layout__center-spotlight-frame {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
 .table-layout__center-spotlight-img {
   max-width: min(82%, 440px);
   width: auto;
@@ -41,6 +47,30 @@
   object-fit: contain;
   opacity: 1;
   filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.32));
+}
+
+.table-layout__center-spotlight-badge {
+  position: absolute;
+  right: clamp(-6px, -0.8vmin, 0px);
+  bottom: calc(-1.5 * clamp(54px, 9.5vmin, 88px));
+  width: clamp(54px, 9.5vmin, 88px);
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter: drop-shadow(0 8px 14px rgba(20, 10, 2, 0.3));
+  transform: rotate(10deg);
+}
+
+.table-layout--how-to-play-special .table-layout__center-spotlight-badge {
+  animation: howToPlayRushTokenCenterFadeIn 0.72s cubic-bezier(0.22, 0.82, 0.28, 1) both;
+}
+
+@media (max-width: 640px) {
+  .table-layout__center-spotlight-badge {
+    right: clamp(-4px, -0.5vmin, 0px);
+    bottom: calc(-1.5 * clamp(46px, 11vmin, 72px));
+    width: clamp(46px, 11vmin, 72px);
+  }
 }
 
 /* Start of the game (steps 1–5): table is read-only — no image / zone takes pointer focus or drill-in */
@@ -60,4 +90,12 @@
 .table-layout--start-game-passive .table-layout__center-spotlight-art,
 .table-layout--start-game-passive .table-layout__objective-card {
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-special .table-layout__center-spotlight-badge {
+    animation: none !important;
+    opacity: 1;
+    transform: rotate(10deg);
+  }
 }

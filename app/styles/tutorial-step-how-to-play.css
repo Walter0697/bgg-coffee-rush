@@ -549,6 +549,13 @@
   pointer-events: none !important;
 }
 
+/* How to play — Special: same steam dimming as rush token; fade in center special art. */
+.table-layout--how-to-play-special .seat-start-five-steam-fly__img,
+.table-layout--how-to-play-special .edge-glass-cup__ingredient--steam {
+  opacity: 0.08 !important;
+  pointer-events: none !important;
+}
+
 @keyframes howToPlayRushTokenCenterFadeIn {
   from {
     opacity: 0;
@@ -564,8 +571,18 @@
   animation: howToPlayRushTokenCenterFadeIn 0.72s cubic-bezier(0.22, 0.82, 0.28, 1) both;
 }
 
+.table-layout--how-to-play-special .table-layout__center-spotlight-img {
+  animation: howToPlayRushTokenCenterFadeIn 0.72s cubic-bezier(0.22, 0.82, 0.28, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .table-layout--how-to-play-rush-token .table-layout__center-spotlight-img {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .table-layout--how-to-play-special .table-layout__center-spotlight-img {
     animation: none !important;
     opacity: 1;
     transform: none;

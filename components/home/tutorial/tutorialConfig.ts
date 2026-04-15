@@ -87,6 +87,16 @@ function howToPlayRushTokenSpotlightLayout(_subFocus: TutorialSubFocus): string[
   ];
 }
 
+/** How to play — special center spotlight with the same fade-in treatment as rush token. */
+function howToPlaySpecialSpotlightLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--tutorial-overview",
+    "table-layout--center-spotlight",
+    "table-layout--how-to-play-special"
+  ];
+}
+
 /** How to play — turn flow: blue meeple demos grid moves on the ingredient board (CSS animation). */
 function howToPlayTurnFlowLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-turn-flow"];
@@ -384,6 +394,17 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     tableOverlayCardSrc: "/images/question.png",
     showCupIngredientsInCup: true,
     showCupSteamInCup: true
+  },
+  {
+    title: "Special",
+    description: "if your completed order is a special menu, you will get a rush token!",
+    interaction: {
+      mode: "center-image-spotlight"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlaySpecialSpotlightLayout,
+    centerOverlayImageSrc: "/images/special.png",
+    centerOverlayBadgeImageSrc: "/images/rush.png"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
