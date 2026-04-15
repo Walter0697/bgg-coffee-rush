@@ -93,6 +93,10 @@ export type TutorialStepConfig = {
   howToPlayMoveLegend?: HowToPlayMoveLegendConfig;
   /** Coffee / milk / steam on the ingredient board (How to play — ingredient board focus). */
   howToPlayIngredientBoardMarkers?: readonly HowToPlayIngredientBoardMarkerItem[];
+  /** Show coffee + milk + steam ingredients in the first bottom cup. */
+  showCupIngredients?: boolean;
+  /** Show upside-down cup stack with a cross marker (How to play — invalid cup setup). */
+  showCupStackCross?: boolean;
 };
 
 export type TutorialModuleConfig = {

@@ -20,6 +20,8 @@ type PlayerSeatProps = {
   startFirstPlayerTokenUnderCardsSrc: string | null;
   /** Objective step: show coffee, milk & steam in the first (left) cup */
   objectiveFirstCupIngredients?: boolean;
+  /** When true, render cup ingredients (coffee/milk/steam) in a horizontal row above the cup. */
+  cupIngredientsRow?: boolean;
   /** Start step 5: animate steam from meeple toward first cup */
   startSteamFlyFromMeeple?: boolean;
 };
@@ -37,6 +39,7 @@ export function PlayerSeat({
   startQuestionCardsMode,
   startFirstPlayerTokenUnderCardsSrc,
   objectiveFirstCupIngredients = false,
+  cupIngredientsRow = false,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
@@ -142,19 +145,31 @@ export function PlayerSeat({
                 height={64}
                 unoptimized
               />
+              {cupIngredientsRow ? (
+                <Image
+                  className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
+                  src="/images/ingredient/steam.png"
+                  alt=""
+                  width={64}
+                  height={64}
+                  unoptimized
+                />
+              ) : null}
             </div>
-            <Image
-              className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
-              src="/images/ingredient/steam.png"
-              alt=""
-              width={64}
-              height={64}
-              unoptimized
-            />
+            {!cupIngredientsRow ? (
+              <Image
+                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
+                src="/images/ingredient/steam.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            ) : null}
           </div>
         ) : (
           <Image
-            className={cupsDimWhenMeepleFocused}
+            className={`edge-glass-group__cup edge-glass-group__cup--1 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
             src="/images/glass.png"
             alt={`${seat.label} cup 1`}
             width={220}
@@ -162,19 +177,57 @@ export function PlayerSeat({
           />
         )}
         <Image
-          className={cupsDimWhenMeepleFocused}
+          className={`edge-glass-group__cup edge-glass-group__cup--2 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
           src="/images/glass.png"
           alt={`${seat.label} cup 2`}
           width={220}
           height={157}
         />
         <Image
-          className={cupsDimWhenMeepleFocused}
+          className={`edge-glass-group__cup edge-glass-group__cup--3 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
           src="/images/glass.png"
           alt={`${seat.label} cup 3`}
           width={220}
           height={157}
         />
+        {seat.side === "bottom" && cupIngredientsRow ? (
+          <>
+            <div className="edge-glass-group__ingredients-row" aria-hidden>
+              <Image
+                className="edge-glass-group__ingredient edge-glass-group__ingredient--coffee"
+                src="/images/ingredient/coffee.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+              <Image
+                className="edge-glass-group__ingredient edge-glass-group__ingredient--milk"
+                src="/images/ingredient/milk.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+              <Image
+                className="edge-glass-group__ingredient edge-glass-group__ingredient--steam"
+                src="/images/ingredient/steam.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            </div>
+            <Image
+              className="edge-glass-group__ingredient-in-cup edge-glass-group__ingredient-in-cup--steam"
+              src="/images/ingredient/steam.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+          </>
+        ) : null}
         {seat.side === "bottom" && startSteamFlyFromMeeple ? (
           <div
             className={`seat-start-five-meeple-anchor ${seatPartsTutorial ? "tutorial-target" : ""} ${

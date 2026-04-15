@@ -102,6 +102,31 @@ function howToPlayIngredientBoardSpotlightLayout(_subFocus: TutorialSubFocus): s
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
+/** How to play — cups only spotlight, with everything else dimmed. */
+function howToPlayCupsLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--objective-cups",
+    "table-layout--focused",
+    "table-layout--focus-bottom",
+    "table-layout--how-to-play-cups"
+  ];
+}
+
+/** How to play — invalid cups example: upside-down cups stack + cross indicator. */
+function howToPlayInvalidCupsLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--objective-cups",
+    "table-layout--focused",
+    "table-layout--focus-bottom",
+    "table-layout--how-to-play-cups",
+    "table-layout--how-to-play-cups-invalid"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -288,6 +313,28 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
       { slot: "coffee", src: "/images/ingredient/coffee.png" },
       { slot: "milk", src: "/images/ingredient/milk.png" }
     ]
+  },
+  {
+    title: "Cups",
+    description:
+      "you can then put the ingredient to whichever cups you like",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayCupsLayout,
+    showCupIngredients: true
+  },
+  {
+    title: "Wrong cup setup",
+    description:
+      "After you put those ingredients into one cup, you cannot put them into another cup. After all, you already mixed those ingredients into your drink. If you mess up one cup, you can only try another recipe or drop the whole thing.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayInvalidCupsLayout,
+    showCupStackCross: true
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

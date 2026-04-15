@@ -80,6 +80,9 @@ export function TableLayout({
       : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectiveCardVisible = tutorialActive && step?.phaseTitle === "Objective of the game";
+  const cupIngredientsVisible = tutorialActive && objectiveCardVisible;
+  const cupIngredientsRow = tutorialActive && Boolean(step?.showCupIngredients);
+  const cupStackCrossVisible = tutorialActive && Boolean(step?.showCupStackCross);
   const isStartGameStepOne =
     tutorialActive &&
     step?.phaseTitle === "Start of the game" &&
@@ -289,7 +292,8 @@ export function TableLayout({
             startFirstPlayerTokenUnderCardsSrc={
               seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
             }
-            objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(objectiveCardVisible)}
+            objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(cupIngredientsVisible)}
+            cupIngredientsRow={seat.side === "bottom" && Boolean(cupIngredientsRow)}
             startSteamFlyFromMeeple={
               seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)
             }
@@ -300,6 +304,19 @@ export function TableLayout({
       {objectiveCardVisible ? (
         <div className="table-layout__objective-card" aria-hidden>
           <Image src="/images/card.png" alt="" width={240} height={320} unoptimized />
+        </div>
+      ) : null}
+
+      {cupStackCrossVisible ? (
+        <div className="table-layout__how-to-play-cups-cross" aria-hidden>
+          <Image
+            className="table-layout__how-to-play-cups-cross-icon"
+            src="/images/cross.png"
+            alt=""
+            width={120}
+            height={120}
+            unoptimized
+          />
         </div>
       ) : null}
 
