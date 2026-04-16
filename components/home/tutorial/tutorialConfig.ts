@@ -112,6 +112,11 @@ function howToPlayIngredientBoardSpotlightLayout(_subFocus: TutorialSubFocus): s
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
+/** How to play — full-board overview with the ingredient bin spotlighted. */
+function howToPlayIngredientBinLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-bin"];
+}
+
 /** How to play — cups only spotlight, with everything else dimmed. */
 function howToPlayCupsLayout(_subFocus: TutorialSubFocus): string[] {
   return [
@@ -148,6 +153,11 @@ function howToPlayCupsNoRotateLayout(_subFocus: TutorialSubFocus): string[] {
     "table-layout--how-to-play-cups",
     "table-layout--how-to-play-cups-no-rotate"
   ];
+}
+
+/** How to play — same no-rotate cup scene, but with the loose ingredients flying toward the bin. */
+function howToPlayCupsNoRotateBinFlightLayout(_subFocus: TutorialSubFocus): string[] {
+  return [...howToPlayCupsNoRotateLayout(_subFocus), "table-layout--how-to-play-cups-no-rotate-bin-flight"];
 }
 
 /** How to play — objective-like layout with one centered cup and a question card. */
@@ -380,7 +390,8 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     },
     focusLabels: {},
     layoutClasses: howToPlayInvalidCupsLayout,
-    showCupStackCross: true
+    showCupStackCross: true,
+    showBottomCupContents: "how-to-play-cups-invalid"
   },
   {
     title: "Wrong cup setup (preview)",
@@ -390,8 +401,9 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
       mode: "passive"
     },
     focusLabels: {},
-    layoutClasses: howToPlayCupsNoRotateLayout,
-    showCupIngredients: true
+    layoutClasses: howToPlayCupsNoRotateBinFlightLayout,
+    showBottomCupContents: "how-to-play-cups-preview",
+    showTopRightSupplyBin: true
   },
   {
     title: "New order card",

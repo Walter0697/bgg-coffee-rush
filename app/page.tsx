@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 /** Matches `.table-layout { transition: transform 560ms ease }` when idle tilt → tutorial face-up. */
 const TUTORIAL_FACEUP_TRANSITION_MS = 560;
@@ -19,6 +20,7 @@ export default function HomePage() {
   const [tutorialSubFocus, setTutorialSubFocus] = useState<TutorialSubFocus>(null);
 
   const isFinalStep = currentStep === TUTORIAL_STEPS.length - 1;
+  const showTopRightSupplyBin = tutorialStarted && Boolean(TUTORIAL_STEPS[currentStep]?.showTopRightSupplyBin);
 
   useEffect(() => {
     if (!tutorialStarted) {
@@ -90,6 +92,12 @@ export default function HomePage() {
         tutorialSubFocus={tutorialSubFocus}
         onTutorialSubFocus={setTutorialSubFocus}
       />
+
+      {showTopRightSupplyBin ? (
+        <div className="page__how-to-play-top-right-supply-bin" aria-hidden>
+          <Image src="/images/supply.png" alt="" width={240} height={120} />
+        </div>
+      ) : null}
     </main>
   );
 }

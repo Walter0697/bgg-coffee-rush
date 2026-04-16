@@ -382,6 +382,74 @@
   animation-name: howToPlayMarkerMilkToColumn;
 }
 
+/* How to play — ingredient bin overview: show the full table, dim everything except the tray/bin. */
+.table-layout--how-to-play-ingredient-bin .center-zone,
+.table-layout--how-to-play-ingredient-bin .table-layout__rush-stack,
+.table-layout--how-to-play-ingredient-bin .table-layout__card-deck-stack,
+.table-layout--how-to-play-ingredient-bin .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-ingredient-bin .seat:not(.seat--bottom) .player-board,
+.table-layout--how-to-play-ingredient-bin .seat--bottom .player-board,
+.table-layout--how-to-play-ingredient-bin .seat--bottom .seat-start-question-wrap,
+.table-layout--how-to-play-ingredient-bin .table-layout__objective-card,
+.table-layout--how-to-play-ingredient-bin .seat-start-five-steam-fly__img {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-ingredient-bin .skill-tiles-group,
+.table-layout--how-to-play-ingredient-bin .skill-tiles-group img {
+  opacity: 0.12 !important;
+  filter: saturate(0.45) brightness(0.72) !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-ingredient-bin .table-layout__supply {
+  opacity: 1;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.table-layout--how-to-play-ingredient-bin .table-layout__supply-img {
+  filter: drop-shadow(0 0 14px rgba(255, 239, 210, 0.14))
+    drop-shadow(0 0 24px rgba(255, 219, 167, 0.22))
+    drop-shadow(0 6px 12px rgba(20, 10, 2, 0.22));
+}
+
+.table-layout--how-to-play-ingredient-bin .seat--bottom .edge-glass-group,
+.table-layout--how-to-play-ingredient-bin .seat--bottom .edge-glass-group img {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.table-layout--how-to-play-ingredient-bin .seat--bottom .edge-glass-group {
+  z-index: 14;
+}
+
+/* Step 7: keep the no-rotate cup scene, but lift the cups a bit so the supply bin stays on screen. */
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group.edge-glass-group--bottom {
+  top: 50%;
+  transform: translateY(calc(-50% - clamp(10px, 2vmin, 18px)));
+}
+
+.page__how-to-play-top-right-supply-bin {
+  position: fixed;
+  top: clamp(242px, 39vmin, 304px);
+  right: clamp(28px, 6vmin, 50px);
+  width: clamp(124px, 24vmin, 180px);
+  z-index: 999;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 10px rgba(255, 245, 225, 0.22))
+    drop-shadow(0 0 20px rgba(255, 220, 170, 0.28))
+    drop-shadow(0 8px 16px rgba(20, 10, 2, 0.22));
+}
+
+.page__how-to-play-top-right-supply-bin img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Loop: board → column (stagger) → hold → fade out at column → invisible jump home → fade in (matches skillTileSlideLoop 67/71/75/96%) */
 @keyframes howToPlayMarkerSteamToColumn {
   0% {
@@ -906,17 +974,77 @@
   z-index: 11;
 }
 
-.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup--2 {
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-shell--cup-2 {
   position: relative;
+  display: inline-block;
   /* Move from cup #2 default slot -> cup #1 slot, then stack above with small gap. */
   --how-to-play-cup-gap: clamp(10px, 1.8vmin, 20px);
-  --how-to-play-cup-stack-gap-y: clamp(4px, 0.9vmin, 8px);
-  height: auto;
+  --how-to-play-cup-stack-gap-y: clamp(22px, 3.4vmin, 34px);
   transform: translate(0, 0) rotate(0deg);
   /* Match skill-tile loop rhythm (67/71/75/96): hold -> fade out -> invisible reset -> fade in. */
   animation: howToPlayCupTwoStackFlipLoop 3200ms cubic-bezier(0.22, 0.8, 0.3, 1) infinite both;
   filter: drop-shadow(0 3px 7px rgba(20, 10, 2, 0.35));
   z-index: 14;
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-shell--cup-2 .edge-glass-group__cup--2 {
+  display: block;
+  width: clamp(44px, 6.8vmin, 64px);
+  height: auto;
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents {
+  position: absolute;
+  z-index: 15;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents--cup-1 {
+  left: calc(50% - clamp(58px, 10.4vmin, 80px));
+  bottom: clamp(18px, 3.4vmin, 30px);
+  width: clamp(28px, 3.8vmin, 38px);
+  height: clamp(28px, 3.8vmin, 38px);
+  transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents--cup-2 {
+  left: 50%;
+  bottom: clamp(16px, 2.9vmin, 28px);
+  width: clamp(28px, 3.8vmin, 38px);
+  height: clamp(28px, 3.8vmin, 38px);
+  transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents-ingredient {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents-ingredient--coffee {
+  left: 50%;
+  bottom: 4%;
+  width: 72%;
+  transform: translateX(-50%) rotate(-14deg);
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents-ingredient--milk {
+  left: 18%;
+  top: 30%;
+  width: 62%;
+  transform: rotate(-10deg);
+}
+
+.table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-contents-ingredient--steam {
+  left: 50%;
+  top: auto;
+  bottom: 2%;
+  width: 56%;
+  transform: translateX(-50%) rotate(-8deg);
 }
 
 @keyframes howToPlayCupTwoStackFlipLoop {
@@ -983,9 +1111,9 @@
     bottom: clamp(48px, 13vmin, 84px);
   }
 
-  .table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup--2 {
+  .table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-shell--cup-2 {
     --how-to-play-cup-gap: clamp(10px, 1.8vmin, 20px);
-    --how-to-play-cup-stack-gap-y: 6px;
+    --how-to-play-cup-stack-gap-y: 22px;
   }
 }
 
@@ -994,7 +1122,7 @@
     animation: none !important;
   }
 
-  .table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup--2 {
+  .table-layout--how-to-play-cups-invalid .seat--bottom .edge-glass-group__cup-shell--cup-2 {
     animation: none !important;
     transform: translate(
         calc(-100% - var(--how-to-play-cup-gap)),
@@ -1010,6 +1138,64 @@
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup--3 {
   animation: none !important;
   transform: none !important;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-shell--cup-2 {
+  position: relative;
+  display: inline-block;
+  z-index: 14;
+  animation: none !important;
+  transform: none !important;
+  filter: drop-shadow(0 3px 7px rgba(20, 10, 2, 0.35));
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-shell--cup-3 {
+  position: relative;
+  display: inline-block;
+  z-index: 13;
+  animation: none !important;
+  transform: none !important;
+  filter: drop-shadow(0 3px 7px rgba(20, 10, 2, 0.35));
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-shell--cup-2 .edge-glass-group__cup--2 {
+  display: block;
+  width: clamp(44px, 6.8vmin, 64px);
+  height: auto;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-shell--cup-3 .edge-glass-group__cup--3 {
+  display: block;
+  width: clamp(44px, 6.8vmin, 64px);
+  height: auto;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents--cup-1,
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents--cup-2 {
+  position: absolute;
+  z-index: 15;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents--cup-1 {
+  left: calc(50% - clamp(58px, 10.4vmin, 80px));
+  bottom: clamp(18px, 3.4vmin, 30px);
+  width: clamp(28px, 3.8vmin, 38px);
+  height: clamp(28px, 3.8vmin, 38px);
+  transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents--cup-2 {
+  left: 50%;
+  bottom: clamp(16px, 2.9vmin, 28px);
+  width: clamp(28px, 3.8vmin, 38px);
+  height: clamp(28px, 3.8vmin, 38px);
+  transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents--cup-3 {
+  inset: 0;
 }
 
 .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__ingredient--coffee,
@@ -1100,6 +1286,170 @@
   left: calc(50% + clamp(58px, 10.4vmin, 80px));
   bottom: clamp(16px, 2.9vmin, 28px);
   transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents-ingredient {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents-ingredient--coffee {
+  left: 50%;
+  bottom: 4%;
+  width: 72%;
+  transform: translateX(-50%) rotate(-14deg);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents-ingredient--milk {
+  left: 18%;
+  top: 30%;
+  width: 62%;
+  transform: rotate(-10deg);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents-ingredient--steam {
+  left: 50%;
+  bottom: 2%;
+  width: 56%;
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__cup-contents-ingredient--ice {
+  left: 50%;
+  top: auto;
+  bottom: 22%;
+  width: 42%;
+  transform: translateX(-50%) rotate(14deg);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredients {
+  position: absolute;
+  inset: 0;
+  z-index: 16;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredient {
+  position: absolute;
+  width: clamp(16px, 2.8vmin, 24px);
+  height: auto;
+  object-fit: contain;
+  animation: none !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 2px 4px rgba(20, 10, 2, 0.28));
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredient--coffee {
+  left: calc(50% - clamp(34px, 6.2vmin, 52px));
+  top: clamp(-40px, -8.5vmin, -24px);
+  transform: rotate(-18deg);
+}
+
+.table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredient--steam {
+  left: calc(50% + clamp(30px, 5.5vmin, 46px));
+  top: clamp(-38px, -8vmin, -22px);
+  transform: rotate(10deg);
+}
+
+/* Step 7: send the loose ingredients into the supply bin. */
+.table-layout--how-to-play-cups-no-rotate-bin-flight .seat--bottom .edge-glass-group__spill-ingredient--coffee {
+  animation: howToPlaySpillCoffeeToBinLoop 3.2s cubic-bezier(0.22, 0.8, 0.28, 1) 420ms infinite both !important;
+  z-index: 1002;
+  will-change: transform, opacity;
+}
+
+.table-layout--how-to-play-cups-no-rotate-bin-flight .seat--bottom .edge-glass-group__spill-ingredient--steam {
+  animation: howToPlaySpillSteamToBinLoop 3.2s cubic-bezier(0.22, 0.8, 0.28, 1) 600ms infinite both !important;
+  z-index: 1002;
+  will-change: transform, opacity;
+}
+
+@keyframes howToPlaySpillCoffeeToBinLoop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-18deg) scale(1);
+  }
+  8% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(-18deg) scale(1);
+  }
+  56% {
+    opacity: 1;
+    transform: translate3d(clamp(62px, 12vw, 112px), calc(-1 * clamp(44px, 9vh, 80px)), 0)
+      rotate(14deg) scale(0.18);
+  }
+  67% {
+    opacity: 0;
+    transform: translate3d(clamp(62px, 12vw, 112px), calc(-1 * clamp(44px, 9vh, 80px)), 0)
+      rotate(14deg) scale(0.18);
+  }
+  71% {
+    opacity: 0;
+    transform: translate3d(clamp(62px, 12vw, 112px), calc(-1 * clamp(44px, 9vh, 80px)), 0)
+      rotate(14deg) scale(0.18);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: translate3d(clamp(62px, 12vw, 112px), calc(-1 * clamp(44px, 9vh, 80px)), 0)
+      rotate(14deg) scale(0.18);
+  }
+}
+
+@keyframes howToPlaySpillSteamToBinLoop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(10deg) scale(1);
+  }
+  8% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(10deg) scale(1);
+  }
+  56% {
+    opacity: 1;
+    transform: translate3d(clamp(70px, 13vw, 124px), calc(-1 * clamp(48px, 10vh, 88px)), 0)
+      rotate(28deg) scale(0.18);
+  }
+  67% {
+    opacity: 0;
+    transform: translate3d(clamp(70px, 13vw, 124px), calc(-1 * clamp(48px, 10vh, 88px)), 0)
+      rotate(28deg) scale(0.18);
+  }
+  71% {
+    opacity: 0;
+    transform: translate3d(clamp(70px, 13vw, 124px), calc(-1 * clamp(48px, 10vh, 88px)), 0)
+      rotate(28deg) scale(0.18);
+  }
+  96%,
+  100% {
+    opacity: 0;
+    transform: translate3d(clamp(70px, 13vw, 124px), calc(-1 * clamp(48px, 10vh, 88px)), 0)
+      rotate(28deg) scale(0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-cups-no-rotate-bin-flight .seat--bottom .edge-glass-group__spill-ingredient--coffee,
+  .table-layout--how-to-play-cups-no-rotate-bin-flight .seat--bottom .edge-glass-group__spill-ingredient--steam {
+    animation: none !important;
+    will-change: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredient--coffee {
+    left: calc(50% - clamp(30px, 8vmin, 46px));
+    top: clamp(-44px, -9.5vmin, -24px);
+  }
+
+  .table-layout--how-to-play-cups-no-rotate .seat--bottom .edge-glass-group__spill-ingredient--steam {
+    left: calc(50% + clamp(26px, 7vmin, 40px));
+    top: clamp(-42px, -9vmin, -24px);
+  }
 }
 
 /* How to play step 8: objective-like framing but keep only one cup centered. */

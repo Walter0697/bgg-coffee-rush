@@ -109,7 +109,9 @@ export type TutorialStepConfig = {
   /** Animate the question-card stack for the player-board-size callout. */
   showBottomQuestionCardFlight?: "board-corner";
   /** Show the bottom cup contents for the player-board-size callout. */
-  showBottomCupContents?: "player-board-size";
+  showBottomCupContents?: "player-board-size" | "how-to-play-cups-invalid" | "how-to-play-cups-preview";
+  /** Show a floating supply bin image in the top-right corner for how-to-play previews. */
+  showTopRightSupplyBin?: boolean;
 };
 
 export type TutorialModuleConfig = {

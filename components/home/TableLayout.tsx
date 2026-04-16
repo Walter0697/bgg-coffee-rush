@@ -92,6 +92,7 @@ export function TableLayout({
   const cupIngredientsRow = tutorialActive && Boolean(step?.showCupIngredients);
   const cupStackCrossVisible = tutorialActive && Boolean(step?.showCupStackCross);
   const bottomCupContentsMode = tutorialActive ? step?.showBottomCupContents ?? null : null;
+  const showTopRightSupplyBin = tutorialActive && Boolean(step?.showTopRightSupplyBin);
   const isStartGameStepOne =
     tutorialActive &&
     step?.phaseTitle === "Start of the game" &&
@@ -217,6 +218,20 @@ export function TableLayout({
           />
         </div>
       </div>
+
+      {showTopRightSupplyBin ? (
+        <div className="table-layout__how-to-play-top-right-supply-bin" aria-hidden>
+          <div className="table-layout__supply-3d">
+            <Image
+              className="table-layout__supply-img"
+              src="/images/supply.png"
+              alt=""
+              width={240}
+              height={120}
+            />
+          </div>
+        </div>
+      ) : null}
 
       <div
         className={`table-layout__rush-stack ${sharedAreaInteractive ? "tutorial-target" : ""} ${
