@@ -409,6 +409,25 @@
   z-index: 8;
 }
 
+.table-layout--how-to-play-ingredient-bin .table-layout__supply-3d {
+  opacity: 0.06 !important;
+  filter: saturate(0.55) brightness(0.72) !important;
+}
+
+.table-layout--how-to-play-ingredient-bin .table-layout__supply-img {
+  opacity: 0.06 !important;
+  filter: saturate(0.55) brightness(0.72)
+    drop-shadow(0 0 14px rgba(255, 239, 210, 0.14))
+    drop-shadow(0 0 24px rgba(255, 219, 167, 0.22))
+    drop-shadow(0 6px 12px rgba(20, 10, 2, 0.22));
+}
+
+.table-layout--how-to-play-ingredient-bin .page__how-to-play-top-right-supply-bin,
+.table-layout--how-to-play-ingredient-bin .page__how-to-play-top-right-supply-bin img {
+  opacity: 0.06 !important;
+  filter: saturate(0.55) brightness(0.72) !important;
+}
+
 .table-layout--how-to-play-ingredient-bin .table-layout__supply-img {
   filter: drop-shadow(0 0 14px rgba(255, 239, 210, 0.14))
     drop-shadow(0 0 24px rgba(255, 219, 167, 0.22))
@@ -1368,6 +1387,17 @@
   will-change: transform, opacity;
 }
 
+.table-layout--how-to-play-cups-no-rotate-bin-flight .page__how-to-play-top-right-supply-bin,
+.table-layout--how-to-play-cups-no-rotate-bin-flight .page__how-to-play-top-right-supply-bin img {
+  opacity: 0.12 !important;
+}
+
+.table-layout--how-to-play-cups-no-rotate-bin-flight .table-layout__how-to-play-top-right-supply-bin,
+.table-layout--how-to-play-cups-no-rotate-bin-flight .table-layout__how-to-play-top-right-supply-bin .table-layout__supply-3d,
+.table-layout--how-to-play-cups-no-rotate-bin-flight .table-layout__how-to-play-top-right-supply-bin .table-layout__supply-img {
+  opacity: 0.12 !important;
+}
+
 @keyframes howToPlaySpillCoffeeToBinLoop {
   0% {
     opacity: 0;
@@ -1460,6 +1490,11 @@
   display: none !important;
 }
 
+/* Step 8 should keep the flying steam present, but dimmed with the rest of the scene. */
+.table-layout--how-to-play-single-cup-question .seat-start-five-steam-fly__img {
+  opacity: 0.08 !important;
+}
+
 .table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-group.edge-glass-group--bottom {
   left: calc(50% - clamp(52px, 8.5vmin, 76px)) !important;
   z-index: 12;
@@ -1541,9 +1576,9 @@
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredients {
   position: absolute;
   left: 50%;
-  bottom: 24%;
+  bottom: 20%;
   transform: translateX(-50%);
-  width: 34%;
+  width: 30%;
   aspect-ratio: 1;
   z-index: 1;
   pointer-events: none;
@@ -1552,7 +1587,7 @@
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient {
   position: absolute;
-  width: 82%;
+  width: 76%;
   height: auto;
   object-fit: contain;
   animation: none !important;
@@ -1563,22 +1598,22 @@
   left: 50%;
   bottom: 4%;
   z-index: 1;
-  width: 74%;
+  width: 68%;
   transform: translateX(-50%) rotate(-14deg);
 }
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient--steam-player-board-size {
   left: 50%;
-  top: 2%;
-  width: 42%;
+  top: 4%;
+  width: 34%;
   z-index: 3;
   transform: translateX(-50%) rotate(-8deg);
 }
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient--ice-player-board-size {
-  left: calc(50% + clamp(3px, 0.7vmin, 7px));
-  bottom: 14%;
-  width: 48%;
+  left: calc(50% + clamp(2px, 0.5vmin, 5px));
+  bottom: 12%;
+  width: 40%;
   z-index: 2;
   transform: translateX(-50%) rotate(14deg);
 }
@@ -1591,10 +1626,10 @@
 }
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-2 {
-  left: calc(50% + clamp(4px, 0.8vmin, 8px));
-  top: calc(50% + clamp(10px, 1.8vmin, 18px));
-  width: clamp(28px, 3.8vmin, 38px);
-  height: clamp(28px, 3.8vmin, 38px);
+  left: calc(50% + clamp(2px, 0.5vmin, 6px));
+  top: calc(50% + clamp(8px, 1.4vmin, 14px));
+  width: clamp(22px, 3.2vmin, 32px);
+  height: clamp(22px, 3.2vmin, 32px);
   transform: translateX(-50%);
 }
 

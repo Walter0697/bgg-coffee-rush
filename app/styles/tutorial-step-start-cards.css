@@ -184,7 +184,11 @@
     opacity: 1;
     transform: translate(0, 0) rotate(0deg) scale(1);
   }
-  77.5% {
+  22% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  74% {
     opacity: 1;
     transform: translate(
         calc(-1 * var(--seat-start-question-board-corner-x)),
@@ -192,21 +196,21 @@
       )
       rotate(-12deg) scale(0.84);
   }
-  77.5% {
-    opacity: 0;
+  92% {
+    opacity: 1;
     transform: translate(
-        calc(-1 * var(--seat-start-question-board-corner-x) - clamp(8px, 1.2vmin, 12px)),
-        calc(-1 * var(--seat-start-question-board-corner-y) - clamp(6px, 1vmin, 10px))
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
       )
       rotate(-12deg) scale(0.84);
   }
-  77.51% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
   100% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
+      )
+      rotate(-12deg) scale(0.84);
   }
 }
 
@@ -215,7 +219,11 @@
     opacity: 1;
     transform: translate(0, 0) rotate(0deg) scale(1);
   }
-  68.125% {
+  18% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  70% {
     opacity: 1;
     transform: translate(
         calc(-1 * var(--seat-start-question-board-corner-x)),
@@ -223,21 +231,21 @@
       )
       rotate(-10deg) scale(0.82);
   }
-  68.125% {
-    opacity: 0;
+  92% {
+    opacity: 1;
     transform: translate(
-        calc(-1 * var(--seat-start-question-board-corner-x) - clamp(12px, 1.4vmin, 16px)),
-        calc(-1 * var(--seat-start-question-board-corner-y) + clamp(2px, 0.5vmin, 6px))
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
       )
       rotate(-10deg) scale(0.82);
   }
-  68.135% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
   100% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0deg) scale(1);
+    opacity: 0;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
+      )
+      rotate(-10deg) scale(0.82);
   }
 }
 
