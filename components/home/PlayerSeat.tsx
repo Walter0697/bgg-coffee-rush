@@ -15,7 +15,9 @@ type PlayerSeatProps = {
   onSeatPartSelect: (part: "board" | "cups" | "meeple") => void;
   skillTilesTutorial: boolean;
   skillTilesFrozen: boolean;
-  startQuestionCardsMode: "step1" | "step2" | null;
+  startQuestionCardsMode: "step1" | "step2" | "step3" | null;
+  /** Step 10: animate specific question cards toward the player board corner. */
+  bottomQuestionCardFlightMode?: "board-corner" | null;
   /** Shown under the start question cards (Prepare cups), small + tilted */
   startFirstPlayerTokenUnderCardsSrc: string | null;
   /** Objective step: show coffee, milk & steam in the first (left) cup */
@@ -24,6 +26,8 @@ type PlayerSeatProps = {
   objectiveCupSteamInCup?: boolean;
   /** When true, render cup ingredients (coffee/milk/steam) in a horizontal row above the cup. */
   cupIngredientsRow?: boolean;
+  /** How to play step 10: render extra ingredients inside the bottom cups. */
+  bottomCupContentsMode?: "player-board-size" | null;
   /** Start step 5: animate steam from meeple toward first cup */
   startSteamFlyFromMeeple?: boolean;
 };
@@ -39,10 +43,12 @@ export function PlayerSeat({
   skillTilesTutorial,
   skillTilesFrozen,
   startQuestionCardsMode,
+  bottomQuestionCardFlightMode = null,
   startFirstPlayerTokenUnderCardsSrc,
   objectiveFirstCupIngredients = false,
   objectiveCupSteamInCup = false,
   cupIngredientsRow = false,
+  bottomCupContentsMode = null,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
@@ -50,6 +56,7 @@ export function PlayerSeat({
     seatPartsTutorial && seatPartsSubFocus === "meeple"
       ? "tutorial-target tutorial-target--dimmed"
       : undefined;
+  const showPlayerBoardSizeCups = seat.side === "bottom" && bottomCupContentsMode === "player-board-size";
 
   return (
     <section
@@ -78,12 +85,29 @@ export function PlayerSeat({
         />
       </div>
       {startQuestionCardsMode ? (
-        <div className="seat-start-question-wrap">
-          <div className={`seat-start-question-cards seat-start-question-cards--${startQuestionCardsMode}`} aria-hidden>
+        <div
+          className={`seat-start-question-wrap ${
+            bottomQuestionCardFlightMode === "board-corner" ? "seat-start-question-wrap--board-corner-flight" : ""
+          }`}
+        >
+          <div
+            className={`seat-start-question-cards seat-start-question-cards--${startQuestionCardsMode}${
+              bottomQuestionCardFlightMode === "board-corner" ? " seat-start-question-cards--board-corner-flight" : ""
+            }`}
+            aria-hidden
+          >
             <Image className="seat-start-question-cards__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
             <Image className="seat-start-question-cards__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
-            {startQuestionCardsMode === "step2" ? (
+            {startQuestionCardsMode === "step2" || startQuestionCardsMode === "step3" ? (
               <Image className="seat-start-question-cards__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            ) : null}
+            {startQuestionCardsMode === "step3" ? (
+              <>
+                <Image className="seat-start-question-cards__card-4" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+                <Image className="seat-start-question-cards__card-5" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+                <Image className="seat-start-question-cards__card-6" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+                <Image className="seat-start-question-cards__card-7" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              </>
             ) : null}
           </div>
           {startFirstPlayerTokenUnderCardsSrc && startQuestionCardsMode === "step2" ? (
@@ -120,10 +144,8 @@ export function PlayerSeat({
         aria-label={`${seat.label} cups`}
         onClick={seatPartsTutorial ? () => onSeatPartSelect("cups") : undefined}
       >
-        {seat.side === "bottom" && objectiveFirstCupIngredients ? (
-          <div
-            className={`edge-glass-cup edge-glass-cup--objective ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
-          >
+        {showPlayerBoardSizeCups || objectiveFirstCupIngredients ? (
+          <div className={`edge-glass-cup edge-glass-cup--objective ${cupsDimWhenMeepleFocused ?? ""}`.trim()}>
             <Image
               className="edge-glass-cup__glass"
               src="/images/glass.png"
@@ -140,14 +162,35 @@ export function PlayerSeat({
                 height={64}
                 unoptimized
               />
-              <Image
-                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--milk"
-                src="/images/ingredient/milk.png"
-                alt=""
-                width={64}
-                height={64}
-                unoptimized
-              />
+              {showPlayerBoardSizeCups ? (
+                <>
+                  <Image
+                    className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam edge-glass-cup__ingredient--steam-player-board-size"
+                    src="/images/ingredient/steam.png"
+                    alt=""
+                    width={64}
+                    height={64}
+                    unoptimized
+                  />
+                  <Image
+                    className="edge-glass-cup__ingredient edge-glass-cup__ingredient--ice edge-glass-cup__ingredient--ice-player-board-size"
+                    src="/images/ingredient/ice.png"
+                    alt=""
+                    width={64}
+                    height={64}
+                    unoptimized
+                  />
+                </>
+              ) : (
+                <Image
+                  className="edge-glass-cup__ingredient edge-glass-cup__ingredient--milk"
+                  src="/images/ingredient/milk.png"
+                  alt=""
+                  width={64}
+                  height={64}
+                  unoptimized
+                />
+              )}
               {cupIngredientsRow ? (
                 <Image
                   className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
@@ -159,7 +202,7 @@ export function PlayerSeat({
                 />
               ) : null}
             </div>
-            {!cupIngredientsRow && !objectiveCupSteamInCup ? (
+            {!cupIngredientsRow && !showPlayerBoardSizeCups && !objectiveCupSteamInCup ? (
               <Image
                 className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
                 src="/images/ingredient/steam.png"
@@ -169,7 +212,7 @@ export function PlayerSeat({
                 unoptimized
               />
             ) : null}
-            {!cupIngredientsRow && objectiveCupSteamInCup ? (
+            {!cupIngredientsRow && objectiveCupSteamInCup && !showPlayerBoardSizeCups ? (
               <Image
                 className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam edge-glass-cup__ingredient--steam-in-cup"
                 src="/images/ingredient/steam.png"
@@ -203,6 +246,26 @@ export function PlayerSeat({
           width={220}
           height={157}
         />
+        {showPlayerBoardSizeCups ? (
+          <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-2" aria-hidden>
+            <Image
+              className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--ice"
+              src="/images/ingredient/ice.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+            <Image
+              className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--milk"
+              src="/images/ingredient/milk.png"
+              alt=""
+              width={64}
+              height={64}
+              unoptimized
+            />
+          </div>
+        ) : null}
         {seat.side === "bottom" && cupIngredientsRow ? (
           <>
             <div className="edge-glass-group__ingredients-row" aria-hidden>

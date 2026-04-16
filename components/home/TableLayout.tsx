@@ -91,6 +91,7 @@ export function TableLayout({
   const cupSteamInCup = tutorialActive && Boolean(step?.showCupSteamInCup);
   const cupIngredientsRow = tutorialActive && Boolean(step?.showCupIngredients);
   const cupStackCrossVisible = tutorialActive && Boolean(step?.showCupStackCross);
+  const bottomCupContentsMode = tutorialActive ? step?.showBottomCupContents ?? null : null;
   const isStartGameStepOne =
     tutorialActive &&
     step?.phaseTitle === "Start of the game" &&
@@ -109,11 +110,14 @@ export function TableLayout({
     tutorialStepIndex > READY_TO_BREW_TUTORIAL_STEP_INDEX;
   const startGameTablePassive =
     tutorialActive && step?.phaseTitle === "Start of the game";
-  const startQuestionCardsMode: "step1" | "step2" | null = isStartGameStepOne
-    ? "step1"
-    : isStartGameStepTwo
-      ? "step2"
-      : null;
+  const startQuestionCardsMode: "step1" | "step2" | "step3" | null = step?.showBottomQuestionCards
+    ? step.showBottomQuestionCards
+    : isStartGameStepOne
+      ? "step1"
+      : isStartGameStepTwo
+        ? "step2"
+        : null;
+  const bottomQuestionCardFlightMode = tutorialActive ? step?.showBottomQuestionCardFlight ?? null : null;
   function onCommonAreaKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (!commonAreaInteractive) return;
     if (event.key === "Enter" || event.key === " ") {
@@ -297,12 +301,14 @@ export function TableLayout({
             skillTilesTutorial={Boolean(skillTilesForThisSeat)}
             skillTilesFrozen={shouldFreezeSkillTiles}
             startQuestionCardsMode={seat.side === "bottom" ? startQuestionCardsMode : null}
+            bottomQuestionCardFlightMode={seat.side === "bottom" ? bottomQuestionCardFlightMode : null}
             startFirstPlayerTokenUnderCardsSrc={
               seat.side === "bottom" ? startFirstPlayerTokenUnderCardsSrc : null
             }
             objectiveFirstCupIngredients={seat.side === "bottom" && Boolean(cupIngredientsVisible)}
             objectiveCupSteamInCup={seat.side === "bottom" && cupSteamInCup}
             cupIngredientsRow={seat.side === "bottom" && Boolean(cupIngredientsRow)}
+            bottomCupContentsMode={seat.side === "bottom" ? bottomCupContentsMode : null}
             startSteamFlyFromMeeple={
               seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)
             }

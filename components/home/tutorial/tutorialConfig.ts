@@ -162,6 +162,17 @@ function howToPlaySingleCupQuestionLayout(_subFocus: TutorialSubFocus): string[]
   ];
 }
 
+/** How to play — board-size callout: zoom the player board while the rest of the table fades away. */
+function howToPlayPlayerBoardSizeLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--focused",
+    "table-layout--focus-bottom",
+    "table-layout--how-to-play-player-board-size"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -405,6 +416,19 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     layoutClasses: howToPlaySpecialSpotlightLayout,
     centerOverlayImageSrc: "/images/special.png",
     centerOverlayBadgeImageSrc: "/images/rush.png"
+  },
+  {
+    title: "Player board size",
+    description:
+      "Your player board is your personal workspace. Keep the rest of the table dim so its size stands out clearly.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayPlayerBoardSizeLayout,
+    showBottomQuestionCards: "step3",
+    showBottomQuestionCardFlight: "board-corner",
+    showBottomCupContents: "player-board-size"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

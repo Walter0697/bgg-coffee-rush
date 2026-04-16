@@ -94,6 +94,153 @@
   animation: none;
 }
 
+.seat-start-question-cards--step3 {
+  display: grid;
+  width: calc((var(--start-question-card-size) * 3) + (var(--start-question-card-gap) * 2));
+  grid-template-columns:
+    var(--start-question-card-size)
+    var(--start-question-card-size)
+    var(--start-question-card-size);
+  grid-template-areas:
+    "card1 card2 card3"
+    "card4 . ."
+    "card5 card6 ."
+    "card7 . .";
+  align-items: start;
+  gap: var(--start-question-card-gap);
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-1 {
+  grid-area: card1;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-2 {
+  grid-area: card2;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-3 {
+  grid-area: card3;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-4 {
+  grid-area: card4;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-5 {
+  grid-area: card5;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-6 {
+  grid-area: card6;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-cards--step3 .seat-start-question-cards__card-7 {
+  grid-area: card7;
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.seat-start-question-wrap--board-corner-flight .seat-start-question-cards--step3 {
+  --seat-start-question-board-corner-x: clamp(92px, 14vmin, 126px);
+  --seat-start-question-board-corner-y: clamp(44px, 6.5vmin, 68px);
+}
+
+.seat-start-question-wrap--board-corner-flight .seat-start-question-cards--step3 .seat-start-question-cards__card-3,
+.seat-start-question-wrap--board-corner-flight .seat-start-question-cards--step3 .seat-start-question-cards__card-6 {
+  will-change: transform, opacity;
+}
+
+.seat-start-question-wrap--board-corner-flight .seat-start-question-cards--step3 .seat-start-question-cards__card-3 {
+  z-index: 4;
+  animation: seatStartQuestionCardToBoardCornerOne 3.2s cubic-bezier(0.22, 0.8, 0.28, 1) 0.12s infinite;
+}
+
+.seat-start-question-wrap--board-corner-flight .seat-start-question-cards--step3 .seat-start-question-cards__card-6 {
+  z-index: 5;
+  animation: seatStartQuestionCardToBoardCornerTwo 3.2s cubic-bezier(0.22, 0.8, 0.28, 1) 0.42s infinite;
+}
+
+@keyframes seatStartQuestionCardToBoardCornerOne {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  77.5% {
+    opacity: 1;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
+      )
+      rotate(-12deg) scale(0.84);
+  }
+  77.5% {
+    opacity: 0;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x) - clamp(8px, 1.2vmin, 12px)),
+        calc(-1 * var(--seat-start-question-board-corner-y) - clamp(6px, 1vmin, 10px))
+      )
+      rotate(-12deg) scale(0.84);
+  }
+  77.51% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes seatStartQuestionCardToBoardCornerTwo {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  68.125% {
+    opacity: 1;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x)),
+        calc(-1 * var(--seat-start-question-board-corner-y))
+      )
+      rotate(-10deg) scale(0.82);
+  }
+  68.125% {
+    opacity: 0;
+    transform: translate(
+        calc(-1 * var(--seat-start-question-board-corner-x) - clamp(12px, 1.4vmin, 16px)),
+        calc(-1 * var(--seat-start-question-board-corner-y) + clamp(2px, 0.5vmin, 6px))
+      )
+      rotate(-10deg) scale(0.82);
+  }
+  68.135% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+}
+
 @keyframes startQuestionCardEaseIn {
   from {
     opacity: 0;

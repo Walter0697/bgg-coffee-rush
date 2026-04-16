@@ -104,6 +104,12 @@ export type TutorialStepConfig = {
   showCupIngredients?: boolean;
   /** Show upside-down cup stack with a cross marker (How to play — invalid cup setup). */
   showCupStackCross?: boolean;
+  /** Show the start-of-game question-card stack beside the bottom player board. */
+  showBottomQuestionCards?: "step1" | "step2" | "step3";
+  /** Animate the question-card stack for the player-board-size callout. */
+  showBottomQuestionCardFlight?: "board-corner";
+  /** Show the bottom cup contents for the player-board-size callout. */
+  showBottomCupContents?: "player-board-size";
 };
 
 export type TutorialModuleConfig = {

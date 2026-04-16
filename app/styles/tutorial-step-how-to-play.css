@@ -646,6 +646,7 @@
 /* Cups step animation: move one-by-one, vanish together, reappear together (skill-tile rhythm). */
 .table-layout--how-to-play-cups .seat--bottom .edge-glass-group__ingredients-row {
   --how-to-play-cups-drop-y: clamp(48px, 9.4vmin, 76px);
+  --how-to-play-cups-left-nudge: clamp(2px, 0.45vmin, 5px);
   --how-to-play-cups-shift-one-cup: clamp(38px, 7.4vmin, 62px);
   --how-to-play-cups-cycle: 3200ms;
 }
@@ -716,17 +717,17 @@
   40%,
   67% {
     opacity: 1;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-1 * var(--how-to-play-cups-left-nudge)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   69% {
     opacity: 0.55;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-1 * var(--how-to-play-cups-left-nudge)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   71% {
     opacity: 0;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-1 * var(--how-to-play-cups-left-nudge)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   71.01% {
@@ -753,17 +754,17 @@
   58%,
   67% {
     opacity: 1;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-2 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   69% {
     opacity: 0.55;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-2 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   71% {
     opacity: 0;
-    transform: translate3d(calc(-1 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
+    transform: translate3d(calc(-2 * var(--how-to-play-cups-shift-one-cup)), var(--how-to-play-cups-drop-y), 0)
       scale(0.76);
   }
   71.01% {
@@ -829,6 +830,7 @@
 
   .table-layout--how-to-play-cups .seat--bottom .edge-glass-group__ingredients-row {
     --how-to-play-cups-drop-y: clamp(42px, 12.5vmin, 72px);
+    --how-to-play-cups-left-nudge: 3px;
     --how-to-play-cups-shift-one-cup: clamp(34px, 10vmin, 56px);
   }
 }
@@ -1137,4 +1139,139 @@
 .table-layout--how-to-play-single-cup-question .seat--bottom .edge-glass-cup__ingredient--steam-in-cup {
   opacity: 0.18 !important;
   transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 0) rotate(0deg) !important;
+}
+
+/* How to play step 10: make the player board the dominant object and dim everything else. */
+.table-layout--how-to-play-player-board-size .center-zone,
+.table-layout--how-to-play-player-board-size .table-layout__supply,
+.table-layout--how-to-play-player-board-size .table-layout__rush-stack,
+.table-layout--how-to-play-player-board-size .table-layout__card-deck-stack,
+.table-layout--how-to-play-player-board-size .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-player-board-size .table-layout__objective-card,
+.table-layout--how-to-play-player-board-size .skill-tiles-group,
+.table-layout--how-to-play-player-board-size .skill-tiles-group img,
+.table-layout--how-to-play-player-board-size .seat:not(.seat--bottom) .player-board,
+.table-layout--how-to-play-player-board-size .seat:not(.seat--bottom) .edge-glass-group img,
+.table-layout--how-to-play-player-board-size .seat-start-five-steam-fly__img {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.table-layout--how-to-play-player-board-size .seat-start-question-wrap,
+.table-layout--how-to-play-player-board-size .seat-start-question-cards,
+.table-layout--how-to-play-player-board-size .seat-start-question-cards img {
+  opacity: 1;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .player-board {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup--objective {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__glass {
+  position: relative;
+  z-index: 0;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(20, 10, 2, 0.25));
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredients {
+  position: absolute;
+  left: 50%;
+  bottom: 24%;
+  transform: translateX(-50%);
+  width: 34%;
+  aspect-ratio: 1;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient {
+  position: absolute;
+  width: 82%;
+  height: auto;
+  object-fit: contain;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient--coffee {
+  left: 50%;
+  bottom: 4%;
+  z-index: 1;
+  width: 74%;
+  transform: translateX(-50%) rotate(-14deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient--steam-player-board-size {
+  left: 50%;
+  top: 2%;
+  width: 42%;
+  z-index: 3;
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-cup__ingredient--ice-player-board-size {
+  left: calc(50% + clamp(3px, 0.7vmin, 7px));
+  bottom: 14%;
+  width: 48%;
+  z-index: 2;
+  transform: translateX(-50%) rotate(14deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents {
+  position: absolute;
+  z-index: 11;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-2 {
+  left: calc(50% + clamp(4px, 0.8vmin, 8px));
+  top: calc(50% + clamp(10px, 1.8vmin, 18px));
+  width: clamp(28px, 3.8vmin, 38px);
+  height: clamp(28px, 3.8vmin, 38px);
+  transform: translateX(-50%);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  animation: none !important;
+  opacity: 1 !important;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient--ice {
+  left: 42%;
+  top: 6%;
+  width: 58%;
+  transform: rotate(14deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient--milk {
+  left: 18%;
+  top: 30%;
+  width: 62%;
+  transform: rotate(-10deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .meeple-token {
+  opacity: 0.08;
+  pointer-events: none;
 }
