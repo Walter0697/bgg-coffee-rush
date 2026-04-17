@@ -91,6 +91,10 @@ export type TutorialStepConfig = {
   centerOverlayBadgeImageSrc?: string;
   /** Optional card image shown in the objective-card slot near cups. */
   tableOverlayCardSrc?: string;
+  /** Where to place `tableOverlayCardSrc` (default: floating table center). */
+  tableOverlayCardPlacement?: "table-center" | "bottom-player-board";
+  /** Optional multi-card stack placed on the bottom player board. */
+  boardOverlayCardStackMode?: "step1" | "step2" | "step3";
   /** Where to show `centerOverlayImageSrc` (default: full table center). */
   centerOverlayPlacement?: "table-center" | "under-bottom-start-cards";
   /** Full dim + move yes/no overlay (How to play). */

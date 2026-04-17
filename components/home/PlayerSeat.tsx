@@ -28,6 +28,10 @@ type PlayerSeatProps = {
   cupIngredientsRow?: boolean;
   /** How to play: render extra ingredients inside the bottom cups. */
   bottomCupContentsMode?: "player-board-size" | "how-to-play-cups-invalid" | "how-to-play-cups-preview" | null;
+  /** Optional question/order card placed on the bottom player board. */
+  boardOverlayCardSrc?: string | null;
+  /** Optional question-card stack placed beside the bottom player board. */
+  boardOverlayCardStackMode?: "step1" | "step2" | "step3" | null;
   /** Start step 5: animate steam from meeple toward first cup */
   startSteamFlyFromMeeple?: boolean;
 };
@@ -49,6 +53,8 @@ export function PlayerSeat({
   objectiveCupSteamInCup = false,
   cupIngredientsRow = false,
   bottomCupContentsMode = null,
+  boardOverlayCardSrc = null,
+  boardOverlayCardStackMode = null,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
@@ -85,7 +91,37 @@ export function PlayerSeat({
           priority={seat.side === "bottom"}
           unoptimized
         />
+        {seat.side === "bottom" && boardOverlayCardSrc ? (
+          <Image
+            className="player-board__overlay-card"
+            src={boardOverlayCardSrc}
+            alt=""
+            width={240}
+            height={320}
+            unoptimized
+          />
+        ) : null}
       </div>
+      {boardOverlayCardStackMode ? (
+        <div
+          className={`seat-board-overlay-stack seat-board-overlay-stack--${boardOverlayCardStackMode} seat-board-overlay-stack--${seat.side}`}
+          aria-hidden
+        >
+          <Image className="seat-board-overlay-stack__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          <Image className="seat-board-overlay-stack__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          {boardOverlayCardStackMode === "step2" || boardOverlayCardStackMode === "step3" ? (
+            <Image className="seat-board-overlay-stack__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+          ) : null}
+          {boardOverlayCardStackMode === "step3" ? (
+            <>
+              <Image className="seat-board-overlay-stack__card-4" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              <Image className="seat-board-overlay-stack__card-5" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              <Image className="seat-board-overlay-stack__card-6" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              <Image className="seat-board-overlay-stack__card-7" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            </>
+          ) : null}
+        </div>
+      ) : null}
       {startQuestionCardsMode ? (
         <div
           className={`seat-start-question-wrap ${

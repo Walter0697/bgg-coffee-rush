@@ -1526,6 +1526,131 @@
   transform: translate(calc(-50% - clamp(2px, 0.55vmin, 6px)), 0) rotate(0deg) !important;
 }
 
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board__overlay-card {
+  position: absolute;
+  left: calc(100% + clamp(4px, 0.9vmin, 10px));
+  top: clamp(8px, 3.2%, 14px);
+  width: clamp(18px, calc(var(--mini-short) * 0.28), 34px);
+  height: auto;
+  z-index: 6;
+  pointer-events: none;
+  transform: none;
+  filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.3));
+}
+
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack {
+  position: absolute;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--bottom {
+  left: calc(clamp(8px, 1.4vmin, 18px) + var(--mini-short) + clamp(12px, 2vmin, 22px));
+  top: clamp(8px, 1.4vmin, 18px);
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--top {
+  right: calc(clamp(8px, 1.4vmin, 18px) + var(--mini-short) + clamp(10px, 1.8vmin, 22px));
+  bottom: clamp(8px, 1.4vmin, 18px);
+  top: auto;
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--left {
+  right: 40px;
+  top: 40px;
+  left: auto;
+  transform: rotate(90deg);
+  transform-origin: center;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--right {
+  left: 40px;
+  bottom: 40px;
+  top: auto;
+  transform: rotate(270deg);
+  transform-origin: center;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-1,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-2,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-3,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-4,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-5,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-6,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack .seat-board-overlay-stack__card-7 {
+  width: clamp(14px, 2vmin, 20px);
+  height: auto;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2 {
+  display: grid;
+  width: clamp(14px, 2vmin, 20px);
+  gap: clamp(2px, 0.45vmin, 5px);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "card1"
+    "card2";
+  align-items: start;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2 .seat-board-overlay-stack__card-1 {
+  grid-area: card1;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2 .seat-board-overlay-stack__card-2 {
+  grid-area: card2;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 {
+  display: grid;
+  width: calc((clamp(14px, 2vmin, 20px) * 3) + (clamp(3px, 0.6vmin, 7px) * 2));
+  grid-template-columns:
+    clamp(14px, 2vmin, 20px)
+    clamp(14px, 2vmin, 20px)
+    clamp(14px, 2vmin, 20px);
+  grid-template-areas:
+    "card1 card2 card3"
+    "card4 . ."
+    "card5 card6 ."
+    "card7 . .";
+  gap: clamp(3px, 0.6vmin, 7px);
+  align-items: start;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-1 {
+  grid-area: card1;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-2 {
+  grid-area: card2;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-3 {
+  grid-area: card3;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-4 {
+  grid-area: card4;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-5 {
+  grid-area: card5;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-6 {
+  grid-area: card6;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 .seat-board-overlay-stack__card-7 {
+  grid-area: card7;
+}
+
 /* How to play step 10: make the player board the dominant object and dim everything else. */
 .table-layout--how-to-play-player-board-size .center-zone,
 .table-layout--how-to-play-player-board-size .table-layout__supply,
@@ -1815,4 +1940,33 @@
     animation: none !important;
     will-change: auto;
   }
+}
+
+/* How to play step 11: keep the whole board visible, but dim the ingredient board. */
+.table-layout--how-to-play-whole-board-focus .center-zone {
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-whole-board-focus .table-layout__supply,
+.table-layout--how-to-play-whole-board-focus .table-layout__rush-stack,
+.table-layout--how-to-play-whole-board-focus .table-layout__card-deck-stack,
+.table-layout--how-to-play-whole-board-focus .table-layout__shared-area-hitbox,
+.table-layout--how-to-play-whole-board-focus .meeple-token,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group img,
+.table-layout--how-to-play-whole-board-focus .edge-glass-cup,
+.table-layout--how-to-play-whole-board-focus .edge-glass-cup__glass,
+.table-layout--how-to-play-whole-board-focus .edge-glass-cup__ingredients,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group__cup-shell,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group__cup,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group__cup-contents,
+.table-layout--how-to-play-whole-board-focus .edge-glass-group__cup-contents-ingredient,
+.table-layout--how-to-play-whole-board-focus .seat-start-five-steam-fly__img {
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-whole-board-focus .center-zone__board {
+  filter: saturate(0.72) brightness(0.9);
 }

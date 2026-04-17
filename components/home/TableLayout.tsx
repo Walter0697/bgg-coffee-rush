@@ -83,9 +83,8 @@ export function TableLayout({
   const commonAreaInteractive = layoutZoomTutorial;
   const objectivePhaseActive = tutorialActive && step?.phaseTitle === "Objective of the game";
   const tableOverlayCardSrc =
-    tutorialActive
-      ? step?.tableOverlayCardSrc ?? (objectivePhaseActive ? "/images/card.png" : null)
-      : null;
+    tutorialActive ? step?.tableOverlayCardSrc ?? null : null;
+  const tableOverlayCardPlacement = step?.tableOverlayCardPlacement ?? "table-center";
   const cupIngredientsVisible =
     tutorialActive && (objectivePhaseActive || Boolean(step?.showCupIngredientsInCup));
   const cupSteamInCup = tutorialActive && Boolean(step?.showCupSteamInCup);
@@ -324,6 +323,21 @@ export function TableLayout({
             objectiveCupSteamInCup={seat.side === "bottom" && cupSteamInCup}
             cupIngredientsRow={seat.side === "bottom" && Boolean(cupIngredientsRow)}
             bottomCupContentsMode={seat.side === "bottom" ? bottomCupContentsMode : null}
+            boardOverlayCardSrc={
+              seat.side === "bottom" && tableOverlayCardPlacement === "bottom-player-board"
+                ? tableOverlayCardSrc
+                : null
+            }
+            boardOverlayCardStackMode={
+              tutorialActive
+                ? seat.side === "bottom"
+                  ? step?.boardOverlayCardStackMode ?? null
+                  : (seat.side === "top" || seat.side === "left" || seat.side === "right") &&
+                      step?.boardOverlayCardStackMode
+                    ? "step2"
+                    : null
+                : null
+            }
             startSteamFlyFromMeeple={
               seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)
             }
@@ -331,7 +345,7 @@ export function TableLayout({
         );
       })}
 
-      {tableOverlayCardSrc ? (
+      {tableOverlayCardSrc && tableOverlayCardPlacement === "table-center" ? (
         <div className="table-layout__objective-card" aria-hidden>
           <Image src={tableOverlayCardSrc} alt="" width={240} height={320} unoptimized />
         </div>

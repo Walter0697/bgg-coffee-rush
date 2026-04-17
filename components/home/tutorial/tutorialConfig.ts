@@ -183,6 +183,15 @@ function howToPlayPlayerBoardSizeLayout(_subFocus: TutorialSubFocus): string[] {
   ];
 }
 
+/** How to play — whole table visible, but the ingredient board is dimmed for the next explanation. */
+function howToPlayWholeBoardFocusLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--tutorial-overview",
+    "table-layout--how-to-play-whole-board-focus"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -438,10 +447,19 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     },
     focusLabels: {},
     layoutClasses: howToPlayPlayerBoardSizeLayout,
-    showBottomQuestionCards: "step3",
-    showBottomQuestionCardFlight: "board-corner",
     showBottomCupContents: "player-board-size",
     showTopRightSupplyBin: true
+  },
+  {
+    title: "Whole board",
+    description:
+      "Now look at the whole table. The ingredient board is dimmed so you can focus on the rest of the board.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayWholeBoardFocusLayout,
+    boardOverlayCardStackMode: "step3"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
