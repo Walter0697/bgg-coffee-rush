@@ -432,7 +432,7 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
   {
     title: "Player board size",
     description:
-      "Your player board is your personal workspace. Keep the rest of the table dim so its size stands out clearly.",
+      "Put your completed order card on the top left of your player card. This is your score now! Then put the ingredients of the finished order cup into the supply bins.",
     interaction: {
       mode: "passive"
     },
@@ -440,7 +440,8 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     layoutClasses: howToPlayPlayerBoardSizeLayout,
     showBottomQuestionCards: "step3",
     showBottomQuestionCardFlight: "board-corner",
-    showBottomCupContents: "player-board-size"
+    showBottomCupContents: "player-board-size",
+    showTopRightSupplyBin: true
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

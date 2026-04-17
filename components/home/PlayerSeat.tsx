@@ -146,7 +146,27 @@ export function PlayerSeat({
         aria-label={`${seat.label} cups`}
         onClick={seatPartsTutorial ? () => onSeatPartSelect("cups") : undefined}
       >
-        {showPlayerBoardSizeCups || objectiveFirstCupIngredients ? (
+        {showPlayerBoardSizeCups ? (
+          <div className="edge-glass-group__cup-shell edge-glass-group__cup-shell--cup-1" aria-hidden>
+            <img
+              className={`edge-glass-group__cup edge-glass-group__cup--1 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
+              src="/images/glass.png"
+              alt={`${seat.label} cup 1`}
+            />
+            <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-1" aria-hidden>
+              <img
+                className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--coffee"
+                src="/images/ingredient/coffee.png"
+                alt=""
+              />
+              <img
+                className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--steam"
+                src="/images/ingredient/steam.png"
+                alt=""
+              />
+            </div>
+          </div>
+        ) : objectiveFirstCupIngredients ? (
           <div className={`edge-glass-cup edge-glass-cup--objective ${cupsDimWhenMeepleFocused ?? ""}`.trim()}>
             <Image
               className="edge-glass-cup__glass"
@@ -164,35 +184,14 @@ export function PlayerSeat({
                 height={64}
                 unoptimized
               />
-              {showPlayerBoardSizeCups ? (
-                <>
-                  <Image
-                    className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam edge-glass-cup__ingredient--steam-player-board-size"
-                    src="/images/ingredient/steam.png"
-                    alt=""
-                    width={64}
-                    height={64}
-                    unoptimized
-                  />
-                  <Image
-                    className="edge-glass-cup__ingredient edge-glass-cup__ingredient--ice edge-glass-cup__ingredient--ice-player-board-size"
-                    src="/images/ingredient/ice.png"
-                    alt=""
-                    width={64}
-                    height={64}
-                    unoptimized
-                  />
-                </>
-              ) : (
-                <Image
-                  className="edge-glass-cup__ingredient edge-glass-cup__ingredient--milk"
-                  src="/images/ingredient/milk.png"
-                  alt=""
-                  width={64}
-                  height={64}
-                  unoptimized
-                />
-              )}
+              <Image
+                className="edge-glass-cup__ingredient edge-glass-cup__ingredient--milk"
+                src="/images/ingredient/milk.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
               {cupIngredientsRow ? (
                 <Image
                   className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
@@ -204,7 +203,7 @@ export function PlayerSeat({
                 />
               ) : null}
             </div>
-            {!cupIngredientsRow && !showPlayerBoardSizeCups && !objectiveCupSteamInCup ? (
+            {!cupIngredientsRow && !objectiveCupSteamInCup ? (
               <Image
                 className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam"
                 src="/images/ingredient/steam.png"
@@ -214,7 +213,7 @@ export function PlayerSeat({
                 unoptimized
               />
             ) : null}
-            {!cupIngredientsRow && objectiveCupSteamInCup && !showPlayerBoardSizeCups ? (
+            {!cupIngredientsRow && objectiveCupSteamInCup ? (
               <Image
                 className="edge-glass-cup__ingredient edge-glass-cup__ingredient--steam edge-glass-cup__ingredient--steam-in-cup"
                 src="/images/ingredient/steam.png"
@@ -234,7 +233,22 @@ export function PlayerSeat({
             height={157}
           />
         )}
-        {showInvalidCupStackContents || showPreviewCupContents ? (
+        {showPlayerBoardSizeCups ? (
+          <div className="edge-glass-group__cup-shell edge-glass-group__cup-shell--cup-2" aria-hidden>
+            <img
+              className={`edge-glass-group__cup edge-glass-group__cup--2 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
+              src="/images/glass.png"
+              alt={`${seat.label} cup 2`}
+            />
+            <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-2" aria-hidden>
+              <img
+                className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--steam"
+                src="/images/ingredient/steam.png"
+                alt=""
+              />
+            </div>
+          </div>
+        ) : showInvalidCupStackContents || showPreviewCupContents ? (
           <div className="edge-glass-group__cup-shell edge-glass-group__cup-shell--cup-2" aria-hidden>
             <Image
               className={`edge-glass-group__cup edge-glass-group__cup--2 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
@@ -263,7 +277,27 @@ export function PlayerSeat({
             height={157}
           />
         )}
-        {showPreviewCupContents ? (
+        {showPlayerBoardSizeCups ? (
+          <div className="edge-glass-group__cup-shell edge-glass-group__cup-shell--cup-3" aria-hidden>
+            <Image
+              className={`edge-glass-group__cup edge-glass-group__cup--3 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
+              src="/images/glass.png"
+              alt={`${seat.label} cup 3`}
+              width={220}
+              height={157}
+            />
+            <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-3" aria-hidden>
+              <Image
+                className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--ice"
+                src="/images/ingredient/ice.png"
+                alt=""
+                width={64}
+                height={64}
+                unoptimized
+              />
+            </div>
+          </div>
+        ) : showPreviewCupContents ? (
           <div className="edge-glass-group__cup-shell edge-glass-group__cup-shell--cup-3" aria-hidden>
             <Image
               className={`edge-glass-group__cup edge-glass-group__cup--3 ${cupsDimWhenMeepleFocused ?? ""}`.trim()}
@@ -292,26 +326,6 @@ export function PlayerSeat({
             height={157}
           />
         )}
-        {showPlayerBoardSizeCups ? (
-          <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-2" aria-hidden>
-            <Image
-              className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--ice"
-              src="/images/ingredient/ice.png"
-              alt=""
-              width={64}
-              height={64}
-              unoptimized
-            />
-            <Image
-              className="edge-glass-group__cup-contents-ingredient edge-glass-group__cup-contents-ingredient--milk"
-              src="/images/ingredient/milk.png"
-              alt=""
-              width={64}
-              height={64}
-              unoptimized
-            />
-          </div>
-        ) : null}
         {showInvalidCupStackContents || showPreviewCupContents ? (
           <div className="edge-glass-group__cup-contents edge-glass-group__cup-contents--cup-1" aria-hidden>
             <Image

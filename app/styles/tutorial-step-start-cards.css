@@ -191,26 +191,26 @@
   74% {
     opacity: 1;
     transform: translate(
-        calc(-1 * var(--seat-start-question-board-corner-x)),
-        calc(-1 * var(--seat-start-question-board-corner-y))
+        calc(-1 * var(--seat-start-question-board-corner-x) - 12px),
+        calc(-1 * var(--seat-start-question-board-corner-y) + 56px)
       )
-      rotate(-12deg) scale(0.84);
+      rotate(-2deg) scale(0.84);
   }
   92% {
     opacity: 1;
     transform: translate(
-        calc(-1 * var(--seat-start-question-board-corner-x)),
-        calc(-1 * var(--seat-start-question-board-corner-y))
+        calc(-1 * var(--seat-start-question-board-corner-x) - 12px),
+        calc(-1 * var(--seat-start-question-board-corner-y) + 56px)
       )
-      rotate(-12deg) scale(0.84);
+      rotate(-2deg) scale(0.84);
   }
   100% {
     opacity: 0;
     transform: translate(
-        calc(-1 * var(--seat-start-question-board-corner-x)),
-        calc(-1 * var(--seat-start-question-board-corner-y))
+        calc(-1 * var(--seat-start-question-board-corner-x) - 12px),
+        calc(-1 * var(--seat-start-question-board-corner-y) + 56px)
       )
-      rotate(-12deg) scale(0.84);
+      rotate(-2deg) scale(0.84);
   }
 }
 

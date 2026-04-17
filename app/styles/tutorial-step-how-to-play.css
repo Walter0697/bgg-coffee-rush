@@ -1620,17 +1620,94 @@
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents {
   position: absolute;
+  left: 50%;
+  bottom: clamp(10px, 2vmin, 18px);
+  width: clamp(24px, 3.4vmin, 32px);
+  height: clamp(24px, 3.4vmin, 32px);
+  transform: translateX(-50%);
   z-index: 11;
   pointer-events: none;
   opacity: 1;
 }
 
-.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-2 {
-  left: calc(50% + clamp(2px, 0.5vmin, 6px));
-  top: calc(50% + clamp(8px, 1.4vmin, 14px));
-  width: clamp(22px, 3.2vmin, 32px);
-  height: clamp(22px, 3.2vmin, 32px);
-  transform: translateX(-50%);
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-1,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-2,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-3 {
+  position: relative;
+  display: inline-block;
+  width: clamp(30px, 4.4vmin, 42px);
+  aspect-ratio: 220 / 157;
+  animation: none !important;
+  transform: none !important;
+  filter: none;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-1 {
+  z-index: 15;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-2,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-3 {
+  z-index: 14;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-1::before,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-2::before,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-3::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #f3eadf;
+  -webkit-mask-image: url("/images/glass.png");
+  mask-image: url("/images/glass.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-1 .edge-glass-group__cup,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-2 .edge-glass-group__cup,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-3 .edge-glass-group__cup {
+  display: none;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group {
+  gap: clamp(12px, 2.2vmin, 22px);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group--bottom {
+  transform: translateY(calc(-50% + clamp(220px, 28vmin, 272px)));
+}
+
+@media (max-width: 640px) {
+  .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group--bottom {
+    top: 90%;
+    transform: translateY(-50%);
+  }
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-1 .edge-glass-group__cup--1,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-2 .edge-glass-group__cup--2,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-shell--cup-3 .edge-glass-group__cup--3 {
+  display: block;
+  width: clamp(30px, 4.4vmin, 42px);
+  height: auto;
+  opacity: 0.92;
+  filter: grayscale(0.14) brightness(1.12) contrast(0.88) saturate(0.78);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-1,
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-3 {
+  z-index: 17;
+  will-change: transform, opacity;
+  animation: howToPlayPlayerBoardSizeCup1ToBinLoop 3.2s cubic-bezier(0.22, 0.8, 0.28, 1) infinite both;
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-3 {
+  animation-name: howToPlayPlayerBoardSizeCup3ToBinLoop;
 }
 
 .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient {
@@ -1640,23 +1717,102 @@
   object-fit: contain;
   animation: none !important;
   opacity: 1 !important;
+  filter: grayscale(0.12) brightness(1.08) contrast(0.9) saturate(0.82);
 }
 
-.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient--ice {
-  left: 42%;
-  top: 6%;
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient--steam {
+  left: 50%;
+  top: 4%;
+  width: 56%;
+  transform: translateX(-50%) rotate(-8deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-1 .edge-glass-group__cup-contents-ingredient--coffee {
+  left: 50%;
+  bottom: 6%;
+  width: 74%;
+  transform: translateX(-50%) rotate(-16deg);
+}
+
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-1 .edge-glass-group__cup-contents-ingredient--steam {
+  left: 50%;
+  top: 2%;
   width: 58%;
-  transform: rotate(14deg);
+  transform: translateX(-50%) rotate(-10deg);
 }
 
-.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents-ingredient--milk {
-  left: 18%;
-  top: 30%;
+.table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-3 .edge-glass-group__cup-contents-ingredient--ice {
+  left: 50%;
+  bottom: 8%;
   width: 62%;
-  transform: rotate(-10deg);
+  transform: translateX(-50%) rotate(14deg);
 }
 
 .table-layout--how-to-play-player-board-size .seat--bottom .meeple-token {
   opacity: 0.08;
   pointer-events: none;
+}
+
+.table-layout--how-to-play-player-board-size .page__how-to-play-top-right-supply-bin,
+.table-layout--how-to-play-player-board-size .page__how-to-play-top-right-supply-bin img,
+.table-layout--how-to-play-player-board-size .table-layout__how-to-play-top-right-supply-bin,
+.table-layout--how-to-play-player-board-size .table-layout__how-to-play-top-right-supply-bin .table-layout__supply-3d,
+.table-layout--how-to-play-player-board-size .table-layout__how-to-play-top-right-supply-bin .table-layout__supply-img {
+  z-index: 1 !important;
+  opacity: 0.12 !important;
+}
+
+@keyframes howToPlayPlayerBoardSizeCup1ToBinLoop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  54% {
+    opacity: 1;
+    transform: translateX(-50%)
+      translate3d(10px, -60px, 0)
+      scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%)
+      translate3d(10px, -60px, 0)
+      scale(0.5);
+  }
+}
+
+@keyframes howToPlayPlayerBoardSizeCup3ToBinLoop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  54% {
+    opacity: 1;
+    transform: translateX(-50%)
+      translate3d(clamp(22px, 3.8vmin, 42px), calc(-1 * clamp(150px, 24vmin, 220px)), 0)
+      scale(1.7);
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: translateX(-50%)
+      translate3d(clamp(22px, 3.8vmin, 42px), calc(-1 * clamp(150px, 24vmin, 220px)), 0)
+      scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-1,
+  .table-layout--how-to-play-player-board-size .seat--bottom .edge-glass-group__cup-contents--cup-3 {
+    animation: none !important;
+    will-change: auto;
+  }
 }
