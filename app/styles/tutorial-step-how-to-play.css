@@ -1538,6 +1538,39 @@
   filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.3));
 }
 
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board--corner-cards {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board__corner-card-stack {
+  position: absolute;
+  left: -30px;
+  top: 2px;
+  width: clamp(18px, 2.4vmin, 24px);
+  display: grid;
+  grid-template-areas: "stack";
+  z-index: 7;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board__corner-card-stack-card {
+  grid-area: stack;
+  width: clamp(18px, 2.4vmin, 24px);
+  height: auto;
+  filter: drop-shadow(0 10px 16px rgba(20, 10, 2, 0.28));
+  will-change: opacity;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board__corner-card-stack-card--1 {
+  transform: translate(-18%, -12%) rotate(-12deg);
+  animation: howToPlayWholeBoardOverlayCardFadeLoop 1.8s ease-in-out infinite;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat--bottom .player-board__corner-card-stack-card--2 {
+  transform: translate(18%, 14%) rotate(6deg);
+  animation: howToPlayWholeBoardOverlayCardFadeLoop 1.8s ease-in-out 220ms infinite;
+}
+
 .table-layout--how-to-play-whole-board-focus .seat--bottom .player-board {
   overflow: visible;
 }
@@ -1555,15 +1588,15 @@
 
 .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--top {
   right: calc(clamp(8px, 1.4vmin, 18px) + var(--mini-short) + clamp(10px, 1.8vmin, 22px));
-  bottom: clamp(8px, 1.4vmin, 18px);
+  bottom: 20px;
   top: auto;
   transform: rotate(180deg);
   transform-origin: center;
 }
 
 .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--left {
-  right: 40px;
-  top: 40px;
+  right: 30px;
+  top: 50px;
   left: auto;
   transform: rotate(90deg);
   transform-origin: center;
@@ -1588,6 +1621,16 @@
   height: auto;
 }
 
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-1,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-1 {
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-2,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-2 {
+  opacity: 0;
+  animation: howToPlayWholeBoardOverlayCardFadeLoop 1.8s ease-in-out 220ms infinite;
+}
+
 .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2 {
   display: grid;
   width: clamp(14px, 2vmin, 20px);
@@ -1605,6 +1648,69 @@
 
 .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2 .seat-board-overlay-stack__card-2 {
   grid-area: card2;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left {
+  width: calc((clamp(14px, 2vmin, 20px) * 3) + (clamp(3px, 0.6vmin, 7px) * 2));
+  grid-template-columns:
+    clamp(14px, 2vmin, 20px)
+    clamp(14px, 2vmin, 20px)
+    clamp(14px, 2vmin, 20px);
+  grid-template-areas:
+    "card1 card2 card3"
+    "card4 . ."
+    "card5 . .";
+  gap: clamp(3px, 0.6vmin, 7px);
+  align-items: start;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-1,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-1 {
+  grid-area: card1;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-2,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-2 {
+  grid-area: card2;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-3,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-3 {
+  grid-area: card3;
+  opacity: 0;
+  animation: howToPlayWholeBoardOverlayCardFadeLoop 1.8s ease-in-out 440ms infinite;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-4,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-4 {
+  grid-area: card4;
+}
+
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-5,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-5 {
+  grid-area: card5;
+}
+
+@keyframes howToPlayWholeBoardOverlayCardFadeLoop {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-4,
+  .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-4,
+  .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--top .seat-board-overlay-stack__card-5,
+  .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step2.seat-board-overlay-stack--left .seat-board-overlay-stack__card-5 {
+    opacity: 1;
+    animation: none;
+  }
 }
 
 .table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--step3 {

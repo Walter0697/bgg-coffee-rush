@@ -91,6 +91,7 @@ export function TableLayout({
   const cupIngredientsRow = tutorialActive && Boolean(step?.showCupIngredients);
   const cupStackCrossVisible = tutorialActive && Boolean(step?.showCupStackCross);
   const bottomCupContentsMode = tutorialActive ? step?.showBottomCupContents ?? null : null;
+  const bottomBoardCornerCardsMode = tutorialActive ? step?.showBottomBoardCornerCards ?? null : null;
   const showTopRightSupplyBin = tutorialActive && Boolean(step?.showTopRightSupplyBin);
   const isStartGameStepOne =
     tutorialActive &&
@@ -329,14 +330,10 @@ export function TableLayout({
                 : null
             }
             boardOverlayCardStackMode={
-              tutorialActive
-                ? seat.side === "bottom"
-                  ? step?.boardOverlayCardStackMode ?? null
-                  : (seat.side === "top" || seat.side === "left" || seat.side === "right") &&
-                      step?.boardOverlayCardStackMode
-                    ? "step2"
-                    : null
-                : null
+              tutorialActive ? step?.boardOverlayCardStackMode ?? null : null
+            }
+            bottomBoardCornerCardsMode={
+              seat.side === "bottom" ? bottomBoardCornerCardsMode : null
             }
             startSteamFlyFromMeeple={
               seat.side === "bottom" && (Boolean(isStartGameStepFive) || holdStartGameStepFiveVisual)

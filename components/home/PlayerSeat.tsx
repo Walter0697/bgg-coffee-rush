@@ -32,6 +32,8 @@ type PlayerSeatProps = {
   boardOverlayCardSrc?: string | null;
   /** Optional question-card stack placed beside the bottom player board. */
   boardOverlayCardStackMode?: "step1" | "step2" | "step3" | null;
+  /** Optional two-card stack anchored to the bottom player's board corner. */
+  bottomBoardCornerCardsMode?: "step11" | null;
   /** Start step 5: animate steam from meeple toward first cup */
   startSteamFlyFromMeeple?: boolean;
 };
@@ -55,6 +57,7 @@ export function PlayerSeat({
   bottomCupContentsMode = null,
   boardOverlayCardSrc = null,
   boardOverlayCardStackMode = null,
+  bottomBoardCornerCardsMode = null,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
@@ -65,6 +68,9 @@ export function PlayerSeat({
   const showPlayerBoardSizeCups = seat.side === "bottom" && bottomCupContentsMode === "player-board-size";
   const showInvalidCupStackContents = seat.side === "bottom" && bottomCupContentsMode === "how-to-play-cups-invalid";
   const showPreviewCupContents = seat.side === "bottom" && bottomCupContentsMode === "how-to-play-cups-preview";
+  const renderedBoardOverlayCardStackMode =
+    boardOverlayCardStackMode && seat.side !== "bottom" ? "step2" : boardOverlayCardStackMode;
+  const showBottomBoardCornerCards = seat.side === "bottom" && bottomBoardCornerCardsMode === "step11";
 
   return (
     <section
@@ -74,7 +80,9 @@ export function PlayerSeat({
       onClick={layoutZoomTutorial ? () => onLayoutZoomSelect(seat.side) : undefined}
     >
       <div
-        className={`player-board player-board--${seat.color} ${seatPartsTutorial ? "tutorial-target" : ""} ${
+        className={`player-board player-board--${seat.color} ${showBottomBoardCornerCards ? "player-board--corner-cards" : ""} ${
+          seatPartsTutorial ? "tutorial-target" : ""
+        } ${
           seatPartsTutorial && seatPartsSubFocus === "board" ? "tutorial-target--active" : ""
         } ${
           seatPartsTutorial && seatPartsSubFocus !== null && seatPartsSubFocus !== "board"
@@ -101,18 +109,44 @@ export function PlayerSeat({
             unoptimized
           />
         ) : null}
+        {showBottomBoardCornerCards ? (
+          <div className="player-board__corner-card-stack" aria-hidden>
+            <Image
+              className="player-board__corner-card-stack-card player-board__corner-card-stack-card--1"
+              src="/images/question.png"
+              alt=""
+              width={220}
+              height={320}
+              unoptimized
+            />
+            <Image
+              className="player-board__corner-card-stack-card player-board__corner-card-stack-card--2"
+              src="/images/question.png"
+              alt=""
+              width={220}
+              height={320}
+              unoptimized
+            />
+          </div>
+        ) : null}
       </div>
-      {boardOverlayCardStackMode ? (
+      {renderedBoardOverlayCardStackMode ? (
         <div
-          className={`seat-board-overlay-stack seat-board-overlay-stack--${boardOverlayCardStackMode} seat-board-overlay-stack--${seat.side}`}
+          className={`seat-board-overlay-stack seat-board-overlay-stack--${renderedBoardOverlayCardStackMode} seat-board-overlay-stack--${seat.side}`}
           aria-hidden
         >
           <Image className="seat-board-overlay-stack__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
           <Image className="seat-board-overlay-stack__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
-          {boardOverlayCardStackMode === "step2" || boardOverlayCardStackMode === "step3" ? (
+          {renderedBoardOverlayCardStackMode === "step2" && (seat.side === "top" || seat.side === "left") ? (
+            <>
+              <Image className="seat-board-overlay-stack__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              <Image className="seat-board-overlay-stack__card-4" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+              <Image className="seat-board-overlay-stack__card-5" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            </>
+          ) : renderedBoardOverlayCardStackMode === "step2" || renderedBoardOverlayCardStackMode === "step3" ? (
             <Image className="seat-board-overlay-stack__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
           ) : null}
-          {boardOverlayCardStackMode === "step3" ? (
+          {renderedBoardOverlayCardStackMode === "step3" ? (
             <>
               <Image className="seat-board-overlay-stack__card-4" src="/images/question.png" alt="" width={220} height={320} unoptimized />
               <Image className="seat-board-overlay-stack__card-5" src="/images/question.png" alt="" width={220} height={320} unoptimized />

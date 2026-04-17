@@ -453,12 +453,13 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
   {
     title: "Whole board",
     description:
-      "Now look at the whole table. The ingredient board is dimmed so you can focus on the rest of the board.",
+      "Now look at the whole table. The ingredient board is dimmed so you can focus on the rest of the board. For every order you complete, add one card to the first row of the next 2 players.",
     interaction: {
       mode: "passive"
     },
     focusLabels: {},
     layoutClasses: howToPlayWholeBoardFocusLayout,
+    showBottomBoardCornerCards: "step11",
     boardOverlayCardStackMode: "step3"
   }
 ] as const satisfies readonly TutorialStepConfig[];
