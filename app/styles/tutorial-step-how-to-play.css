@@ -538,6 +538,29 @@
   overflow: visible;
 }
 
+.table-layout--how-to-play-powerup-step5 .center-zone__ingredient-meeples {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone__ingredient-meeple {
+  pointer-events: none;
+  will-change: auto;
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone__ingredient-meeple--blue {
+  left: 39%;
+  top: 15%;
+  transform: translate(-50%, -50%) rotate(-12deg) scale(0.9);
+  z-index: 9;
+  animation: none !important;
+}
+
+.table-layout--how-to-play-powerup-step5 .seat--bottom .meeple-token,
+.table-layout--how-to-play-powerup-step5 .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 .table-layout--how-to-play-powerup-step5 .center-zone__board-skill-tile {
   position: absolute;
   right: -80px;

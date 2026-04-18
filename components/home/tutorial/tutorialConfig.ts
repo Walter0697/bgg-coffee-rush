@@ -606,6 +606,9 @@ const POWERUP_TUTORIAL_STEPS = [
     },
     focusLabels: {},
     layoutClasses: powerUpStepFiveLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "blue", src: "/images/meeple_blue.png" }
+    ],
     showBottomRightSkillTileSrc: "/images/e4.png"
   }
 ] as const satisfies readonly TutorialStepConfig[];
