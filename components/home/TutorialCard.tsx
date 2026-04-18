@@ -26,14 +26,6 @@ function IconChevronRight() {
   );
 }
 
-function IconCheck() {
-  return (
-    <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
-      <path fill="currentColor" d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-    </svg>
-  );
-}
-
 function IconClose() {
   return (
     <svg className="tutorial-nav-icon" viewBox="0 0 24 24" width={22} height={22} aria-hidden>
@@ -132,16 +124,19 @@ export function TutorialCard({
                   >
                     <IconChevronLeft />
                   </button>
-                  <button
-                    type="button"
-                    className="tutorial-button tutorial-button--icon"
-                    onClick={onNext}
-                    aria-label={hasNextStep ? "Next step" : "Finish tutorial"}
-                  >
-                    {hasNextStep ? <IconChevronRight /> : <IconCheck />}
-                  </button>
-                </>
-              )}
+                <button
+                  type="button"
+                  className={`tutorial-button tutorial-button--icon ${
+                    hasNextStep ? "" : "tutorial-button--blank"
+                  }`}
+                  onClick={onNext}
+                  disabled={!hasNextStep}
+                  aria-label={hasNextStep ? "Next step" : undefined}
+                >
+                  {hasNextStep ? <IconChevronRight /> : null}
+                </button>
+              </>
+            )}
             </div>
           </div>
         </section>

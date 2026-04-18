@@ -204,6 +204,18 @@ function howToPlayPlayerBoardFocusLayout(_subFocus: TutorialSubFocus): string[] 
   ];
 }
 
+/** How to play — keep the same board camera, but freeze the card stack in its settled end position. */
+function howToPlayPlayerBoardSettledLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--focused",
+    "table-layout--focus-bottom-board",
+    "table-layout--how-to-play-player-board-focus",
+    "table-layout--how-to-play-player-board-focus-step13"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -485,6 +497,18 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     layoutClasses: howToPlayPlayerBoardFocusLayout,
     showBottomBoardCornerCards: "step11",
     showBottomBoardRushToken: "step12",
+    boardOverlayCardStackBottomBoardMode: "step3"
+  },
+  {
+    title: "Cards settled",
+    description:
+      "If one player has 5 or more penalty cards, we will play one more round and then the game will end.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayPlayerBoardSettledLayout,
+    showBottomBoardCornerCards: "step11",
     boardOverlayCardStackBottomBoardMode: "step3"
   }
 ] as const satisfies readonly TutorialStepConfig[];

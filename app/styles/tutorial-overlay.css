@@ -119,6 +119,12 @@
   background: #f4e1c5;
 }
 
+.tutorial-button--blank {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
 .tutorial-button:disabled {
   opacity: 0.45;
   cursor: not-allowed;

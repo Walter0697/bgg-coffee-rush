@@ -2006,6 +2006,50 @@
   }
 }
 
+/* How to play step 13: keep the player board camera and freeze the card stack in its settled end position. */
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-1,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-2,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-3,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-4,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-5,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-6 {
+  will-change: auto;
+  animation: none;
+  opacity: 1;
+  transform: translateY(calc(100% + var(--start-question-card-gap)));
+}
+
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-7 {
+  position: relative;
+  z-index: 8;
+  will-change: auto;
+  animation: none;
+  opacity: 1;
+  transform: translateX(calc(-1 * (var(--start-question-card-size) * 4 + clamp(16px, 3.4vmin, 30px))));
+}
+
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-1,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-2,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-3,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-4,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-5,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__overlay-card-stack .seat-start-question-cards__card-6 {
+  opacity: 0.28;
+  filter: saturate(0.55) brightness(0.82);
+}
+
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__corner-card-stack-card--1,
+.table-layout--how-to-play-player-board-focus-step13 .seat--bottom .player-board__corner-card-stack-card--2 {
+  opacity: 0.28;
+  filter: saturate(0.55) brightness(0.82);
+}
+
+.table-layout--how-to-play-player-board-focus-step13 .seat-board-overlay-stack--right,
+.table-layout--how-to-play-whole-board-focus .seat-board-overlay-stack--right {
+  opacity: 0.3;
+  filter: saturate(0.55) brightness(0.82);
+}
+
 /* How to play step 10: make the player board the dominant object and dim everything else. */
 .table-layout--how-to-play-player-board-size .center-zone,
 .table-layout--how-to-play-player-board-size .table-layout__supply,
