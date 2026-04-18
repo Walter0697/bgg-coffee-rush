@@ -193,12 +193,12 @@ export function TableLayout({
               ))}
             </div>
           ) : null}
-          {howToPlayBottomRightSkillTileSrc ? (
-            <div className="center-zone__board-skill-tile" aria-hidden>
-              <Image src={howToPlayBottomRightSkillTileSrc} alt="" width={96} height={96} unoptimized />
-            </div>
-          ) : null}
         </div>
+        {howToPlayBottomRightSkillTileSrc ? (
+          <div className="center-zone__board-skill-tile" aria-hidden>
+            <Image src={howToPlayBottomRightSkillTileSrc} alt="" width={96} height={96} unoptimized />
+          </div>
+        ) : null}
       </div>
 
       <div

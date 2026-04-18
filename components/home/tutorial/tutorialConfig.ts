@@ -231,6 +231,16 @@ function powerUpStepThreeLayout(_subFocus: TutorialSubFocus): string[] {
   return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step3"];
 }
 
+/** Power up — move the ingredient-board meeple into the top-right corner cell. */
+function powerUpStepFourLayout(_subFocus: TutorialSubFocus): string[] {
+  return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step4"];
+}
+
+/** Power up — keep the ingredient board visible and emphasize the skill tile. */
+function powerUpStepFiveLayout(_subFocus: TutorialSubFocus): string[] {
+  return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step5"];
+}
+
 /** Power up — return to the player board so the final score can be read off the completed orders. */
 function powerUpFinalScoringLayout(subFocus: TutorialSubFocus): string[] {
   return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--powerup-final-scoring"];
@@ -581,7 +591,7 @@ const POWERUP_TUTORIAL_STEPS = [
       mode: "passive"
     },
     focusLabels: {},
-    layoutClasses: powerUpStepTwoLayout,
+    layoutClasses: powerUpStepFourLayout,
     howToPlayIngredientBoardMeeples: [
       { slot: "blue", src: "/images/meeple_blue.png" }
     ],
@@ -595,10 +605,7 @@ const POWERUP_TUTORIAL_STEPS = [
       mode: "passive"
     },
     focusLabels: {},
-    layoutClasses: powerUpStepTwoLayout,
-    howToPlayIngredientBoardMeeples: [
-      { slot: "blue", src: "/images/meeple_blue.png" }
-    ],
+    layoutClasses: powerUpStepFiveLayout,
     showBottomRightSkillTileSrc: "/images/e4.png"
   }
 ] as const satisfies readonly TutorialStepConfig[];

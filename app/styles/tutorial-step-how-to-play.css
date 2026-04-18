@@ -497,6 +497,67 @@
   }
 }
 
+/* Power up step 4: show a single meeple moving into the top-right corner cell. */
+.table-layout--how-to-play-powerup-step4 .meeple-token {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-powerup-step4 .center-zone {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step4 .center-zone__ingredient-meeples {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step4 .center-zone__ingredient-meeple {
+  pointer-events: none;
+  will-change: left, top, transform, opacity;
+}
+
+.table-layout--how-to-play-powerup-step4 .center-zone__ingredient-meeple--blue {
+  opacity: 1;
+  left: 80%;
+  top: 15%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-powerup-step4 .center-zone__ingredient-meeple--blue {
+    animation: none;
+    opacity: 1;
+    left: 79%;
+    top: 29%;
+    transform: translate(-50%, -50%) rotate(8deg) scale(0.9);
+  }
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone__board-skill-tile {
+  position: absolute;
+  right: -80px;
+  bottom: -80px;
+  width: 100px;
+  z-index: 5;
+  pointer-events: none;
+  rotate: 12deg;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 245, 225, 0.2))
+    drop-shadow(0 0 16px rgba(255, 220, 170, 0.24))
+    drop-shadow(0 8px 14px rgba(20, 10, 2, 0.22));
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone__board-skill-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Original on-board spots (also pre-animation / delay hold) → animate to shared column */
 .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--steam {
   width: clamp(19px, 4.8vmin, 32px);
