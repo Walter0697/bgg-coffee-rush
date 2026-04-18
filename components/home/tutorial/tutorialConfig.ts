@@ -216,6 +216,11 @@ function howToPlayPlayerBoardSettledLayout(_subFocus: TutorialSubFocus): string[
   ];
 }
 
+/** Power up — keep the settled player-board camera, then dim the whole bottom board too. */
+function powerUpStepOneLayout(subFocus: TutorialSubFocus): string[] {
+  return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--how-to-play-powerup-step1"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -513,6 +518,21 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
+const POWERUP_TUTORIAL_STEPS = [
+  {
+    title: "Power up",
+    description:
+      "Power up — keep the settled card stack dimmed, then dim the whole player board too.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepOneLayout,
+    showBottomBoardCornerCards: "step11",
+    boardOverlayCardStackBottomBoardMode: "step3"
+  }
+] as const satisfies readonly TutorialStepConfig[];
+
 /**
  * Ordered tutorial modules. `DEFAULT_TUTORIAL_MODULE_INDEX` can limit which slice runs in dev.
  */
@@ -520,7 +540,8 @@ export const TUTORIAL_MODULES: readonly TutorialModuleConfig[] = [
   { kind: "setup", title: "Setup", steps: SETUP_TUTORIAL_STEPS },
   { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS },
   { kind: "start-of-game", title: "Start of the game", steps: START_OF_GAME_TUTORIAL_STEPS },
-  { kind: "how-to-play", title: "How to play", steps: HOW_TO_PLAY_TUTORIAL_STEPS }
+  { kind: "how-to-play", title: "How to play", steps: HOW_TO_PLAY_TUTORIAL_STEPS },
+  { kind: "powerup", title: "Power up", steps: POWERUP_TUTORIAL_STEPS }
 ] as const;
 
 export const DEFAULT_TUTORIAL_MODULE_INDEX = 0;
