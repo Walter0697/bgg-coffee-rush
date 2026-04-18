@@ -84,6 +84,8 @@ export function TableLayout({
     tutorialActive && step?.howToPlayIngredientBoardMeeples?.length
       ? step.howToPlayIngredientBoardMeeples
       : null;
+  const howToPlayIngredientBoardIces =
+    tutorialActive && step?.howToPlayIngredientBoardIces?.length ? step.howToPlayIngredientBoardIces : null;
   const howToPlayBottomRightSkillTileSrc =
     tutorialActive && step?.showBottomRightSkillTileSrc ? step.showBottomRightSkillTileSrc : null;
   const commonAreaInteractive = layoutZoomTutorial;
@@ -152,7 +154,7 @@ export function TableLayout({
     >
       <div
         className={`center-zone${
-          howToPlayIngredientBoardMarkers || howToPlayIngredientBoardMeeples
+          howToPlayIngredientBoardMarkers || howToPlayIngredientBoardMeeples || howToPlayIngredientBoardIces
             ? " center-zone--with-ingredient-markers"
             : ""
         } ${layoutZoomTutorial ? "tutorial-target" : ""} ${
@@ -188,6 +190,21 @@ export function TableLayout({
                   alt=""
                   width={98}
                   height={144}
+                  unoptimized
+                />
+              ))}
+            </div>
+          ) : null}
+          {howToPlayIngredientBoardIces ? (
+            <div className="center-zone__ingredient-ices" aria-hidden>
+              {howToPlayIngredientBoardIces.map((ice) => (
+                <Image
+                  key={ice.slot}
+                  className={`center-zone__ingredient-ice center-zone__ingredient-ice--${ice.slot}`}
+                  src={ice.src}
+                  alt=""
+                  width={84}
+                  height={84}
                   unoptimized
                 />
               ))}

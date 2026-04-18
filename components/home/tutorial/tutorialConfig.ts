@@ -112,6 +112,16 @@ function howToPlayIngredientBoardSpotlightLayout(_subFocus: TutorialSubFocus): s
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
+/** How to play step 4 — ingredient board spotlight with stronger ingredient glow. */
+function howToPlayIngredientBoardGlowLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--tutorial-overview",
+    "table-layout--how-to-play-ingredient-board",
+    "table-layout--how-to-play-ingredient-board-glow"
+  ];
+}
+
 /** How to play — full-board overview with the ingredient bin spotlighted. */
 function howToPlayIngredientBinLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-bin"];
@@ -223,7 +233,12 @@ function powerUpStepOneLayout(subFocus: TutorialSubFocus): string[] {
 
 /** Power up — switch the camera back to the ingredient board. */
 function powerUpStepTwoLayout(_subFocus: TutorialSubFocus): string[] {
-  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
+  return [
+    "table-layout--face-up",
+    "table-layout--tutorial-overview",
+    "table-layout--how-to-play-ingredient-board",
+    "table-layout--how-to-play-powerup-step2"
+  ];
 }
 
 /** Power up — keep the ingredient-board meeple moving toward the bottom player's board corner. */
@@ -426,7 +441,7 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
       mode: "passive"
     },
     focusLabels: {},
-    layoutClasses: howToPlayIngredientBoardSpotlightLayout,
+    layoutClasses: howToPlayIngredientBoardGlowLayout,
     howToPlayIngredientBoardMarkers: [
       { slot: "steam", src: "/images/ingredient/steam.png" },
       { slot: "coffee", src: "/images/ingredient/coffee.png" },
@@ -567,6 +582,10 @@ const POWERUP_TUTORIAL_STEPS = [
     layoutClasses: powerUpStepTwoLayout,
     howToPlayIngredientBoardMeeples: [
       { slot: "green", src: "/images/meeple_green.png" }
+    ],
+    howToPlayIngredientBoardIces: [
+      { slot: "left", src: "/images/ingredient/ice.png" },
+      { slot: "right", src: "/images/ingredient/ice.png" }
     ],
     showBottomRightSkillTileSrc: "/images/e1.png"
   },

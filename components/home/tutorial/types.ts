@@ -70,6 +70,12 @@ export type HowToPlayIngredientBoardMeepleItem = {
   src: string;
 };
 
+/** Ice tokens overlaid on the ingredient board (positions via CSS modifiers). */
+export type HowToPlayIngredientBoardIceItem = {
+  slot: "left" | "right";
+  src: string;
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
@@ -119,6 +125,8 @@ export type TutorialStepConfig = {
   howToPlayIngredientBoardMarkers?: readonly HowToPlayIngredientBoardMarkerItem[];
   /** Extra meeples on the ingredient board (How to play — ingredient board focus). */
   howToPlayIngredientBoardMeeples?: readonly HowToPlayIngredientBoardMeepleItem[];
+  /** Ice tokens on the ingredient board (How to play — power up step 2). */
+  howToPlayIngredientBoardIces?: readonly HowToPlayIngredientBoardIceItem[];
   /** Show coffee + milk + steam ingredients in the first bottom cup. */
   showCupIngredientsInCup?: boolean;
   /** When the first cup is rendered, keep the steam inside the cup instead of floating above it. */
