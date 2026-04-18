@@ -226,6 +226,11 @@ function powerUpStepTwoLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
+/** Power up — return to the player board so the final score can be read off the completed orders. */
+function powerUpFinalScoringLayout(subFocus: TutorialSubFocus): string[] {
+  return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--powerup-final-scoring"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -593,6 +598,19 @@ const POWERUP_TUTORIAL_STEPS = [
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
+const FINAL_SCORING_TUTORIAL_STEPS = [
+  {
+    title: "Final scoring",
+    description:
+      "Final scoring — the final score will be the number of your completed orders + the number of activated upgrades × 2 - the number of your penalty orders.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpFinalScoringLayout
+  }
+] as const satisfies readonly TutorialStepConfig[];
+
 /**
  * Ordered tutorial modules. `DEFAULT_TUTORIAL_MODULE_INDEX` can limit which slice runs in dev.
  */
@@ -601,7 +619,8 @@ export const TUTORIAL_MODULES: readonly TutorialModuleConfig[] = [
   { kind: "objective", title: "Objective of the game", steps: OBJECTIVE_TUTORIAL_STEPS },
   { kind: "start-of-game", title: "Start of the game", steps: START_OF_GAME_TUTORIAL_STEPS },
   { kind: "how-to-play", title: "How to play", steps: HOW_TO_PLAY_TUTORIAL_STEPS },
-  { kind: "powerup", title: "Power up", steps: POWERUP_TUTORIAL_STEPS }
+  { kind: "powerup", title: "Power up", steps: POWERUP_TUTORIAL_STEPS },
+  { kind: "scoring", title: "Final scoring", steps: FINAL_SCORING_TUTORIAL_STEPS }
 ] as const;
 
 export const DEFAULT_TUTORIAL_MODULE_INDEX = 0;
