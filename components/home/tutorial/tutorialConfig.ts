@@ -221,6 +221,11 @@ function powerUpStepOneLayout(subFocus: TutorialSubFocus): string[] {
   return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--how-to-play-powerup-step1"];
 }
 
+/** Power up — switch the camera back to the ingredient board. */
+function powerUpStepTwoLayout(_subFocus: TutorialSubFocus): string[] {
+  return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -530,6 +535,20 @@ const POWERUP_TUTORIAL_STEPS = [
     layoutClasses: powerUpStepOneLayout,
     showBottomBoardCornerCards: "step11",
     boardOverlayCardStackBottomBoardMode: "step3"
+  },
+  {
+    title: "Ingredient board",
+    description:
+      "For this upgrade, you can get 2 ingredients if you walk into a celll with a another meeple in it.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepTwoLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "green", src: "/images/meeple_green.png" }
+    ],
+    showBottomRightSkillTileSrc: "/images/e1.png"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 

@@ -64,6 +64,12 @@ export type HowToPlayIngredientBoardMarkerItem = {
   src: string;
 };
 
+/** Meeples overlaid on the ingredient board (positions via CSS modifiers). */
+export type HowToPlayIngredientBoardMeepleItem = {
+  slot: "blue" | "green" | "red" | "yellow";
+  src: string;
+};
+
 export type TutorialInteractionConfig =
   | TutorialLayoutZoomInteraction
   | TutorialSharedAreaInteraction
@@ -111,6 +117,8 @@ export type TutorialStepConfig = {
   howToPlayMoveLegend?: HowToPlayMoveLegendConfig;
   /** Coffee / milk / steam on the ingredient board (How to play — ingredient board focus). */
   howToPlayIngredientBoardMarkers?: readonly HowToPlayIngredientBoardMarkerItem[];
+  /** Extra meeples on the ingredient board (How to play — ingredient board focus). */
+  howToPlayIngredientBoardMeeples?: readonly HowToPlayIngredientBoardMeepleItem[];
   /** Show coffee + milk + steam ingredients in the first bottom cup. */
   showCupIngredientsInCup?: boolean;
   /** When the first cup is rendered, keep the steam inside the cup instead of floating above it. */
@@ -126,6 +134,8 @@ export type TutorialStepConfig = {
   showBottomCupContents?: "player-board-size" | "how-to-play-cups-invalid" | "how-to-play-cups-preview";
   /** Show a floating supply bin image in the top-right corner for how-to-play previews. */
   showTopRightSupplyBin?: boolean;
+  /** Show a skill tile anchored to the ingredient board for how-to-play previews. */
+  showBottomRightSkillTileSrc?: string;
 };
 
 export type TutorialModuleConfig = {

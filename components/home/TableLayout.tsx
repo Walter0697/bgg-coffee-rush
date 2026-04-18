@@ -80,6 +80,12 @@ export function TableLayout({
     tutorialActive && step?.howToPlayIngredientBoardMarkers?.length
       ? step.howToPlayIngredientBoardMarkers
       : null;
+  const howToPlayIngredientBoardMeeples =
+    tutorialActive && step?.howToPlayIngredientBoardMeeples?.length
+      ? step.howToPlayIngredientBoardMeeples
+      : null;
+  const howToPlayBottomRightSkillTileSrc =
+    tutorialActive && step?.showBottomRightSkillTileSrc ? step.showBottomRightSkillTileSrc : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectivePhaseActive = tutorialActive && step?.phaseTitle === "Objective of the game";
   const tableOverlayCardSrc =
@@ -145,13 +151,13 @@ export function TableLayout({
       aria-label="Coffee Rush table layout"
     >
       <div
-        className={`center-zone${howToPlayIngredientBoardMarkers ? " center-zone--with-ingredient-markers" : ""} ${
-          layoutZoomTutorial ? "tutorial-target" : ""
-        } ${layoutZoomSubFocus === "center" ? "tutorial-target--active" : ""} ${
-          layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "center"
-            ? "tutorial-target--dimmed"
+        className={`center-zone${
+          howToPlayIngredientBoardMarkers || howToPlayIngredientBoardMeeples
+            ? " center-zone--with-ingredient-markers"
             : ""
-        }`}
+        } ${layoutZoomTutorial ? "tutorial-target" : ""} ${
+          layoutZoomSubFocus === "center" ? "tutorial-target--active" : ""
+        } ${layoutZoomTutorial && layoutZoomSubFocus !== null && layoutZoomSubFocus !== "center" ? "tutorial-target--dimmed" : ""}`}
         aria-label="Ingredient board"
         onClick={layoutZoomTutorial ? () => onTutorialSubFocus("center") : undefined}
       >
@@ -170,6 +176,26 @@ export function TableLayout({
                   unoptimized
                 />
               ))}
+            </div>
+          ) : null}
+          {howToPlayIngredientBoardMeeples ? (
+            <div className="center-zone__ingredient-meeples" aria-hidden>
+              {howToPlayIngredientBoardMeeples.map((meeple) => (
+                <Image
+                  key={meeple.slot}
+                  className={`center-zone__ingredient-meeple center-zone__ingredient-meeple--${meeple.slot}`}
+                  src={meeple.src}
+                  alt=""
+                  width={98}
+                  height={144}
+                  unoptimized
+                />
+              ))}
+            </div>
+          ) : null}
+          {howToPlayBottomRightSkillTileSrc ? (
+            <div className="center-zone__board-skill-tile" aria-hidden>
+              <Image src={howToPlayBottomRightSkillTileSrc} alt="" width={96} height={96} unoptimized />
             </div>
           ) : null}
         </div>

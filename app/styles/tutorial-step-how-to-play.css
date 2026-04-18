@@ -358,6 +358,72 @@
     drop-shadow(0 3px 8px rgba(20, 10, 2, 0.4));
 }
 
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeples {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeple {
+  position: absolute;
+  display: block;
+  width: clamp(18px, 4.2vmin, 30px);
+  height: auto;
+  object-fit: contain;
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 1px rgb(255, 255, 255))
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.98))
+    drop-shadow(0 0 10px rgba(255, 255, 255, 0.75))
+    drop-shadow(0 0 22px rgba(255, 255, 255, 0.45))
+    drop-shadow(0 3px 8px rgba(20, 10, 2, 0.44));
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeple--blue {
+  left: 49.2%;
+  top: 47%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeple--green {
+  left: 62.4%;
+  top: 35.7%;
+  transform: translate(-50%, -50%) rotate(9deg);
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeple--red {
+  left: 43%;
+  top: 58%;
+  transform: translate(-50%, -50%) rotate(6deg);
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__ingredient-meeple--yellow {
+  left: 55%;
+  top: 73%;
+  transform: translate(-50%, -50%) rotate(-4deg);
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__board-skill-tile {
+  position: absolute;
+  right: -80px;
+  bottom: -80px;
+  width: 100px;
+  z-index: 5;
+  pointer-events: none;
+  rotate: 12deg;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 245, 225, 0.2))
+    drop-shadow(0 0 16px rgba(255, 220, 170, 0.24))
+    drop-shadow(0 8px 14px rgba(20, 10, 2, 0.22));
+}
+
+.table-layout--how-to-play-ingredient-board .center-zone__board-skill-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Original on-board spots (also pre-animation / delay hold) → animate to shared column */
 .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--steam {
   width: clamp(19px, 4.8vmin, 32px);
