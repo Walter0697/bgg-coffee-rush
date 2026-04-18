@@ -32,8 +32,12 @@ type PlayerSeatProps = {
   boardOverlayCardSrc?: string | null;
   /** Optional question-card stack placed beside the bottom player board. */
   boardOverlayCardStackMode?: "step1" | "step2" | "step3" | null;
+  /** Optional question-card stack anchored to the bottom player's board. */
+  boardOverlayCardStackBottomBoardMode?: "step3" | null;
   /** Optional two-card stack anchored to the bottom player's board corner. */
   bottomBoardCornerCardsMode?: "step11" | null;
+  /** Optional rush token anchored to the bottom player's board corner. */
+  showBottomBoardRushToken?: "step12" | null;
   /** Start step 5: animate steam from meeple toward first cup */
   startSteamFlyFromMeeple?: boolean;
 };
@@ -57,7 +61,9 @@ export function PlayerSeat({
   bottomCupContentsMode = null,
   boardOverlayCardSrc = null,
   boardOverlayCardStackMode = null,
+  boardOverlayCardStackBottomBoardMode = null,
   bottomBoardCornerCardsMode = null,
+  showBottomBoardRushToken: bottomBoardRushTokenMode = null,
   startSteamFlyFromMeeple = false
 }: PlayerSeatProps) {
   const isZoomedLayout = layoutZoomTutorial && layoutZoomSubFocus !== null;
@@ -68,9 +74,9 @@ export function PlayerSeat({
   const showPlayerBoardSizeCups = seat.side === "bottom" && bottomCupContentsMode === "player-board-size";
   const showInvalidCupStackContents = seat.side === "bottom" && bottomCupContentsMode === "how-to-play-cups-invalid";
   const showPreviewCupContents = seat.side === "bottom" && bottomCupContentsMode === "how-to-play-cups-preview";
-  const renderedBoardOverlayCardStackMode =
-    boardOverlayCardStackMode && seat.side !== "bottom" ? "step2" : boardOverlayCardStackMode;
+  const renderedBoardOverlayCardStackMode = boardOverlayCardStackMode && seat.side !== "bottom" ? "step2" : boardOverlayCardStackMode;
   const showBottomBoardCornerCards = seat.side === "bottom" && bottomBoardCornerCardsMode === "step11";
+  const showBottomBoardRushToken = seat.side === "bottom" && bottomBoardRushTokenMode === "step12";
 
   return (
     <section
@@ -127,6 +133,39 @@ export function PlayerSeat({
               height={320}
               unoptimized
             />
+          </div>
+        ) : null}
+        {showBottomBoardRushToken ? (
+          <Image
+            className="player-board__rush-token"
+            src="/images/rush.png"
+            alt=""
+            width={125}
+            height={128}
+            unoptimized
+          />
+        ) : null}
+        {seat.side === "bottom" && boardOverlayCardStackBottomBoardMode ? (
+          <div
+            className={`seat-start-question-cards seat-start-question-cards--${boardOverlayCardStackBottomBoardMode} player-board__overlay-card-stack`}
+            aria-hidden
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              zIndex: 7,
+              pointerEvents: "none",
+              ["--start-question-card-size" as string]: "clamp(14px, 2.2vmin, 20px)",
+              ["--start-question-card-gap" as string]: "clamp(2px, 0.5vmin, 6px)"
+            }}
+          >
+            <Image className="seat-start-question-cards__card-1" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-2" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-3" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-4" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-5" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-6" src="/images/question.png" alt="" width={220} height={320} unoptimized />
+            <Image className="seat-start-question-cards__card-7" src="/images/question.png" alt="" width={220} height={320} unoptimized />
           </div>
         ) : null}
       </div>

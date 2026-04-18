@@ -192,6 +192,18 @@ function howToPlayWholeBoardFocusLayout(_subFocus: TutorialSubFocus): string[] {
   ];
 }
 
+/** How to play — zoom back in on the bottom player board while keeping the same corner-card stack. */
+function howToPlayPlayerBoardFocusLayout(_subFocus: TutorialSubFocus): string[] {
+  return [
+    "table-layout--face-up",
+    "table-layout--step-three",
+    "table-layout--focused",
+    "table-layout--focus-bottom-board",
+    "table-layout--how-to-play-player-board-focus",
+    "table-layout--how-to-play-player-board-focus-step12"
+  ];
+}
+
 const SETUP_TUTORIAL_STEPS = [
   {
     title: "Table layout",
@@ -461,6 +473,19 @@ const HOW_TO_PLAY_TUTORIAL_STEPS = [
     layoutClasses: howToPlayWholeBoardFocusLayout,
     showBottomBoardCornerCards: "step11",
     boardOverlayCardStackMode: "step3"
+  },
+  {
+    title: "Flow of time~",
+    description:
+      "Flow of time~ After finishing (or not finishing) your orders, move all your cards one row down. For the last row, move it to the left and flip it to the back. For every card we lose, you will get one rush token.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: howToPlayPlayerBoardFocusLayout,
+    showBottomBoardCornerCards: "step11",
+    showBottomBoardRushToken: "step12",
+    boardOverlayCardStackBottomBoardMode: "step3"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
