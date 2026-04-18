@@ -1,4 +1,4 @@
-import type { TutorialModuleConfig, TutorialStepConfig, TutorialSubFocus } from "./types";
+import type { TutorialKind, TutorialModuleConfig, TutorialStepConfig, TutorialSubFocus } from "./types";
 
 function stepOneLayout(subFocus: TutorialSubFocus): string[] {
   const base = ["table-layout--face-up", "table-layout--tutorial-overview"];
@@ -704,6 +704,28 @@ export const TUTORIAL_STEPS: readonly TutorialStepConfig[] = TUTORIAL_MODULES.fl
     phaseTitle: step.phaseTitle ?? module.title
   }))
 );
+
+export type TutorialSectionStart = {
+  kind: TutorialKind;
+  title: string;
+  stepIndex: number;
+  stepTitle: string;
+};
+
+/** First step of each tutorial section, in tutorial order. */
+export const TUTORIAL_SECTION_STARTS: readonly TutorialSectionStart[] = TUTORIAL_MODULES.map(
+  (module) => {
+    const stepIndex = TUTORIAL_STEPS.findIndex((step) => step.phaseTitle === module.title);
+    const stepTitle = stepIndex >= 0 ? TUTORIAL_STEPS[stepIndex]?.title ?? module.title : module.title;
+
+    return {
+      kind: module.kind,
+      title: module.title,
+      stepIndex,
+      stepTitle
+    };
+  }
+).filter((section): section is TutorialSectionStart => section.stepIndex >= 0);
 
 /** Index of "Ready to brew" in the flattened tutorial; steps after this keep its meeple/steam end pose. */
 export const READY_TO_BREW_TUTORIAL_STEP_INDEX = TUTORIAL_STEPS.findIndex(
