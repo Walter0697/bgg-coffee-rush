@@ -522,7 +522,7 @@ const POWERUP_TUTORIAL_STEPS = [
   {
     title: "Power up",
     description:
-      "Power up — keep the settled card stack dimmed, then dim the whole player board too.",
+      "You can use 3 completed order cards to learn a skill at any time. Please note that a skill is worth 2 points, so you are essentially losing 1 point but gaining an extra ability.",
     interaction: {
       mode: "passive"
     },
