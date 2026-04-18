@@ -72,7 +72,7 @@ export type HowToPlayIngredientBoardMeepleItem = {
 
 /** Ice tokens overlaid on the ingredient board (positions via CSS modifiers). */
 export type HowToPlayIngredientBoardIceItem = {
-  slot: "left" | "right";
+  slot: "left" | "right" | "top-left" | "bottom-left" | "top-right" | "bottom-right";
   src: string;
 };
 
@@ -144,6 +144,8 @@ export type TutorialStepConfig = {
   showTopRightSupplyBin?: boolean;
   /** Show a skill tile anchored to the ingredient board for how-to-play previews. */
   showBottomRightSkillTileSrc?: string;
+  /** Show multiple skill tiles anchored to the ingredient board for how-to-play previews. */
+  showBottomRightSkillTileSrcs?: readonly string[];
 };
 
 export type TutorialModuleConfig = {

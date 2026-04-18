@@ -556,7 +556,7 @@
   transform: translate(-50%, -50%) rotate(-4deg);
 }
 
-.table-layout--how-to-play-ingredient-board .center-zone__board-skill-tile {
+.table-layout--how-to-play-ingredient-board .center-zone__board-skill-tiles {
   position: absolute;
   right: -80px;
   bottom: -80px;
@@ -812,11 +812,24 @@
   overflow: visible;
 }
 
+.table-layout--how-to-play-powerup-step6 .center-zone {
+  overflow: visible;
+}
+
 .table-layout--how-to-play-powerup-step5 .center-zone__ingredient-meeples {
   overflow: visible;
 }
 
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-meeples {
+  overflow: visible;
+}
+
 .table-layout--how-to-play-powerup-step5 .center-zone__ingredient-meeple {
+  pointer-events: none;
+  will-change: auto;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-meeple {
   pointer-events: none;
   will-change: auto;
 }
@@ -827,6 +840,74 @@
   transform: translate(-50%, -50%) rotate(-12deg) scale(0.9);
   z-index: 9;
   animation: none !important;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-meeple--blue {
+  left: 80%;
+  top: 15%;
+  transform: translate(-50%, -50%) scale(0.9);
+  z-index: 9;
+  opacity: 1;
+  animation: none !important;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-meeple--green {
+  left: 86%;
+  top: 22%;
+  transform: translate(-50%, -50%) rotate(10deg) scale(0.9);
+  z-index: 8;
+  opacity: 1;
+  animation: none !important;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ices {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice {
+  position: absolute;
+  display: block;
+  width: clamp(20px, 4.8vmin, 32px);
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  will-change: left, top, transform, opacity;
+  animation-duration: 3.2s;
+  animation-timing-function: cubic-bezier(0.22, 0.8, 0.3, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--top-left {
+  left: 71.5%;
+  top: 12%;
+  transform: translate(-50%, -50%) rotate(-10deg);
+  z-index: 8;
+  animation-name: howToPlayPowerUpStepSixCoffeeTopLeft;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--bottom-left {
+  left: 74.5%;
+  top: 22%;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  z-index: 8;
+  animation-name: howToPlayPowerUpStepSixCoffeeBottomLeft;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--top-right {
+  left: 84.8%;
+  top: 15%;
+  transform: translate(-50%, -50%) rotate(8deg);
+  z-index: 8;
+  animation-name: howToPlayPowerUpStepSixCoffeeTopRight;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--bottom-right {
+  left: 88.8%;
+  top: 26%;
+  transform: translate(-50%, -50%) rotate(12deg);
+  z-index: 8;
+  animation-name: howToPlayPowerUpStepSixCoffeeBottomRight;
 }
 
 .table-layout--how-to-play-powerup-step5 .center-zone__ingredient-ices {
@@ -869,7 +950,13 @@
   pointer-events: none !important;
 }
 
-.table-layout--how-to-play-powerup-step5 .center-zone__board-skill-tile {
+.table-layout--how-to-play-powerup-step6 .seat--bottom .meeple-token,
+.table-layout--how-to-play-powerup-step6 .seat--bottom .seat-start-five-meeple-anchor .meeple-token {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-powerup-step5 .center-zone__board-skill-tiles {
   position: absolute;
   right: -80px;
   bottom: -80px;
@@ -889,21 +976,157 @@
   height: auto;
 }
 
+.table-layout--how-to-play-powerup-step6 .center-zone__board-skill-tiles {
+  position: absolute;
+  right: -112px;
+  bottom: -88px;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(6px, 1.2vmin, 12px);
+  width: max-content;
+  z-index: 5;
+  pointer-events: none;
+  rotate: 12deg;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 245, 225, 0.2))
+    drop-shadow(0 0 16px rgba(255, 220, 170, 0.24))
+    drop-shadow(0 8px 14px rgba(20, 10, 2, 0.22));
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__board-skill-tile {
+  flex: 0 0 auto;
+  width: 88px;
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__board-skill-tile--2 {
+  transform: translateY(clamp(8px, 1.2vmin, 14px));
+}
+
+.table-layout--how-to-play-powerup-step6 .center-zone__board-skill-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .table-layout--how-to-play-powerup-step5 .center-zone__ingredient-ice--left {
+  .table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--top-left {
     animation: none;
     opacity: 1;
-    left: 31%;
-    top: 15%;
-    transform: translate(-50%, -50%) rotate(-8deg);
+    left: 112%;
+    top: 0%;
+    transform: translate(-50%, -50%) rotate(-10deg);
   }
 
-  .table-layout--how-to-play-powerup-step5 .center-zone__ingredient-ice--right {
+  .table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--bottom-left {
     animation: none;
     opacity: 1;
-    left: 48%;
-    top: 18%;
-    transform: translate(-50%, -50%) rotate(10deg);
+    left: 112%;
+    top: 14%;
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+
+  .table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--top-right {
+    animation: none;
+    opacity: 1;
+    left: 112%;
+    top: 28%;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+
+  .table-layout--how-to-play-powerup-step6 .center-zone__ingredient-ice--bottom-right {
+    animation: none;
+    opacity: 1;
+    left: 112%;
+    top: 42%;
+    transform: translate(-50%, -50%) rotate(12deg);
+  }
+}
+
+@keyframes howToPlayPowerUpStepSixCoffeeTopLeft {
+  0%,
+  12% {
+    opacity: 1;
+    left: 71.5%;
+    top: 12%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+  }
+  95% {
+    opacity: 1;
+    left: 112%;
+    top: 0%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+  }
+  100% {
+    opacity: 0;
+    left: 112%;
+    top: 0%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+  }
+}
+
+@keyframes howToPlayPowerUpStepSixCoffeeBottomLeft {
+  0%,
+  12% {
+    opacity: 1;
+    left: 74.5%;
+    top: 22%;
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+  95% {
+    opacity: 1;
+    left: 112%;
+    top: 14%;
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    left: 112%;
+    top: 14%;
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+}
+
+@keyframes howToPlayPowerUpStepSixCoffeeTopRight {
+  0%,
+  12% {
+    opacity: 1;
+    left: 84.8%;
+    top: 15%;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+  95% {
+    opacity: 1;
+    left: 112%;
+    top: 28%;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+  100% {
+    opacity: 0;
+    left: 112%;
+    top: 28%;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+}
+
+@keyframes howToPlayPowerUpStepSixCoffeeBottomRight {
+  0%,
+  12% {
+    opacity: 1;
+    left: 88.8%;
+    top: 26%;
+    transform: translate(-50%, -50%) rotate(12deg);
+  }
+  95% {
+    opacity: 1;
+    left: 112%;
+    top: 42%;
+    transform: translate(-50%, -50%) rotate(12deg);
+  }
+  100% {
+    opacity: 0;
+    left: 112%;
+    top: 42%;
+    transform: translate(-50%, -50%) rotate(12deg);
   }
 }
 

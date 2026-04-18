@@ -86,8 +86,12 @@ export function TableLayout({
       : null;
   const howToPlayIngredientBoardIces =
     tutorialActive && step?.howToPlayIngredientBoardIces?.length ? step.howToPlayIngredientBoardIces : null;
-  const howToPlayBottomRightSkillTileSrc =
-    tutorialActive && step?.showBottomRightSkillTileSrc ? step.showBottomRightSkillTileSrc : null;
+  const howToPlayBottomRightSkillTileSrcs =
+    tutorialActive && step?.showBottomRightSkillTileSrcs?.length
+      ? step.showBottomRightSkillTileSrcs
+      : tutorialActive && step?.showBottomRightSkillTileSrc
+        ? [step.showBottomRightSkillTileSrc]
+        : null;
   const commonAreaInteractive = layoutZoomTutorial;
   const objectivePhaseActive = tutorialActive && step?.phaseTitle === "Objective of the game";
   const tableOverlayCardSrc =
@@ -211,9 +215,16 @@ export function TableLayout({
             </div>
           ) : null}
         </div>
-        {howToPlayBottomRightSkillTileSrc ? (
-          <div className="center-zone__board-skill-tile" aria-hidden>
-            <Image src={howToPlayBottomRightSkillTileSrc} alt="" width={96} height={96} unoptimized />
+        {howToPlayBottomRightSkillTileSrcs ? (
+          <div
+            className={`center-zone__board-skill-tiles center-zone__board-skill-tiles--count-${howToPlayBottomRightSkillTileSrcs.length}`}
+            aria-hidden
+          >
+            {howToPlayBottomRightSkillTileSrcs.map((src, index) => (
+              <div key={`${src}-${index}`} className={`center-zone__board-skill-tile center-zone__board-skill-tile--${index + 1}`}>
+                <Image src={src} alt="" width={96} height={96} unoptimized />
+              </div>
+            ))}
           </div>
         ) : null}
       </div>

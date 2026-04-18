@@ -256,6 +256,11 @@ function powerUpStepFiveLayout(_subFocus: TutorialSubFocus): string[] {
   return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step5"];
 }
 
+/** Power up — keep the ingredient board visible and show a pair of skill tiles. */
+function powerUpStepSixLayout(_subFocus: TutorialSubFocus): string[] {
+  return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step6"];
+}
+
 /** Power up — return to the player board so the final score can be read off the completed orders. */
 function powerUpFinalScoringLayout(subFocus: TutorialSubFocus): string[] {
   return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--powerup-final-scoring"];
@@ -637,6 +642,27 @@ const POWERUP_TUTORIAL_STEPS = [
       { slot: "right", src: "/images/ingredient/choco.png" }
     ],
     showBottomRightSkillTileSrc: "/images/e4.png"
+  },
+  {
+    title: "Ingredient board",
+    description:
+      "Upgrades can be used together. That means if you have one upgrade that gives you double ingredients when touching another meeple and another upgrade that gives you double ingredients when moving into the corner cell, you will get 4 ingredients.",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepSixLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "blue", src: "/images/meeple_blue.png" },
+      { slot: "green", src: "/images/meeple_green.png" }
+    ],
+    howToPlayIngredientBoardIces: [
+      { slot: "top-left", src: "/images/ingredient/coffee.png" },
+      { slot: "bottom-left", src: "/images/ingredient/coffee.png" },
+      { slot: "top-right", src: "/images/ingredient/coffee.png" },
+      { slot: "bottom-right", src: "/images/ingredient/coffee.png" }
+    ],
+    showBottomRightSkillTileSrcs: ["/images/e1.png", "/images/e3.png"]
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
