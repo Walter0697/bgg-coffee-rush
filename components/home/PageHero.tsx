@@ -13,6 +13,7 @@ export function PageHero({ onHowToPlay, onFindStep, showHowToPlay = true }: Page
   return (
     <>
       <div className="table-title" aria-label="Coffee Rush title">
+        <div className="table-title__text">H H C</div>
         <Image src="/images/title.png" alt="Coffee Rush title" width={1024} height={340} priority />
       </div>
 

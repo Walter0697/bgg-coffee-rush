@@ -169,6 +169,19 @@ body {
   transform: translateX(-50%);
   z-index: 12;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4px, 0.8vh, 8px);
+}
+
+.table-title__text {
+  color: #5e3d22;
+  font-size: clamp(0.8rem, 1.1vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  text-shadow: 0 1px 0 rgba(255, 247, 232, 0.7);
 }
 
 .table-title img {
@@ -176,6 +189,7 @@ body {
   height: auto;
   display: block;
   filter: drop-shadow(0 8px 12px rgba(20, 8, 2, 0.35));
+  transform: translateY(8px);
 }
 
 .how-to-play-button {
