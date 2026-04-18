@@ -605,7 +605,7 @@ const POWERUP_TUTORIAL_STEPS = [
   {
     title: "Ingredient board",
     description:
-      "with this upgrade, you can get 2 ingredients when walking into the corner cell",
+      "with this upgrade, you can get 2 coffee ingredients when walking into the corner cell",
     interaction: {
       mode: "passive"
     },
@@ -614,12 +614,16 @@ const POWERUP_TUTORIAL_STEPS = [
     howToPlayIngredientBoardMeeples: [
       { slot: "blue", src: "/images/meeple_blue.png" }
     ],
+    howToPlayIngredientBoardIces: [
+      { slot: "left", src: "/images/ingredient/coffee.png" },
+      { slot: "right", src: "/images/ingredient/coffee.png" }
+    ],
     showBottomRightSkillTileSrc: "/images/e3.png"
   },
   {
     title: "Ingredient board",
     description:
-      "with this upgrade, you can get 2 ingredients when walking into the cell with golden ribbon",
+      "with this upgrade, you can get 2 chocolate ingredients when walking into the cell with golden ribbon",
     interaction: {
       mode: "passive"
     },
@@ -627,6 +631,10 @@ const POWERUP_TUTORIAL_STEPS = [
     layoutClasses: powerUpStepFiveLayout,
     howToPlayIngredientBoardMeeples: [
       { slot: "blue", src: "/images/meeple_blue.png" }
+    ],
+    howToPlayIngredientBoardIces: [
+      { slot: "left", src: "/images/ingredient/choco.png" },
+      { slot: "right", src: "/images/ingredient/choco.png" }
     ],
     showBottomRightSkillTileSrc: "/images/e4.png"
   }
