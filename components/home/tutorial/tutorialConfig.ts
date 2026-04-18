@@ -549,6 +549,47 @@ const POWERUP_TUTORIAL_STEPS = [
       { slot: "green", src: "/images/meeple_green.png" }
     ],
     showBottomRightSkillTileSrc: "/images/e1.png"
+  },
+  {
+    title: "Ingredient board",
+    description: "with this upgrade, your meeple can walk diagonally",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepTwoLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "blue", src: "/images/meeple_blue.png" }
+    ],
+    showBottomRightSkillTileSrc: "/images/e2.png"
+  },
+  {
+    title: "Ingredient board",
+    description:
+      "with this upgrade, you can get 2 ingredients when walking into the corner cell",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepTwoLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "blue", src: "/images/meeple_blue.png" }
+    ],
+    showBottomRightSkillTileSrc: "/images/e3.png"
+  },
+  {
+    title: "Ingredient board",
+    description:
+      "with this upgrade, you can get 2 ingredients when walking into the cell with golden ribbon",
+    interaction: {
+      mode: "passive"
+    },
+    focusLabels: {},
+    layoutClasses: powerUpStepTwoLayout,
+    howToPlayIngredientBoardMeeples: [
+      { slot: "blue", src: "/images/meeple_blue.png" }
+    ],
+    showBottomRightSkillTileSrc: "/images/e4.png"
   }
 ] as const satisfies readonly TutorialStepConfig[];
 
