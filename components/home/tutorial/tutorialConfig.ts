@@ -226,6 +226,11 @@ function powerUpStepTwoLayout(_subFocus: TutorialSubFocus): string[] {
   return ["table-layout--face-up", "table-layout--tutorial-overview", "table-layout--how-to-play-ingredient-board"];
 }
 
+/** Power up — keep the ingredient-board meeple moving toward the bottom player's board corner. */
+function powerUpStepThreeLayout(_subFocus: TutorialSubFocus): string[] {
+  return [...powerUpStepTwoLayout(null), "table-layout--how-to-play-powerup-step3"];
+}
+
 /** Power up — return to the player board so the final score can be read off the completed orders. */
 function powerUpFinalScoringLayout(subFocus: TutorialSubFocus): string[] {
   return [...howToPlayPlayerBoardSettledLayout(subFocus), "table-layout--powerup-final-scoring"];
@@ -562,7 +567,7 @@ const POWERUP_TUTORIAL_STEPS = [
       mode: "passive"
     },
     focusLabels: {},
-    layoutClasses: powerUpStepTwoLayout,
+    layoutClasses: powerUpStepThreeLayout,
     howToPlayIngredientBoardMeeples: [
       { slot: "blue", src: "/images/meeple_blue.png" }
     ],

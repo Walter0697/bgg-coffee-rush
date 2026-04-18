@@ -424,6 +424,79 @@
   height: auto;
 }
 
+/* Power up step 3: keep only the moving ingredient-board meeple visible. */
+.table-layout--how-to-play-powerup-step3 .meeple-token {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.table-layout--how-to-play-powerup-step3 .center-zone {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step3 .center-zone__ingredient-meeples {
+  overflow: visible;
+}
+
+.table-layout--how-to-play-powerup-step3 .center-zone__ingredient-meeple {
+  pointer-events: none;
+  will-change: left, top, transform, opacity;
+}
+
+.table-layout--how-to-play-powerup-step3 .center-zone__ingredient-meeple--blue {
+  animation: howToPlayPowerUpStepThreeMeepleCorner 3.2s ease-in-out infinite;
+  z-index: 9;
+}
+
+@keyframes howToPlayPowerUpStepThreeMeepleCorner {
+  0% {
+    opacity: 0;
+    left: 60%;
+    top: 58%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+  12% {
+    opacity: 1;
+    left: 60%;
+    top: 58%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+  74% {
+    opacity: 1;
+    left: 80%;
+    top: 78%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+  86% {
+    opacity: 0.45;
+    left: 80%;
+    top: 78%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+  94% {
+    opacity: 0.25;
+    left: 80%;
+    top: 78%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    left: 80%;
+    top: 78%;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .table-layout--how-to-play-powerup-step3 .center-zone__ingredient-meeple--blue {
+    animation: none;
+    opacity: 1;
+    left: 78%;
+    top: 82%;
+    transform: translate(-50%, -50%) rotate(10deg) scale(0.9);
+  }
+}
+
 /* Original on-board spots (also pre-animation / delay hold) → animate to shared column */
 .table-layout--how-to-play-ingredient-board .center-zone__ingredient-marker--steam {
   width: clamp(19px, 4.8vmin, 32px);
